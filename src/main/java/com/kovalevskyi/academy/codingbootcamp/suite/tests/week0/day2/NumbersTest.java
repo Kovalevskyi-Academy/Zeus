@@ -1,4 +1,4 @@
-package com.kovalevskyi.academy.codingbootcamp.suite.week0.day2;
+package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2;
 
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers;
