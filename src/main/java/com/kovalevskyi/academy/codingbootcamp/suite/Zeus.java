@@ -5,7 +5,7 @@ import picocli.CommandLine;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "zeus", mixinStandardHelpOptions = true, version = Constants.VERSION,
-        description = "Prints the checksum (MD5 by default) of a file to STDOUT.")
+        description = "Zeus the Mighty")
 public class Zeus implements Callable<Integer> {
 
   private final String[][][] classNames = {
@@ -16,6 +16,9 @@ public class Zeus implements Callable<Integer> {
                   {
                           "com.kovalevskyi.academy.codingbootcamp.suite.week0.day1.AlphabetTest",
                           "com.kovalevskyi.academy.codingbootcamp.suite.week0.day1.NumbersTest"
+                  },
+                  {
+                          "com.kovalevskyi.academy.codingbootcamp.suite.week0.day2.NumbersTest"
                   }
           }
   };
@@ -30,7 +33,7 @@ public class Zeus implements Callable<Integer> {
   public Integer call() {
     try{
       if (this.week == -1 || this.day == -1) {
-        System.out.println("error");
+        System.out.println("you need to specify week and day like this: --week X --day Y");
         return 0;
       }
       executeTest();
