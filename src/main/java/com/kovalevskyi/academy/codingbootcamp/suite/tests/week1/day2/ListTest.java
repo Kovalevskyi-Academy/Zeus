@@ -1,5 +1,6 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2;
 
+import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week1.day2.List;
 import java.util.function.Function;
 import org.junit.Test;
@@ -9,7 +10,7 @@ import org.junit.Test;
 
 import static com.google.common.truth.Truth.assertThat;
 
-public class ListTest {
+public class ListTest extends AbstractTestExecutor {
 
   @Test
   public void createOne() {
@@ -99,163 +100,163 @@ public class ListTest {
     assertThat(List.contains(newList, "7")).isFalse();
   }
 
-//    @Test
-//    public void lengthToEnd() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        List.addToEnd(firstListElement, value + 1);
-//        List.addToEnd(firstListElement, value + 2);
-//        List.addToEnd(firstListElement, value + 3);
-//        List.addToEnd(firstListElement, value + 4);
-//        List.addToEnd(firstListElement, value + 5);
-//
-//        Assertions.assertEquals(6, firstListElement.length());
-//    }
-//
-//    @Test
-//    public void insertAfter() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        List.addToEnd(firstListElement, value + 1);
-//        List.addToEnd(firstListElement, value + 2);
-//        var targetElement = List.addToEnd(firstListElement, value + 3);
-//        var nextElement = List.addToEnd(firstListElement, value + 4);
-//        List.addToEnd(firstListElement, value + 5);
-//
-//        var insertedElement = targetElement.insertAfter(15);
-//
-//        Assertions.assertTrue(List.contains(firstListElement, 15));
-//        Assertions.assertEquals(7, firstListElement.length());
-//        Assertions.assertEquals(nextElement, insertedElement.getNext());
-//        Assertions.assertEquals(targetElement, insertedElement.getPrev());
-//        Assertions.assertEquals(insertedElement, targetElement.getNext());
-//        Assertions.assertEquals(insertedElement, nextElement.getPrev());
-//    }
-//
-//    @Test
-//    public void insertAfterLast() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        List.addToEnd(firstListElement, value + 1);
-//        List.addToEnd(firstListElement, value + 2);
-//        List.addToEnd(firstListElement, value + 3);
-//        List.addToEnd(firstListElement, value + 4);
-//        var lastElement = List.addToEnd(firstListElement, value + 5);
-//
-//        var insertedElement = lastElement.insertAfter(15);
-//
-//        Assertions.assertTrue(List.contains(firstListElement, 15));
-//        Assertions.assertEquals(7, firstListElement.length());
-//        Assertions.assertEquals(insertedElement, lastElement.getNext());
-//        Assertions.assertEquals(lastElement, insertedElement.getPrev());
-//        Assertions.assertNull(insertedElement.getNext());
-//    }
-//
-//    @Test
-//    public void insertAfterWithArray() {
-//        var toAdd = new Integer[] {20, 21, 22, 23, 24, 25};
-//
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        List.addToEnd(firstListElement, value + 1);
-//        List.addToEnd(firstListElement, value + 2);
-//        var targetElement = List.addToEnd(firstListElement, value + 3);
-//        var nextElement = List.addToEnd(firstListElement, value + 4);
-//        List.addToEnd(firstListElement, value + 5);
-//
-//        targetElement.insertAfter(toAdd);
-//        for (var toAddElement : toAdd) {
-//            Assertions.assertTrue(List.contains(firstListElement, toAddElement));
-//        }
-//        Assertions.assertEquals(12, firstListElement.length());
-//    }
-//
-//    @Test
-//    public void delete() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        List.addToEnd(firstListElement, value + 1);
-//        var beforeDelete = List.addToEnd(firstListElement, value + 2);
-//        var toDelete = List.addToEnd(firstListElement, value + 3);
-//        var afterDelete = List.addToEnd(firstListElement, value + 4);
-//        List.addToEnd(firstListElement, value + 5);
-//
-//        toDelete.delete();
-//
-//        Assertions.assertEquals(afterDelete, beforeDelete.getNext());
-//        Assertions.assertEquals(beforeDelete, afterDelete.getPrev());
-//        Assertions.assertEquals(5, firstListElement.length());
-//    }
-//
-//    @Test
-//    public void deleteFirstElement() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        var secondElement = List.addToEnd(firstListElement, value + 1);
-//        List.addToEnd(firstListElement, value + 2);
-//        List.addToEnd(firstListElement, value + 3);
-//        List.addToEnd(firstListElement, value + 4);
-//        List.addToEnd(firstListElement, value + 5);
-//
-//        firstListElement.delete();
-//
-//        Assertions.assertNull(secondElement.getPrev());
-//    }
-//
-//    @Test
-//    public void deleteLastElement() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        List.addToEnd(firstListElement, value + 1);
-//        List.addToEnd(firstListElement, value + 2);
-//        List.addToEnd(firstListElement, value + 3);
-//        var beforeLast = List.addToEnd(firstListElement, value + 4);
-//        var lastElement = List.addToEnd(firstListElement, value + 5);
-//
-//        lastElement.delete();
-//
-//        Assertions.assertNull(beforeLast.getNext());
-//    }
-//
-//    @Test
-//    public void setPrev() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        var secondListElement = List.createOne(value);
-//
-//        firstListElement.setPrev(secondListElement);
-//
-//        Assertions.assertEquals(secondListElement, firstListElement.getPrev());
-//    }
-//
-//    @Test
-//    public void setNext() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        var secondListElement = List.createOne(value);
-//
-//        firstListElement.setNext(secondListElement);
-//
-//        Assertions.assertEquals(secondListElement, firstListElement.getNext());
-//    }
-//
-//    @Test
-//    public void getValue() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//
-//        Assertions.assertEquals(value, firstListElement.getValue());
-//    }
-//
-//    @Test
-//    public void connect() {
-//        var value = (Integer) 1;
-//        var firstListElement = List.createOne(value);
-//        var secondListElement = List.createOne(value);
-//
-//        firstListElement.connect(secondListElement);
-//
-//        Assertions.assertEquals(firstListElement, secondListElement.getPrev());
-//        Assertions.assertEquals(secondListElement, firstListElement.getNext());
-//    }
+    @Test
+    public void lengthToEnd() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        List.addToEnd(firstListElement, value + 1);
+        List.addToEnd(firstListElement, value + 2);
+        List.addToEnd(firstListElement, value + 3);
+        List.addToEnd(firstListElement, value + 4);
+        List.addToEnd(firstListElement, value + 5);
+
+        assertThat(firstListElement.length()).isEqualTo(6);
+    }
+
+    @Test
+    public void insertAfter() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        List.addToEnd(firstListElement, value + 1);
+        List.addToEnd(firstListElement, value + 2);
+        var targetElement = List.addToEnd(firstListElement, value + 3);
+        var nextElement = List.addToEnd(firstListElement, value + 4);
+        List.addToEnd(firstListElement, value + 5);
+
+        var insertedElement = targetElement.insertAfter(15);
+
+        assertThat(List.contains(firstListElement, 15)).isTrue();
+        assertThat(firstListElement.length()).isEqualTo(7);
+        assertThat(insertedElement.getNext()).isEqualTo(nextElement);
+        assertThat(insertedElement.getPrev()).isEqualTo(targetElement);
+        assertThat(targetElement.getNext()).isEqualTo(insertedElement);
+        assertThat(nextElement.getPrev()).isEqualTo(insertedElement);
+    }
+
+    @Test
+    public void insertAfterLast() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        List.addToEnd(firstListElement, value + 1);
+        List.addToEnd(firstListElement, value + 2);
+        List.addToEnd(firstListElement, value + 3);
+        List.addToEnd(firstListElement, value + 4);
+        var lastElement = List.addToEnd(firstListElement, value + 5);
+
+        var insertedElement = lastElement.insertAfter(15);
+
+        assertThat(List.contains(firstListElement, 15)).isTrue();
+        assertThat(firstListElement.length()).isEqualTo(7);
+        assertThat(lastElement.getNext()).isEqualTo(insertedElement);
+        assertThat(insertedElement.getPrev()).isEqualTo(lastElement);
+        assertThat(insertedElement.getNext()).isNull();
+    }
+
+    @Test
+    public void insertAfterWithArray() {
+        var toAdd = new Integer[] {20, 21, 22, 23, 24, 25};
+
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        List.addToEnd(firstListElement, value + 1);
+        List.addToEnd(firstListElement, value + 2);
+        var targetElement = List.addToEnd(firstListElement, value + 3);
+        var nextElement = List.addToEnd(firstListElement, value + 4);
+        List.addToEnd(firstListElement, value + 5);
+
+        targetElement.insertAfter(toAdd);
+        for (var toAddElement : toAdd) {
+            assertThat(List.contains(firstListElement, toAddElement)).isTrue();
+        }
+        assertThat(firstListElement.length()).isEqualTo(12);
+    }
+
+    @Test
+    public void delete() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        List.addToEnd(firstListElement, value + 1);
+        var beforeDelete = List.addToEnd(firstListElement, value + 2);
+        var toDelete = List.addToEnd(firstListElement, value + 3);
+        var afterDelete = List.addToEnd(firstListElement, value + 4);
+        List.addToEnd(firstListElement, value + 5);
+
+        toDelete.delete();
+
+        assertThat(beforeDelete.getNext()).isEqualTo(afterDelete);
+        assertThat(afterDelete.getPrev()).isEqualTo(beforeDelete);
+        assertThat(firstListElement.length()).isEqualTo(5);
+    }
+
+    @Test
+    public void deleteFirstElement() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        var secondElement = List.addToEnd(firstListElement, value + 1);
+        List.addToEnd(firstListElement, value + 2);
+        List.addToEnd(firstListElement, value + 3);
+        List.addToEnd(firstListElement, value + 4);
+        List.addToEnd(firstListElement, value + 5);
+
+        firstListElement.delete();
+
+        assertThat(secondElement.getPrev()).isNull();
+    }
+
+    @Test
+    public void deleteLastElement() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        List.addToEnd(firstListElement, value + 1);
+        List.addToEnd(firstListElement, value + 2);
+        List.addToEnd(firstListElement, value + 3);
+        var beforeLast = List.addToEnd(firstListElement, value + 4);
+        var lastElement = List.addToEnd(firstListElement, value + 5);
+
+        lastElement.delete();
+
+        assertThat(beforeLast.getNext()).isNull();
+    }
+
+    @Test
+    public void setPrev() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        var secondListElement = List.createOne(value);
+
+        firstListElement.setPrev(secondListElement);
+
+        assertThat(firstListElement.getPrev()).isEqualTo(secondListElement);
+    }
+
+    @Test
+    public void setNext() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        var secondListElement = List.createOne(value);
+
+        firstListElement.setNext(secondListElement);
+
+        assertThat(firstListElement.getNext()).isEqualTo(secondListElement);
+    }
+
+    @Test
+    public void getValue() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+
+        assertThat(firstListElement.getValue()).isEqualTo(value);
+    }
+
+    @Test
+    public void connect() {
+        var value = (Integer) 1;
+        var firstListElement = List.createOne(value);
+        var secondListElement = List.createOne(value);
+
+        firstListElement.connect(secondListElement);
+
+        assertThat(secondListElement.getPrev()).isEqualTo(firstListElement);
+        assertThat(firstListElement.getNext()).isEqualTo(secondListElement);
+    }
 }
