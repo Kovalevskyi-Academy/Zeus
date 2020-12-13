@@ -2,15 +2,16 @@ package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3;
 
 import static com.google.common.truth.Truth.assertThat;
 
-
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day3.Point;
+import org.junit.Ignore;
 import org.junit.Test;
 
-class PointTest extends AbstractTestExecutor {
+
+public class PointTest extends AbstractTestExecutor {
 
   @Test
-  void sum() {
+  public void sum() {
     var left = new Point(2, 3);
     var right = new Point(-80, 100);
 
@@ -21,21 +22,21 @@ class PointTest extends AbstractTestExecutor {
   }
 
   @Test
-  void getX() {
+  public void getX() {
     var point = new Point(1, 2);
 
     assertThat(point.getX()).isEqualTo(1);
   }
 
   @Test
-  void getY() {
+  public void getY() {
     var point = new Point(1, 2);
 
     assertThat(point.getY()).isEqualTo(2);
   }
 
   @Test
-  void updateX() {
+  public void updateX() {
     var newX = 15;
     var point = new Point(1, 2);
     var newPoint = point.updateX(newX);
@@ -44,7 +45,7 @@ class PointTest extends AbstractTestExecutor {
   }
 
   @Test
-  void updateY() {
+  public void updateY() {
     var newY = 15;
     var point = new Point(1, 2);
     var newPoint = point.updateY(newY);
@@ -53,7 +54,7 @@ class PointTest extends AbstractTestExecutor {
   }
 
   @Test
-  void distanceTo() {
+  public void distanceTo() {
     var x1 = 2;
     var x2 = 3;
     var y1 = -80;
@@ -67,33 +68,33 @@ class PointTest extends AbstractTestExecutor {
   }
 
   @Test
-  void testEquals() {
+  public void testEquals() {
     var left = new Point(100, 200);
     var left2 = new Point(100, 200);
     var right = new Point(100, 300);
 
     assertThat(left.equals(left2)).isTrue();
     assertThat(left.equals(right)).isFalse();
-    assertThat(left.equals(null)).isTrue();
-    assertThat(left.equals("1")).isTrue();
+    assertThat(left.equals(null)).isFalse();
+    assertThat(left.equals("1")).isFalse();
   }
 
   @Test
-  void testHashCode() {
+  public void testHashCode() {
     var point = new Point(100, 200);
 
     assertThat(point.hashCode()).isEqualTo(300);
   }
 
   @Test
-  void testToString() {
+  public void testToString() {
     var point = new Point(100, 200);
 
     assertThat(point.toString()).isEqualTo("Point{X: 100, Y: 200}");
   }
 
   @Test
-  void testCompareTo() {
+  public void testCompareTo() {
     var pointLeft = new Point(100, 200);
     var pointRight = new Point(-10, -50);
     var expected = pointRight.getY() - pointLeft.getY() + pointRight.getX() - pointLeft.getX();
