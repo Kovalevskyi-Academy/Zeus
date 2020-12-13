@@ -36,6 +36,7 @@ public class Zeus implements Callable<Integer> {
       {
         "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest",
         "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest",
+        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest",
         "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest"
       },
       {},
