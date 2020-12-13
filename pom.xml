@@ -9,8 +9,10 @@
     <version>1.0</version>
 
     <properties>
-        <maven.compiler.source>13</maven.compiler.source>
-        <maven.compiler.target>13</maven.compiler.target>
+        <!--        write your java -version-->
+        <javaVersion>13</javaVersion>
+        <maven.compiler.target>${javaVersion}</maven.compiler.target>
+        <maven.compiler.source>${javaVersion}</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
