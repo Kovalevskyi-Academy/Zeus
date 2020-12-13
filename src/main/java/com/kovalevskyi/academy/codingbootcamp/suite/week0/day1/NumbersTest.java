@@ -1,5 +1,6 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.week0.day1;
 
+import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ import java.util.stream.Stream;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.*;
 
-public class NumbersTest {
+public class NumbersTest extends AbstractTestExecutor {
 
   @Test
   public void testGenerateNumbers() {

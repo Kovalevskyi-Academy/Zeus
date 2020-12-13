@@ -11,8 +11,11 @@ public class Zeus implements Callable<Integer> {
   private final String[][][] classNames = {
           {
                   {
-                          "com.kovalevskyi.academy.codingbootcamp.suite.week0.day1.AlphabetTestExecutor",
-                          "com.kovalevskyi.academy.codingbootcamp.suite.week0.day1.NumbersTestExecutor"
+                          "com.kovalevskyi.academy.codingbootcamp.suite.week0.day0.MainTest"
+                  },
+                  {
+                          "com.kovalevskyi.academy.codingbootcamp.suite.week0.day1.AlphabetTest",
+                          "com.kovalevskyi.academy.codingbootcamp.suite.week0.day1.NumbersTest"
                   }
           }
   };

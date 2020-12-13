@@ -43,17 +43,23 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <archive>
-                                <manifest>
-                                    <mainClass>
-                                        com.baeldung.executable.ExecutableMavenJar
-                                    </mainClass>
-                                </manifest>
-                            </archive>
+                            <outputDirectory>
+                                cli
+                            </outputDirectory>
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
+                            <finalName>Zeus</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <archive>
+                                <manifest>
+                                    <mainClass>
+                                        com.kovalevskyi.academy.codingbootcamp.suite.Zeus
+                                    </mainClass>
+                                </manifest>
+                            </archive>
                         </configuration>
+
                     </execution>
                 </executions>
 

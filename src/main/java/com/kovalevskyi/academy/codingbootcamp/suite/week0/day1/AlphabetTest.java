@@ -1,12 +1,13 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.week0.day1;
 
+import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day1.Alphabet;
 import org.junit.Test;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertArrayEquals;
 
-public class AlphabetTest {
+public class AlphabetTest extends AbstractTestExecutor {
 
   @Test
   public void testGenerateAlphabet() {
