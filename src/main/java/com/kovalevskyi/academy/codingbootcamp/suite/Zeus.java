@@ -26,8 +26,20 @@ public class Zeus implements Callable<Integer> {
     },
     {
       {},
-      {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest"},
+      {
+        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest",
+        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest"
+      },
       {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest"}
+    },
+    {
+      {
+        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest",
+        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest",
+        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest"
+      },
+      {},
+      {}
     }
   };
 

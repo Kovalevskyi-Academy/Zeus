@@ -7,7 +7,6 @@ import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtils;
 import org.junit.Test;
 
-
 public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
@@ -25,7 +24,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.isAsciiUppercase((char) 257);
       fail("isAsciiUppercase((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
@@ -43,7 +43,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.isAsciiLowercase((char) 257);
       fail("isAsciiLowercase((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
@@ -61,7 +62,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.isAsciiNumeric((char) 257);
       fail("isAsciiNumeric((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
@@ -79,7 +81,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.isAsciiAlphabetic((char) 257);
       fail("isAsciiAlphabetic((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
@@ -97,7 +100,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.toAsciiUppercase((char) 257);
       fail("toAsciiUppercase((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
@@ -115,7 +119,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.toAsciiLowercase((char) 257);
       fail("toAsciiLowercase((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
@@ -141,7 +146,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
       StringUtils.makeUppercase(inputValue);
       fail(
           "makeUppercase does not throw IllegalArgumentException for input: new char[] {(char)299, 'e', 'l', 'L', 'o'}");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
@@ -167,7 +173,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
       StringUtils.makeLowercase(inputValue);
       fail(
           "makeLowercase with new char[] {'1', '2', '3', (char)299, ' ', 'H', 'E', 'l', 'L', 'o'} does not throw IllegalArgumentException exception");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
@@ -193,7 +200,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
       StringUtils.makeCamel(inputValue);
       fail(
           "makeCamel for new char[] {'1', (char)399, 'H', 'E', 'l', 'L', 'o', '?', 'O'} does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
@@ -208,13 +216,13 @@ public class StringUtilsTest extends AbstractTestExecutor {
       StringUtils.isStringAlphaNumerical(new char[] {(char) 399, 'b', '1', ' '});
       fail(
           "isStringAlphaNumerical does not throw IllegalArgumentException for new char[]{(char)399, 'b', '1', ' '}");
-    } catch (IllegalArgumentException ignore) { }
+    } catch (IllegalArgumentException ignore) {
+    }
   }
 
   @Test
   public void concatStrings() {
-    var input =
-        new char[][] {{'a', 'b'}, {'c', 'd'}};
+    var input = new char[][] {{'a', 'b'}, {'c', 'd'}};
     var expectedOut = new char[] {'a', 'b', 'c', 'd'};
     assertThat(StringUtils.concatStrings(input)).isEqualTo(expectedOut);
   }
@@ -231,7 +239,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.concatStrings(null);
       fail("StringUtils.concatStrings(null) does not throw NullPointerException");
-    } catch (NullPointerException ignore) { }
+    } catch (NullPointerException ignore) {
+    }
   }
 
   @Test
@@ -240,7 +249,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.concatStrings(input);
       fail("StringUtils.concatStrings does not throw NullPointerException for new char[][]{null}");
-    } catch (NullPointerException ignore) { }
+    } catch (NullPointerException ignore) {
+    }
   }
 
   @Test
@@ -259,7 +269,8 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.toInt(null);
       fail("StringUtils.toInt(null); does not throw NullPointerException");
-    } catch (NullPointerException ignore) { }
+    } catch (NullPointerException ignore) {
+    }
   }
 
   @Test
@@ -268,6 +279,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
     try {
       StringUtils.toInt(input);
       fail("StringUtils.toInt does not throw NumberFormatException for: new char[]{'1', '2', 'a'}");
-    } catch (NumberFormatException ignore) { }
+    } catch (NumberFormatException ignore) {
+    }
   }
 }
