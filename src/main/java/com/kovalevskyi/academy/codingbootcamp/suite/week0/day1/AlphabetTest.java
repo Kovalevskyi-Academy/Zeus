@@ -3,6 +3,7 @@ package com.kovalevskyi.academy.codingbootcamp.suite.week0.day1;
 import com.kovalevskyi.academy.codingbootcamp.week0.day1.Alphabet;
 import org.junit.Test;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertArrayEquals;
 
 public class AlphabetTest {
@@ -15,7 +16,8 @@ public class AlphabetTest {
           's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
         };
 
-    assertArrayEquals(expectedResult, Alphabet.generateAlphabet());
+    var actualResult = Alphabet.generateAlphabet();
+    assertThat(actualResult).isEqualTo(expectedResult);
   }
 
   @Test
@@ -26,6 +28,7 @@ public class AlphabetTest {
           'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'
         };
 
-    assertArrayEquals(expectedResult, Alphabet.generateReversedAlphabet());
+    var actualResult = Alphabet.generateReversedAlphabet();
+    assertThat(actualResult).isEqualTo(expectedResult);
   }
 }

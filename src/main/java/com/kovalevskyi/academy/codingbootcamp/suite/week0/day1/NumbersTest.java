@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.*;
 
 public class NumbersTest {
@@ -14,16 +15,27 @@ public class NumbersTest {
   @Test
   public void testGenerateNumbers() {
     var expectedResult = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-    assertArrayEquals(expectedResult, Numbers.generateNumbers());
+    var actualResult = Numbers.generateNumbers();
+    assertThat(actualResult).isEqualTo(expectedResult);
   }
 
   @Test
   public void testIsNegative() {
-    assertTrue(Numbers.isNegative(-1));
-    assertTrue(Numbers.isNegative(-200));
-    assertFalse(Numbers.isNegative(0));
-    assertFalse(Numbers.isNegative(200));
+      testIsNegative(-1, true);
+      testIsNegative(-200, true);
+      testIsNegative(0, false);
+      testIsNegative(200, false);
+  }
+
+  private void testIsNegative(int input, boolean expected) {
+    var actual = Numbers.isNegative(input);
+    System.out.printf("For input: %d, result is: %s, expected: %s\n", input, actual, expected);
+    var assertResult = assertThat(actual);
+    if (expected) {
+        assertResult.isTrue();
+    } else {
+        assertResult.isFalse();
+    }
   }
 
   @Test
@@ -32,10 +44,10 @@ public class NumbersTest {
     IntStream.range(0, 10)
         .forEach(
             n1 -> {
-              IntStream.range(0, 10)
+              IntStream.range(n1 + 1, 10)
                   .forEach(
                       n2 -> {
-                        IntStream.range(0, 10)
+                        IntStream.range(n2 + 1, 10)
                             .forEach(
                                 n3 -> {
                                   if (n1 != n2 && n1 != n3 && n2 != n3) {
@@ -47,9 +59,18 @@ public class NumbersTest {
 
     var actualResult = Numbers.generateTriplets();
 
-    Stream.of(actualResult).forEach(value -> assertTrue(expected.contains(new String(value))));
-    assertEquals("012", new String(actualResult[0]));
-    assertEquals("013", new String(actualResult[1]));
+    Stream.of(actualResult).forEach(value -> {
+        if (!expected.contains(new String(value))) {
+            fail(String.format("Value from your result: %s is not expected\n", new String(value)));
+        }
+    });
+    System.out.print("Checking if element 0 is 012:");
+    assertThat(new String(actualResult[0])).isEqualTo("012");
+    System.out.println(" so far so good");
+    System.out.print("Checking if element 1 is 013");
+    assertThat(new String(actualResult[1])).isEqualTo("013");
+    System.out.println(" so far so good");
+    assertThat(actualResult).hasLength(expected.size());
   }
 
   @Test
@@ -75,7 +96,12 @@ public class NumbersTest {
 
     var actualResult = Numbers.generateTuples();
 
-    Stream.of(actualResult).forEach(value -> assertTrue(expected.contains(new String(value))));
+    Stream.of(actualResult).forEach(value -> {
+        if (!expected.contains(new String(value))) {
+            fail(String.format("Value from your result: %s is not expected\n", new String(value)));
+        }
+    });
+    assertThat(actualResult).hasLength(expected.size());
   }
 
   @Test
@@ -94,7 +120,11 @@ public class NumbersTest {
 
     var actualResult = Numbers.generateTuples(n);
 
-    Stream.of(actualResult).forEach(value -> assertTrue(expected.contains(value)));
+    Stream.of(actualResult).forEach(value -> {
+        if (!expected.contains(new String(value))) {
+            fail(String.format("Value from your result: %s is not expected\n", new String(value)));
+        }
+    });
   }
 
   @Test
@@ -114,20 +144,18 @@ public class NumbersTest {
     var n = 0;
 
     var actualResult = Numbers.generateTuples(n);
-    assertTrue(actualResult.length == 0);
+    assertThat(actualResult).isEmpty();
   }
 
   @Test
   public void testToString() {
-    assertArrayEquals(new char[] {'1', '2'}, Numbers.convertToString(12));
-    assertArrayEquals(new char[] {'0'}, Numbers.convertToString(0));
-    assertArrayEquals(new char[] {'-', '3', '2'}, Numbers.convertToString(-32));
-    assertArrayEquals(
-        String.valueOf(Integer.MAX_VALUE).toCharArray(),
-        Numbers.convertToString(Integer.MAX_VALUE));
-    assertArrayEquals(
-        String.valueOf(Integer.MIN_VALUE).toCharArray(),
-        Numbers.convertToString(Integer.MIN_VALUE));
+    assertThat(Numbers.convertToString(12)).isEqualTo(new char[] {'1', '2'});
+    assertThat(Numbers.convertToString(0)).isEqualTo(new char[] {'0'});
+    assertThat(Numbers.convertToString(-32)).isEqualTo(new char[] {'-', '3', '2'});
+    assertThat(Numbers.convertToString(Integer.MAX_VALUE))
+            .isEqualTo(String.valueOf(Integer.MAX_VALUE).toCharArray());
+      assertThat(Numbers.convertToString(Integer.MIN_VALUE))
+              .isEqualTo(String.valueOf(Integer.MIN_VALUE).toCharArray());
   }
 
   @Test
@@ -137,7 +165,7 @@ public class NumbersTest {
 
     Numbers.sort(input);
 
-    assertArrayEquals(expected, input);
+    assertThat(input).isEqualTo(expected);
   }
 
   @Test
