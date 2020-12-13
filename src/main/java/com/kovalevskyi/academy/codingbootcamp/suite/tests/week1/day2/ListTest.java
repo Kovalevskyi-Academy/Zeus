@@ -1,101 +1,103 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2;
 
 import com.kovalevskyi.academy.codingbootcamp.week1.day2.List;
+import java.util.function.Function;
 import org.junit.Test;
 
-import java.util.function.Function;
+
+
 
 import static com.google.common.truth.Truth.assertThat;
 
 public class ListTest {
 
-    @Test
-    public void createOne() {
-        var value = (Integer) 1;
-        var newListElement = List.createOne(value);
+  @Test
+  public void createOne() {
+    var value = (Integer) 1;
+    var newListElement = List.createOne(value);
 
-        assertThat(newListElement.getNext()).isNull();
-        assertThat(newListElement.getPrev()).isNull();
-        assertThat(newListElement.getValue()).isEqualTo(value);
-    }
+    assertThat(newListElement.getNext()).isNull();
+    assertThat(newListElement.getPrev()).isNull();
+    assertThat(newListElement.getValue()).isEqualTo(value);
+  }
 
-    @Test
-    public void addToEnd() {
-        var value = (Integer) 1;
-        var firstListElement = List.createOne(value);
+  @Test
+  public void addToEnd() {
+    var value = (Integer) 1;
+    var firstListElement = List.createOne(value);
 
-        var firstNew = List.addToEnd(firstListElement, value + 1);
-        var secondNew = List.addToEnd(firstListElement, value + 2);
+    var firstNew = List.addToEnd(firstListElement, value + 1);
+    var secondNew = List.addToEnd(firstListElement, value + 2);
 
-        assertThat(firstListElement.getPrev()).isNull();
-        assertThat(firstNew).isEqualTo(firstListElement.getNext());
-        assertThat(secondNew).isEqualTo(firstListElement.getNext().getNext());
-        assertThat(firstListElement).isEqualTo(firstListElement.getNext().getPrev());
-        assertThat(firstNew).isEqualTo(firstListElement.getNext().getNext().getPrev());
-        assertThat(firstListElement.getNext().getNext().getNext()).isNull();
+    assertThat(firstListElement.getPrev()).isNull();
+    assertThat(firstNew).isEqualTo(firstListElement.getNext());
+    assertThat(secondNew).isEqualTo(firstListElement.getNext().getNext());
+    assertThat(firstListElement).isEqualTo(firstListElement.getNext().getPrev());
+    assertThat(firstNew).isEqualTo(firstListElement.getNext().getNext().getPrev());
+    assertThat(firstListElement.getNext().getNext().getNext()).isNull();
 
-        assertThat(firstListElement.getValue()).isEqualTo(value);
-        assertThat(firstListElement.getNext().getValue()).isEqualTo(value + 1);
-        assertThat(firstListElement.getNext().getNext().getValue()).isEqualTo(value + 2);
-    }
+    assertThat(firstListElement.getValue()).isEqualTo(value);
+    assertThat(firstListElement.getNext().getValue()).isEqualTo(value + 1);
+    assertThat(firstListElement.getNext().getNext().getValue()).isEqualTo(value + 2);
+  }
 
-    @Test
-    public void addToStart() {
-        var value = (Integer) 1;
-        var firstListElement = List.createOne(value);
+  @Test
+  public void addToStart() {
+    var value = (Integer) 1;
+    var firstListElement = List.createOne(value);
 
-        var firstNew = List.addToStart(firstListElement, value + 1);
-        var secondNew = List.addToStart(firstListElement, value + 2);
+    var firstNew = List.addToStart(firstListElement, value + 1);
+    var secondNew = List.addToStart(firstListElement, value + 2);
 
-        assertThat(secondNew.getPrev()).isNull();
-        assertThat(firstNew).isEqualTo(secondNew.getNext());
-        assertThat(firstListElement).isEqualTo(secondNew.getNext().getNext());
-        assertThat(secondNew).isEqualTo(secondNew.getNext().getPrev());
-        assertThat(firstNew).isEqualTo(secondNew.getNext().getNext().getPrev());
-        assertThat(secondNew.getNext()).isNotNull();
+    assertThat(secondNew.getPrev()).isNull();
+    assertThat(firstNew).isEqualTo(secondNew.getNext());
+    assertThat(firstListElement).isEqualTo(secondNew.getNext().getNext());
+    assertThat(secondNew).isEqualTo(secondNew.getNext().getPrev());
+    assertThat(firstNew).isEqualTo(secondNew.getNext().getNext().getPrev());
+    assertThat(secondNew.getNext()).isNotNull();
 
-        assertThat(secondNew.getValue()).isEqualTo(value + 2);
-        assertThat(secondNew.getNext().getValue()).isEqualTo(value + 1);
-        assertThat(secondNew.getNext().getNext().getValue()).isEqualTo(value);
-    }
+    assertThat(secondNew.getValue()).isEqualTo(value + 2);
+    assertThat(secondNew.getNext().getValue()).isEqualTo(value + 1);
+    assertThat(secondNew.getNext().getNext().getValue()).isEqualTo(value);
+  }
 
-    @Test
-    public void contains() {
-        var value = (Integer) 1;
-        var firstListElement = List.createOne(value);
-        List.addToEnd(firstListElement, value + 1);
-        List.addToEnd(firstListElement, value + 2);
-        List.addToEnd(firstListElement, value + 3);
-        List.addToEnd(firstListElement, value + 4);
-        List.addToEnd(firstListElement, value + 5);
+  @Test
+  public void contains() {
+    var value = (Integer) 1;
+    var firstListElement = List.createOne(value);
+    List.addToEnd(firstListElement, value + 1);
+    List.addToEnd(firstListElement, value + 2);
+    List.addToEnd(firstListElement, value + 3);
+    List.addToEnd(firstListElement, value + 4);
+    List.addToEnd(firstListElement, value + 5);
 
-        assertThat(List.contains(firstListElement, 0)).isFalse();
-        assertThat(List.contains(firstListElement, 5)).isTrue();
-    }
+    assertThat(List.contains(firstListElement, 0)).isFalse();
+    assertThat(List.contains(firstListElement, 5)).isTrue();
+  }
 
-    @Test
-    public void map() {
-        var toStr = (Function<Integer, String>) String::valueOf;
+  @Test
+  public void map() {
+    var toStr = (Function<Integer, String>) String::valueOf;
 
-        var value = (Integer) 1;
-        var firstListElement = List.createOne(value);
-        List.addToEnd(firstListElement, value + 1);
-        List.addToEnd(firstListElement, value + 2);
-        List.addToEnd(firstListElement, value + 3);
-        List.addToEnd(firstListElement, value + 4);
-        List.addToEnd(firstListElement, value + 5);
+    var value = (Integer) 1;
+    var firstListElement = List.createOne(value);
+    List.addToEnd(firstListElement, value + 1);
+    List.addToEnd(firstListElement, value + 2);
+    List.addToEnd(firstListElement, value + 3);
+    List.addToEnd(firstListElement, value + 4);
+    List.addToEnd(firstListElement, value + 5);
 
-        var newList = List.map(firstListElement, toStr);
-        assertThat(newList.length()).isEqualTo(6);
-        assertThat(List.contains(newList, "1")).isTrue();
-        assertThat(List.contains(newList, "2")).isTrue();
-        assertThat(List.contains(newList, "3")).isTrue();
-        assertThat(List.contains(newList, "4")).isTrue();
-        assertThat(List.contains(newList, "5")).isTrue();
-        assertThat(List.contains(newList, "6")).isTrue();
-        // Just in case:)
-        assertThat(List.contains(newList, "7")).isFalse();
-    }
+    var newList = List.map(firstListElement, toStr);
+    assertThat(newList.length()).isEqualTo(6);
+    assertThat(List.contains(newList, "1")).isTrue();
+    assertThat(List.contains(newList, "2")).isTrue();
+    assertThat(List.contains(newList, "3")).isTrue();
+    assertThat(List.contains(newList, "4")).isTrue();
+    assertThat(List.contains(newList, "5")).isTrue();
+    assertThat(List.contains(newList, "6")).isTrue();
+    // Just in case:)
+    assertThat(List.contains(newList, "7")).isFalse();
+  }
 
 //    @Test
 //    public void lengthToEnd() {

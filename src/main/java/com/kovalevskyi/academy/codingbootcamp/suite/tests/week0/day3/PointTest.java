@@ -1,10 +1,11 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3;
 
+import static com.google.common.truth.Truth.assertThat;
+
+
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day3.Point;
 import org.junit.Test;
-
-import static com.google.common.truth.Truth.assertThat;
 
 class PointTest extends AbstractTestExecutor {
 

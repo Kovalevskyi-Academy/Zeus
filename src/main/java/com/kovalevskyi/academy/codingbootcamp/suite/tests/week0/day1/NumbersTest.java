@@ -1,37 +1,37 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1;
 
+import static com.google.common.truth.Truth.assertThat;
+import static junit.framework.TestCase.fail;
+
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day1.Numbers;
-import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.stream.IntStream;
+import org.junit.Test;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.fail;
 
 public class NumbersTest extends AbstractTestExecutor {
 
-    @Test
-    public void testGenerateNumbers() {
-        var expectedResult = IntStream.range(0, 100).toArray();
-        var actualResult = com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers.generateNumbers();
-        assertThat(actualResult).isEqualTo(expectedResult);
-    }
+  @Test
+  public void testGenerateNumbers() {
+    var expectedResult = IntStream.range(0, 100).toArray();
+    var actualResult = com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers.generateNumbers();
+    assertThat(actualResult).isEqualTo(expectedResult);
+  }
 
-    @Test
-    public void testFindBiggestInTuple() {
-        assertThat(Numbers.findBiggest(-2, 3)).isEqualTo(3);
-        assertThat(Numbers.findBiggest(-2, -3)).isEqualTo(-2);
-        assertThat(Numbers.findBiggest(0, 0)).isEqualTo(0);
-    }
+  @Test
+  public void testFindBiggestInTuple() {
+    assertThat(Numbers.findBiggest(-2, 3)).isEqualTo(3);
+    assertThat(Numbers.findBiggest(-2, -3)).isEqualTo(-2);
+    assertThat(Numbers.findBiggest(0, 0)).isEqualTo(0);
+  }
 
-    @Test
-    public void testFindBiggestInTriplet() {
-        assertThat(Numbers.findBiggest(-2, 3, 0)).isEqualTo(3);
-        assertThat(Numbers.findBiggest(-2, 0,-3)).isEqualTo(0);
-        assertThat(Numbers.findBiggest(10, -1, 0)).isEqualTo(10);
-    }
+  @Test
+  public void testFindBiggestInTriplet() {
+    assertThat(Numbers.findBiggest(-2, 3, 0)).isEqualTo(3);
+    assertThat(Numbers.findBiggest(-2, 0, -3)).isEqualTo(0);
+    assertThat(Numbers.findBiggest(10, -1, 0)).isEqualTo(10);
+  }
 
   @Test
   public void testFindBiggestInArray() {
@@ -46,9 +46,7 @@ public class NumbersTest extends AbstractTestExecutor {
     try {
       Numbers.findBiggest(input);
       fail("findBiggest should throw IllegalArgumentException when input is empty array");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignored) { }
   }
 
   @Test
@@ -56,45 +54,41 @@ public class NumbersTest extends AbstractTestExecutor {
     try {
       Numbers.findBiggest(null);
       fail("findBiggest should throw IllegalArgumentException when input is null");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignored) { }
   }
 
-    @Test
-    public void testFindIndexOfBiggestNumber() {
-        testFindIndexOfBiggestNumber(new int[] {0, 1, -200, 3, 400, 5, 6, 7, 8, 9}, 4);
-        testFindIndexOfBiggestNumber(new int[] {0, 1, -200, 3, 4, 5, 6, 7, 8, 9}, 9);
-        testFindIndexOfBiggestNumber(new int[] {0}, 0);
-        testFindIndexOfBiggestNumber(new int[] {0, 1, 200, 3, 4, 5, 6, 7, 8, 9}, 2);
-    }
+  @Test
+  public void testFindIndexOfBiggestNumber() {
+    testFindIndexOfBiggestNumber(new int[] {0, 1, -200, 3, 400, 5, 6, 7, 8, 9}, 4);
+    testFindIndexOfBiggestNumber(new int[] {0, 1, -200, 3, 4, 5, 6, 7, 8, 9}, 9);
+    testFindIndexOfBiggestNumber(new int[] {0}, 0);
+    testFindIndexOfBiggestNumber(new int[] {0, 1, 200, 3, 4, 5, 6, 7, 8, 9}, 2);
+  }
 
-    private void testFindIndexOfBiggestNumber(int[] input, int index) {
-        System.out.printf("Testing for input: %s, index should be: %d\n", Arrays.toString(input), index);
-        var actualResult = Numbers.findIndexOfBiggestNumber(input);
-        assertThat(actualResult).isEqualTo(index);
-    }
+  private void testFindIndexOfBiggestNumber(int[] input, int index) {
+    System.out
+        .printf("Testing for input: %s, index should be: %d\n", Arrays.toString(input), index);
+    var actualResult = Numbers.findIndexOfBiggestNumber(input);
+    assertThat(actualResult).isEqualTo(index);
+  }
 
-    @Test
-    public void testFindIndexOfBiggestNumberWithEmptyArray() {
-        var input = new int[] {};
-        try {
-            Numbers.findIndexOfBiggestNumber(input);
-            fail("findIndexOfBiggestNumber should throw IllegalArgumentException when input is empty array");
-        } catch (IllegalArgumentException e) {
+  @Test
+  public void testFindIndexOfBiggestNumberWithEmptyArray() {
+    var input = new int[] {};
+    try {
+      Numbers.findIndexOfBiggestNumber(input);
+      fail("findIndexOfBiggestNumber should throw IllegalArgumentException "
+          + "when input is empty array");
+    } catch (IllegalArgumentException ignored) { }
+  }
 
-        }
-    }
-
-    @Test
-    public void testFindIndexOfBiggestNumberWithNull() {
-        try {
-            Numbers.findIndexOfBiggestNumber(null);
-            fail("findIndexOfBiggestNumber should throw IllegalArgumentException when input is null");
-        } catch (IllegalArgumentException e) {
-
-        }
-    }
+  @Test
+  public void testFindIndexOfBiggestNumberWithNull() {
+    try {
+      Numbers.findIndexOfBiggestNumber(null);
+      fail("findIndexOfBiggestNumber should throw IllegalArgumentException when input is null");
+    } catch (IllegalArgumentException ignored) { }
+  }
 
   @Test
   public void testIsNegative() {

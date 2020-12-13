@@ -1,15 +1,15 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2;
 
+import static com.google.common.truth.Truth.assertThat;
+import static junit.framework.TestCase.fail;
+
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers;
-import org.junit.Test;
-
 import java.util.HashSet;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import org.junit.Test;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.*;
 
 public class NumbersTest extends AbstractTestExecutor {
 
@@ -35,9 +35,9 @@ public class NumbersTest extends AbstractTestExecutor {
     var actualResult = Numbers.generateTriplets();
 
     Stream.of(actualResult).forEach(value -> {
-        if (!expected.contains(new String(value))) {
-            fail(String.format("Value from your result: %s is not expected\n", new String(value)));
-        }
+      if (!expected.contains(new String(value))) {
+        fail(String.format("Value from your result: %s is not expected\n", new String(value)));
+      }
     });
     System.out.print("Checking if element 0 is 012:");
     assertThat(new String(actualResult[0])).isEqualTo("012");
@@ -72,9 +72,9 @@ public class NumbersTest extends AbstractTestExecutor {
     var actualResult = Numbers.generateTuples();
 
     Stream.of(actualResult).forEach(value -> {
-        if (!expected.contains(new String(value))) {
-            fail(String.format("Value from your result: %s is not expected\n", new String(value)));
-        }
+      if (!expected.contains(new String(value))) {
+        fail(String.format("Value from your result: %s is not expected\n", new String(value)));
+      }
     });
     assertThat(actualResult).hasLength(expected.size());
   }
@@ -92,9 +92,9 @@ public class NumbersTest extends AbstractTestExecutor {
     var actualResult = Numbers.generateTuples(n);
 
     Stream.of(actualResult).forEach(value -> {
-        if (!expected.contains(new String(value))) {
-            fail(String.format("Value from your result: %s is not expected\n", new String(value)));
-        }
+      if (!expected.contains(new String(value))) {
+        fail(String.format("Value from your result: %s is not expected\n", new String(value)));
+      }
     });
   }
 
@@ -105,9 +105,7 @@ public class NumbersTest extends AbstractTestExecutor {
     try {
       Numbers.generateTuples(n);
       fail();
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignored) { }
   }
 
   @Test
@@ -124,9 +122,9 @@ public class NumbersTest extends AbstractTestExecutor {
     assertThat(Numbers.convertToString(0)).isEqualTo(new char[] {'0'});
     assertThat(Numbers.convertToString(-32)).isEqualTo(new char[] {'-', '3', '2'});
     assertThat(Numbers.convertToString(Integer.MAX_VALUE))
-            .isEqualTo(String.valueOf(Integer.MAX_VALUE).toCharArray());
-      assertThat(Numbers.convertToString(Integer.MIN_VALUE))
-              .isEqualTo(String.valueOf(Integer.MIN_VALUE).toCharArray());
+        .isEqualTo(String.valueOf(Integer.MAX_VALUE).toCharArray());
+    assertThat(Numbers.convertToString(Integer.MIN_VALUE))
+        .isEqualTo(String.valueOf(Integer.MIN_VALUE).toCharArray());
   }
 
   @Test

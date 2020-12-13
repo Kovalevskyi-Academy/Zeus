@@ -1,10 +1,11 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1;
 
+import static com.google.common.truth.Truth.assertThat;
+import static junit.framework.TestCase.fail;
+
 import com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtils;
 import org.junit.Test;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.fail;
 
 public class StringUtilsTest {
 
@@ -23,9 +24,7 @@ public class StringUtilsTest {
     try {
       StringUtils.isAsciiUppercase((char) 257);
       fail("isAsciiUppercase((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
@@ -43,9 +42,7 @@ public class StringUtilsTest {
     try {
       StringUtils.isAsciiLowercase((char) 257);
       fail("isAsciiLowercase((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
@@ -63,9 +60,7 @@ public class StringUtilsTest {
     try {
       StringUtils.isAsciiNumeric((char) 257);
       fail("isAsciiNumeric((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
@@ -83,9 +78,7 @@ public class StringUtilsTest {
     try {
       StringUtils.isAsciiAlphabetic((char) 257);
       fail("isAsciiAlphabetic((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
@@ -103,9 +96,7 @@ public class StringUtilsTest {
     try {
       StringUtils.toAsciiUppercase((char) 257);
       fail("toAsciiUppercase((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
@@ -123,9 +114,7 @@ public class StringUtilsTest {
     try {
       StringUtils.toAsciiLowercase((char) 257);
       fail("toAsciiLowercase((char)257) does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
@@ -151,9 +140,7 @@ public class StringUtilsTest {
       StringUtils.makeUppercase(inputValue);
       fail(
           "makeUppercase does not throw IllegalArgumentException for input: new char[] {(char)299, 'e', 'l', 'L', 'o'}");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
@@ -179,9 +166,7 @@ public class StringUtilsTest {
       StringUtils.makeLowercase(inputValue);
       fail(
           "makeLowercase with new char[] {'1', '2', '3', (char)299, ' ', 'H', 'E', 'l', 'L', 'o'} does not throw IllegalArgumentException exception");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
@@ -207,9 +192,7 @@ public class StringUtilsTest {
       StringUtils.makeCamel(inputValue);
       fail(
           "makeCamel for new char[] {'1', (char)399, 'H', 'E', 'l', 'L', 'o', '?', 'O'} does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
@@ -224,18 +207,13 @@ public class StringUtilsTest {
       StringUtils.isStringAlphaNumerical(new char[] {(char) 399, 'b', '1', ' '});
       fail(
           "isStringAlphaNumerical does not throw IllegalArgumentException for new char[]{(char)399, 'b', '1', ' '}");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException ignore) { }
   }
 
   @Test
   public void concatStrings() {
     var input =
-        new char[][] {
-          {'a', 'b'},
-          {'c', 'd'}
-        };
+        new char[][] {{'a', 'b'}, {'c', 'd'}};
     var expectedOut = new char[] {'a', 'b', 'c', 'd'};
     assertThat(StringUtils.concatStrings(input)).isEqualTo(expectedOut);
   }
@@ -252,9 +230,7 @@ public class StringUtilsTest {
     try {
       StringUtils.concatStrings(null);
       fail("StringUtils.concatStrings(null) does not throw NullPointerException");
-    } catch (NullPointerException e) {
-
-    }
+    } catch (NullPointerException ignore) { }
   }
 
   @Test
@@ -263,9 +239,7 @@ public class StringUtilsTest {
     try {
       StringUtils.concatStrings(input);
       fail("StringUtils.concatStrings does not throw NullPointerException for new char[][]{null}");
-    } catch (NullPointerException e) {
-
-    }
+    } catch (NullPointerException ignore) { }
   }
 
   @Test
@@ -284,9 +258,7 @@ public class StringUtilsTest {
     try {
       StringUtils.toInt(null);
       fail("StringUtils.toInt(null); does not throw NullPointerException");
-    } catch (NullPointerException e) {
-
-    }
+    } catch (NullPointerException ignore) { }
   }
 
   @Test
@@ -295,8 +267,6 @@ public class StringUtilsTest {
     try {
       StringUtils.toInt(input);
       fail("StringUtils.toInt does not throw NumberFormatException for: new char[]{'1', '2', 'a'}");
-    } catch (NumberFormatException e) {
-
-    }
+    } catch (NumberFormatException ignore) { }
   }
 }
