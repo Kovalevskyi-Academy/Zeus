@@ -39,7 +39,11 @@ public class Zeus implements Callable<Integer> {
         "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest",
         "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest"
       },
-      {},
+      {
+        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest",
+        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test",
+        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTes"
+      },
       {}
     }
   };
@@ -109,7 +113,7 @@ public class Zeus implements Callable<Integer> {
           }
         });
     Invoker invoker = new DefaultInvoker();
-    invoker.setMavenHome(new File(mavenHome));
+    invoker.setMavenHome(new File(this.mavenHome));
     System.out.println("Zeus is about to execute 'mvn clean compile package'");
     invoker.execute(request);
   }

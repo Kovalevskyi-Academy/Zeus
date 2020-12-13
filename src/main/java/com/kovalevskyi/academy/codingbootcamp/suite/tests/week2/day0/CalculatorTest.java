@@ -10,7 +10,7 @@ import static org.junit.Assert.fail;
 public class CalculatorTest extends BasicStdTest {
 
   @Test
-  void main() {
+  public void main() {
     var inputArgs = new String[] {"2", "+", "355"};
     var expectedString = "result: 357\n";
     Calculator.main(inputArgs);
@@ -18,7 +18,7 @@ public class CalculatorTest extends BasicStdTest {
   }
 
   @Test
-  void mainWithMinus() {
+  public void mainWithMinus() {
     var inputArgs = new String[] {"2", "-", "355"};
     var expectedString = "result: -353\n";
     Calculator.main(inputArgs);
@@ -26,7 +26,7 @@ public class CalculatorTest extends BasicStdTest {
   }
 
   @Test
-  void mainWithMinusMinus() {
+  public void mainWithMinusMinus() {
     var inputArgs = new String[] {"-12", "+", "-355"};
     var expectedString = "result: -367\n";
     Calculator.main(inputArgs);
@@ -34,7 +34,7 @@ public class CalculatorTest extends BasicStdTest {
   }
 
   @Test
-  void mainWithMult() {
+  public void mainWithMult() {
     var inputArgs = new String[] {"-12", "*", "5"};
     var expectedString = "result: -60\n";
     Calculator.main(inputArgs);
@@ -42,7 +42,7 @@ public class CalculatorTest extends BasicStdTest {
   }
 
   @Test
-  void mainWithDevid() {
+  public void mainWithDevid() {
     var inputArgs = new String[] {"-12", "/", "-6"};
     var expectedString = "result: 2\n";
     Calculator.main(inputArgs);
@@ -50,7 +50,7 @@ public class CalculatorTest extends BasicStdTest {
   }
 
   @Test
-  void mainWithPercent() {
+  public void mainWithPercent() {
     var inputArgs = new String[] {"6", "%", "4"};
     var expectedString = "result: 2\n";
     Calculator.main(inputArgs);
@@ -58,7 +58,7 @@ public class CalculatorTest extends BasicStdTest {
   }
 
   @Test
-  void mainWithIncorrectInput() {
+  public void mainWithIncorrectInput() {
     var inputArgs = new String[] {"6"};
     var expectedString = "Please provide 3 input arguments, example: 2 + 3\n";
     Calculator.main(inputArgs);
@@ -66,7 +66,7 @@ public class CalculatorTest extends BasicStdTest {
   }
 
   @Test
-  void mainWithIllegalInput() {
+  public void mainWithIllegalInput() {
     var inputArgs = new String[] {"6", "%", "!"};
     try {
       Calculator.main(inputArgs);
