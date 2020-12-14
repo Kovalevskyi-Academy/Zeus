@@ -1,6 +1,10 @@
 package com.kovalevskyi.academy.codingbootcamp.suite;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
@@ -82,6 +86,11 @@ public class Zeus implements Callable<Integer> {
           description = "specific test to executed")
   private String test;
 
+  @CommandLine.Option(
+          names = {"-b", "--build"},
+          description = "build jar")
+  private boolean build;
+
   @Override
   public Integer call() {
     try {
@@ -95,15 +104,17 @@ public class Zeus implements Callable<Integer> {
         }
         return 0;
       }
-      System.out.println("Zeus is about to start compiling your project");
-      mavenCompile();
-      System.out.println("Zeus happy");
-      if (this.all) {
+      if (this.build) {
+        System.out.println("Zeus is about to start compiling your project");
+        mavenCompile();
+        System.out.println("Zeus happy");
+        return 0;
+      } else if (this.all) {
         if (this.week != -1 && this.day != -1) {
           System.out.println(
               "one can not ask Zeus to run all test and specific tests (week/day) "
                   + "at the same time!");
-          return 0;
+          return -1;
         }
         executeAllTests();
       } else if (this.test != null) {
