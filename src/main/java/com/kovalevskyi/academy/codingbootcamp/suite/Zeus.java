@@ -72,11 +72,27 @@ public class Zeus implements Callable<Integer> {
       required = true)
   private String mavenHome;
 
+  @CommandLine.Option(
+          names = {"-s", "--show"},
+          description = "show tests for week/day")
+  private boolean show;
+
+  @CommandLine.Option(
+          names = {"-t", "--test"},
+          description = "specific test to executed")
+  private String test;
+
   @Override
   public Integer call() {
     try {
-      if (!this.all && (this.week == -1 || this.day == -1)) {
+      if (this.test != null && !this.all && (this.week == -1 || this.day == -1)) {
         System.out.println("you need to specify week and day like this: --week X --day Y");
+        return 0;
+      }
+      if (this.show) {
+        for (var dayTest : this.classNames[this.week][this.day]) {
+          System.out.printf(String.format("test: %s\n", dayTest));
+        }
         return 0;
       }
       System.out.println("Zeus is about to start compiling your project");
@@ -90,8 +106,10 @@ public class Zeus implements Callable<Integer> {
           return 0;
         }
         executeAllTests();
+      } else if (this.test != null) {
+        executeDayTest(this.test);
       } else {
-        executeTest(this.classNames[this.week][this.day]);
+        executeDayTests(this.classNames[this.week][this.day]);
       }
     } catch (Exception e) {
       System.out.println("Zeus is VERY unhappy!!!!");
@@ -121,16 +139,20 @@ public class Zeus implements Callable<Integer> {
   private void executeAllTests() throws Exception {
     for (var weekTests : this.classNames) {
       for (var dayTests : weekTests) {
-        executeTest(dayTests);
+        executeDayTests(dayTests);
       }
     }
   }
 
-  private void executeTest(String[] classNames) throws Exception {
+  private void executeDayTest(String className) throws Exception {
+    var testExecutor =
+            (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
+    testExecutor.executeTest();
+  }
+
+  private void executeDayTests(String[] classNames) throws Exception {
     for (var className : classNames) {
-      var testExecutor =
-          (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
-      testExecutor.executeTest();
+      executeDayTest(className);
     }
   }
 
