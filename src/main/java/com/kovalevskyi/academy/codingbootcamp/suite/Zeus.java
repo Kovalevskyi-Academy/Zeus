@@ -7,8 +7,10 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
-
-import org.apache.maven.shared.invoker.*;
+import org.apache.maven.shared.invoker.DefaultInvocationRequest;
+import org.apache.maven.shared.invoker.DefaultInvoker;
+import org.apache.maven.shared.invoker.InvocationRequest;
+import org.apache.maven.shared.invoker.Invoker;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -18,39 +20,32 @@ import picocli.CommandLine;
     description = "Zeus the Mighty")
 public class Zeus implements Callable<Integer> {
 
-  private final String[][][] classNames = {
-    {
-      {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest"},
-      {
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest",
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest"
-      },
-      {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest"},
-      {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest"}
-    },
-    {
-      {},
-      {
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest",
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest"
-      },
-      {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest"}
-    },
+  private final String[][][] classNames =
     {
       {
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest",
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest",
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest",
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest"
+          {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest"},
+          {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest",
+              "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest"},
+          {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest"},
+          {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest"}
       },
       {
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest",
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test",
-        "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTes"
+          {},
+          {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest",
+              "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest" },
+          {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest"}
       },
-      {}
-    }
-  };
+      {
+          {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest",
+              "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest",
+              "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest",
+              "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest"},
+          { "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest",
+              "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test",
+              "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTes"},
+          {}
+      }
+    };
 
   @CommandLine.Option(
       names = {"-w", "--week"},
@@ -77,18 +72,18 @@ public class Zeus implements Callable<Integer> {
   private String mavenHome;
 
   @CommandLine.Option(
-          names = {"-s", "--show"},
-          description = "show tests for week/day")
+      names = {"-s", "--show"},
+      description = "show tests for week/day")
   private boolean show;
 
   @CommandLine.Option(
-          names = {"-t", "--test"},
-          description = "specific test to executed")
+      names = {"-t", "--test"},
+      description = "specific test to executed")
   private String test;
 
   @CommandLine.Option(
-          names = {"-b", "--build"},
-          description = "build jar")
+      names = {"-b", "--build"},
+      description = "build jar")
   private boolean build;
 
   @Override
@@ -157,7 +152,7 @@ public class Zeus implements Callable<Integer> {
 
   private void executeDayTest(String className) throws Exception {
     var testExecutor =
-            (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
+        (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
     testExecutor.executeTest();
   }
 
