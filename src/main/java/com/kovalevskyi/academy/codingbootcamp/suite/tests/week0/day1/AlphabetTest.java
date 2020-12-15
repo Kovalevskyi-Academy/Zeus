@@ -14,8 +14,7 @@ public class AlphabetTest extends AbstractTestExecutor {
     var expectedResult =
         new char[] {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
-            'r',
-            's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+            'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
           };
 
     var actualResult = Alphabet.generateAlphabet();
@@ -27,8 +26,7 @@ public class AlphabetTest extends AbstractTestExecutor {
     var expectedResult =
         new char[] {
             'z', 'y', 'x', 'w', 'v', 'u', 't', 's', 'r', 'q', 'p', 'o', 'n', 'm', 'l', 'k', 'j',
-            'i',
-            'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'
+            'i', 'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'
           };
 
     var actualResult = Alphabet.generateReversedAlphabet();

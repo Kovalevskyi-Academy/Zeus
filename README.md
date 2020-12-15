@@ -5,7 +5,10 @@ Some exciting description.
 #### To contributors:
 
 1. Do not forget make a separate branch for your fixes.
-2. Use CheckStyle plugin version 8.37 & Google style from it.
+2. Use the [intellij-java-google-style.xml](https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml)
+   
+   How to apply "intellij-java-google-style.xml" fo current project:
+   ![use style](./pictures/HowToUseCODESTYLE.png)
 3. Remember - tests should be speaking.
 
 #### All rays of kindness.
