@@ -4,8 +4,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day3.Point;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 public class PointTest extends AbstractTestExecutor {

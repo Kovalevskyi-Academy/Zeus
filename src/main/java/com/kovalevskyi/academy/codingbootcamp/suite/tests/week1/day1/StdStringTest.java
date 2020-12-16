@@ -2,7 +2,7 @@ package com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1;
 
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week1.day1.StdString;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
