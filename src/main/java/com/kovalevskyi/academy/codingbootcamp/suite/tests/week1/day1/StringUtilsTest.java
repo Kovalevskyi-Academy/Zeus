@@ -5,7 +5,7 @@ import static junit.framework.TestCase.fail;
 
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class StringUtilsTest extends AbstractTestExecutor {
 
@@ -125,7 +125,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void makeUppercase() {
-    var inputValue = new char[] {'h', 'e', 'l', 'L', 'o'};
+    var inputValue = new char[]{'h', 'e', 'l', 'L', 'o'};
     var expectedValue = "HELLO";
 
     assertThat(StringUtils.makeUppercase(inputValue).toString()).isEqualTo(expectedValue);
@@ -133,7 +133,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void makeUppercaseWithLegalNonCharacters() {
-    var inputValue = new char[] {'1', '2', '3', ' ', 'h', 'e', 'l', 'L', 'o'};
+    var inputValue = new char[]{'1', '2', '3', ' ', 'h', 'e', 'l', 'L', 'o'};
     var expectedValue = "123 HELLO";
 
     assertThat(StringUtils.makeUppercase(inputValue).toString()).isEqualTo(expectedValue);
@@ -141,7 +141,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void makeUppercaseWithIllegalInput() {
-    var inputValue = new char[] {(char) 299, 'e', 'l', 'L', 'o'};
+    var inputValue = new char[]{(char) 299, 'e', 'l', 'L', 'o'};
     try {
       StringUtils.makeUppercase(inputValue);
       fail(
@@ -152,7 +152,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void makeLowercase() {
-    var inputValue = new char[] {'H', 'E', 'l', 'L', 'o'};
+    var inputValue = new char[]{'H', 'E', 'l', 'L', 'o'};
     var expectedValue = "hello";
 
     assertThat(StringUtils.makeLowercase(inputValue).toString()).isEqualTo(expectedValue);
@@ -160,7 +160,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void makeLowercaseWithLegalNonCharacters() {
-    var inputValue = new char[] {'1', '2', '3', ' ', 'H', 'E', 'l', 'L', 'o'};
+    var inputValue = new char[]{'1', '2', '3', ' ', 'H', 'E', 'l', 'L', 'o'};
     var expectedValue = "123 hello";
 
     assertThat(StringUtils.makeLowercase(inputValue).toString()).isEqualTo(expectedValue);
@@ -168,7 +168,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void makeLowercaseWithIllegalCharacter() {
-    var inputValue = new char[] {'1', '2', '3', (char) 299, ' ', 'H', 'E', 'l', 'L', 'o'};
+    var inputValue = new char[]{'1', '2', '3', (char) 299, ' ', 'H', 'E', 'l', 'L', 'o'};
     try {
       StringUtils.makeLowercase(inputValue);
       fail(
@@ -179,7 +179,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void makeCamel() {
-    var inputValue = new char[] {'H', 'E', 'l', 'L', 'o'};
+    var inputValue = new char[]{'H', 'E', 'l', 'L', 'o'};
     var expectedValue = "hElLo";
 
     assertThat(StringUtils.makeCamel(inputValue).toString()).isEqualTo(expectedValue);
@@ -187,7 +187,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void makeCamelWithLegalNonAlphabeticCharacters() {
-    var inputValue = new char[] {'1', ' ', 'H', 'E', 'l', 'L', 'o', '?', 'O'};
+    var inputValue = new char[]{'1', ' ', 'H', 'E', 'l', 'L', 'o', '?', 'O'};
     var expectedValue = "1 hElLo?o";
 
     assertThat(StringUtils.makeCamel(inputValue).toString()).isEqualTo(expectedValue);
@@ -195,7 +195,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void makeCamelWithIllegalCharacters() {
-    var inputValue = new char[] {'1', (char) 399, 'H', 'E', 'l', 'L', 'o', '?', 'O'};
+    var inputValue = new char[]{'1', (char) 399, 'H', 'E', 'l', 'L', 'o', '?', 'O'};
     try {
       StringUtils.makeCamel(inputValue);
       fail(
@@ -206,14 +206,14 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void isStringAlphaNumerical() {
-    assertThat(StringUtils.isStringAlphaNumerical(new char[] {'a', 'b', '1', ' '})).isTrue();
-    assertThat(StringUtils.isStringAlphaNumerical(new char[] {'a', ',', '1', ' '})).isFalse();
+    assertThat(StringUtils.isStringAlphaNumerical(new char[]{'a', 'b', '1', ' '})).isTrue();
+    assertThat(StringUtils.isStringAlphaNumerical(new char[]{'a', ',', '1', ' '})).isFalse();
   }
 
   @Test
   public void isStringAlphaNumericalWithIllegalInput() {
     try {
-      StringUtils.isStringAlphaNumerical(new char[] {(char) 399, 'b', '1', ' '});
+      StringUtils.isStringAlphaNumerical(new char[]{(char) 399, 'b', '1', ' '});
       fail(
           "isStringAlphaNumerical does not throw IllegalArgumentException for new char[]{(char)399, 'b', '1', ' '}");
     } catch (IllegalArgumentException ignore) {
@@ -222,15 +222,15 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void concatStrings() {
-    var input = new char[][] {{'a', 'b'}, {'c', 'd'}};
-    var expectedOut = new char[] {'a', 'b', 'c', 'd'};
+    var input = new char[][]{{'a', 'b'}, {'c', 'd'}};
+    var expectedOut = new char[]{'a', 'b', 'c', 'd'};
     assertThat(StringUtils.concatStrings(input)).isEqualTo(expectedOut);
   }
 
   @Test
   public void concatStringsWithZeroInput() {
-    var input = new char[][] {};
-    var expectedOut = new char[] {};
+    var input = new char[][]{};
+    var expectedOut = new char[]{};
     assertThat(StringUtils.concatStrings(input)).isEqualTo(expectedOut);
   }
 
@@ -245,7 +245,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void concatStringsWithNullInputWithinNonNullArray() {
-    var input = new char[][] {null};
+    var input = new char[][]{null};
     try {
       StringUtils.concatStrings(input);
       fail("StringUtils.concatStrings does not throw NullPointerException for new char[][]{null}");
@@ -255,9 +255,9 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void toInt() {
-    assertThat(StringUtils.toInt(new char[] {'1', '2'})).isEqualTo(12);
-    assertThat(StringUtils.toInt(new char[] {'0'})).isEqualTo(0);
-    assertThat(StringUtils.toInt(new char[] {'-', '1', '2'})).isEqualTo(-12);
+    assertThat(StringUtils.toInt(new char[]{'1', '2'})).isEqualTo(12);
+    assertThat(StringUtils.toInt(new char[]{'0'})).isEqualTo(0);
+    assertThat(StringUtils.toInt(new char[]{'-', '1', '2'})).isEqualTo(-12);
     assertThat(StringUtils.toInt(String.valueOf(Integer.MAX_VALUE).toCharArray()))
         .isEqualTo(Integer.MAX_VALUE);
     assertThat(StringUtils.toInt(String.valueOf(Integer.MIN_VALUE).toCharArray()))
@@ -275,7 +275,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
 
   @Test
   public void toIntWithIllegalInput() {
-    var input = new char[] {'1', '2', 'a'};
+    var input = new char[]{'1', '2', 'a'};
     try {
       StringUtils.toInt(input);
       fail("StringUtils.toInt does not throw NumberFormatException for: new char[]{'1', '2', 'a'}");

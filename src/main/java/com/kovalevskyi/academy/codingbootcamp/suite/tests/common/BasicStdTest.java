@@ -5,7 +5,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.Before;
 
-
 public abstract class BasicStdTest extends AbstractTestExecutor {
 
   protected final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -14,5 +13,4 @@ public abstract class BasicStdTest extends AbstractTestExecutor {
   public void setUp() {
     System.setOut(new PrintStream(outputStreamCaptor));
   }
-
 }

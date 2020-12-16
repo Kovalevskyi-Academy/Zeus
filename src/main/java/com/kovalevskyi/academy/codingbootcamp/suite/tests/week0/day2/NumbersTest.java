@@ -8,7 +8,7 @@ import com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers;
 import java.util.HashSet;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 public class NumbersTest extends AbstractTestExecutor {
@@ -105,7 +105,8 @@ public class NumbersTest extends AbstractTestExecutor {
     try {
       Numbers.generateTuples(n);
       fail();
-    } catch (IllegalArgumentException ignored) { }
+    } catch (IllegalArgumentException ignored) {
+    }
   }
 
   @Test
@@ -118,9 +119,9 @@ public class NumbersTest extends AbstractTestExecutor {
 
   @Test
   public void testToString() {
-    assertThat(Numbers.convertToString(12)).isEqualTo(new char[] {'1', '2'});
-    assertThat(Numbers.convertToString(0)).isEqualTo(new char[] {'0'});
-    assertThat(Numbers.convertToString(-32)).isEqualTo(new char[] {'-', '3', '2'});
+    assertThat(Numbers.convertToString(12)).isEqualTo(new char[]{'1', '2'});
+    assertThat(Numbers.convertToString(0)).isEqualTo(new char[]{'0'});
+    assertThat(Numbers.convertToString(-32)).isEqualTo(new char[]{'-', '3', '2'});
     assertThat(Numbers.convertToString(Integer.MAX_VALUE))
         .isEqualTo(String.valueOf(Integer.MAX_VALUE).toCharArray());
     assertThat(Numbers.convertToString(Integer.MIN_VALUE))
@@ -129,8 +130,8 @@ public class NumbersTest extends AbstractTestExecutor {
 
   @Test
   public void testSort() {
-    var input = new int[] {3, 8, -1, 5, 0};
-    var expected = new int[] {-1, 0, 3, 5, 8};
+    var input = new int[]{3, 8, -1, 5, 0};
+    var expected = new int[]{-1, 0, 3, 5, 8};
 
     Numbers.sort(input);
 

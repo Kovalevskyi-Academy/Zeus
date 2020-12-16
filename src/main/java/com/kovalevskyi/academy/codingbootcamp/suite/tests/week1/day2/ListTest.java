@@ -3,7 +3,7 @@ package com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2;
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week1.day2.List;
 import java.util.function.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.google.common.truth.Truth.assertThat;
 
