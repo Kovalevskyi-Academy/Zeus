@@ -19,31 +19,31 @@ import picocli.CommandLine;
 public class Zeus implements Callable<Integer> {
 
   private final String[][][] classNames =
-      {
-          {
-              {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest"},
-              {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest",
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest"},
-              {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest"},
-              {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest"}
-          },
-          {
-              {},
-              {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest",
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest"},
-              {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest"}
-          },
-          {
-              {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest",
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest",
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest",
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest"},
-              {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest",
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test",
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTes"},
-              {}
-          }
-      };
+    {
+        {
+            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest"},
+            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest",
+                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest"},
+            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest"},
+            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest"}
+        },
+        {
+            {},
+            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest",
+                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest"},
+            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest"}
+        },
+        {
+            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest",
+                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest",
+                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest",
+                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest"},
+            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest",
+                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test",
+                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTes"},
+            {}
+        }
+    };
 
   @CommandLine.Option(
       names = {"-w", "--week"},
