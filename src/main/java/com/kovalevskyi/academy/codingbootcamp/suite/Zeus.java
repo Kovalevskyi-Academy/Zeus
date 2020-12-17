@@ -177,7 +177,11 @@ public class Zeus implements Callable<Integer> {
   }
 
   public static void main(String... args) {
-    int exitCode = new CommandLine(new Zeus()).execute(args);
+    CommandLine commandLine = new CommandLine(new Zeus());
+    int exitCode = commandLine.execute(args);
+    if (exitCode < 0) {
+      commandLine.usage(System.out);
+    }
     System.exit(exitCode);
   }
 }
