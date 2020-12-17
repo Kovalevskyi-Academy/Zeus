@@ -27,18 +27,25 @@ public class PointWithLabelTest extends AbstractTestExecutor {
 
   @Test
   public void testCompareTo() {
-      var x1 = 1;
-      var x2 = 2;
-      var y1 = 0;
-      var y2 = 2;
-      var x3 = 3;
-      var y3 = 4;
+    var x1 = 1;
+    var y1 = 0;
 
-      var point1 = new PointWithLabel(x1, y1, "hi");
-      var point2 = new PointWithLabel(x2, y2, "ololo");
-      var point3 = new Point(x3, y3);
+    var x2 = 2;
+    var y2 = 2;
 
-    assertWithMessage("assesrting that (1, 0, \"hi\") compareTo with Point(3, 4) will return 6").that(point1.compareTo(point3))
+    var x3 = 3;
+    var y3 = 4;
+
+    var point1 = new PointWithLabel(x1, y1, "hi");
+    var point2 = new PointWithLabel(x2, y2, "ololo");
+    var point3 = new Point(x3, y3);
+
+    assertWithMessage("asserting that (1, 0, \"hi\") compareTo with Point(3, 4) will return 6")
+        .that(point1.compareTo(point3))
         .isEqualTo(6);
+    assertWithMessage(
+            "asserting that (1, 0, \"hi\") compareTo with PointWithLabel(x2, y2, \"ololo\") will return -7")
+        .that(point1.compareTo(point2))
+        .isEqualTo(-7);
   }
 }
