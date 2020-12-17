@@ -5,7 +5,7 @@ import com.kovalevskyi.academy.codingbootcamp.week2.day0.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class CalculatorTest extends BasicStdTest {
 
@@ -71,7 +71,7 @@ public class CalculatorTest extends BasicStdTest {
     try {
       Calculator.main(inputArgs);
       fail("input: new String[] {\"6\", \"%\", \"!\"} does not cause IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException ignored) {
 
     }
   }

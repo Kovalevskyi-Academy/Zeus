@@ -5,13 +5,13 @@ import com.kovalevskyi.academy.codingbootcamp.week1.day3.StdString;
 import org.junit.jupiter.api.Test;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void toAsciiLowerCase() {
-    var testStr = new StdString(new char[] {'H', 'e', 'L', 'L', 'o'});
+    var testStr = new StdString(new char[]{'H', 'e', 'L', 'L', 'o'});
 
     assertThat(testStr.toAsciiLowerCase().toString()).isEqualTo("hello");
     assertThat(testStr.toString().toString()).isEqualTo("HeLLo");
@@ -19,15 +19,15 @@ public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void toAsciiLowerCaseWithLegalNonAlphabetCharacters() {
-    var testStr = new StdString(new char[] {'H', 'e', 'L', 'L', 'o', '1', ' '});
+    var testStr = new StdString(new char[]{'H', 'e', 'L', 'L', 'o', '1', ' '});
 
     assertThat(testStr.toAsciiLowerCase().toString()).isEqualTo("hello1 ");
-    assertThat(testStr.toString().toString()).isEqualTo("HeLLo1 ");
+    assertThat(testStr.toString()).isEqualTo("HeLLo1 ");
   }
 
   @Test
   public void toAsciiLowerCaseWithIllegalCharacters() {
-    var testStr = new StdString(new char[] {(char) 299, 'e', 'L', 'L', 'o', '1', ' '});
+    var testStr = new StdString(new char[]{(char) 299, 'e', 'L', 'L', 'o', '1', ' '});
 
     try {
       testStr.toAsciiLowerCase();
@@ -40,7 +40,7 @@ public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void toAsciiUpperCase() {
-    var testStr = new StdString(new char[] {'H', 'e', 'L', 'L', 'o'});
+    var testStr = new StdString(new char[]{'H', 'e', 'L', 'L', 'o'});
 
     assertThat(testStr.toAsciiUpperCase().toString()).isEqualTo("HELLO");
     assertThat(testStr.toString()).isEqualTo("HeLLo");
@@ -48,14 +48,14 @@ public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void toAsciiUpperCaseWithLegalNonAlphabetCharacters() {
-    var testStr = new StdString(new char[] {' ', '!', 'H', 'e', 'L', 'L', 'o'});
+    var testStr = new StdString(new char[]{' ', '!', 'H', 'e', 'L', 'L', 'o'});
 
     assertThat(testStr.toAsciiUpperCase().toString()).isEqualTo(" !HELLO");
   }
 
   @Test
   public void toAsciiUpperCaseWithIllegalCharacters() {
-    var testStr = new StdString(new char[] {(char) 299, '!', 'H', 'e', 'L', 'L', 'o'});
+    var testStr = new StdString(new char[]{(char) 299, '!', 'H', 'e', 'L', 'L', 'o'});
 
     try {
       testStr.toAsciiUpperCase();
@@ -68,7 +68,7 @@ public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void subString() {
-    var testStr = new StdString(new char[] {'H', 'e', 'L', 'L', 'o', '1', '2', '3'});
+    var testStr = new StdString(new char[]{'H', 'e', 'L', 'L', 'o', '1', '2', '3'});
 
     assertThat(testStr.subString(1, 6).toString()).isEqualTo("eLLo1");
     assertThat(testStr.subString(2, 4).toString()).isEqualTo("LL");
@@ -76,7 +76,7 @@ public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void subStringWithIncorrectIndex() {
-    var testStr = new StdString(new char[] {'H', 'e', 'L', 'L', 'o', '1', '2', '3'});
+    var testStr = new StdString(new char[]{'H', 'e', 'L', 'L', 'o', '1', '2', '3'});
 
     try {
       testStr.subString(-1, 6);
@@ -89,7 +89,7 @@ public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void subStringWithFromBiggerThanTo() {
-    var testStr = new StdString(new char[] {'H', 'e', 'L', 'L', 'o', '1', '2', '3'});
+    var testStr = new StdString(new char[]{'H', 'e', 'L', 'L', 'o', '1', '2', '3'});
 
     try {
       testStr.subString(7, 6);
@@ -102,8 +102,8 @@ public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void concat() {
-    var testStrLeft = new StdString(new char[] {'H', 'e', 'L', 'L', 'o'});
-    var testStrRight = new StdString(new char[] {'1', '2', '3'});
+    var testStrLeft = new StdString(new char[]{'H', 'e', 'L', 'L', 'o'});
+    var testStrRight = new StdString(new char[]{'1', '2', '3'});
     assertThat(testStrLeft.concat(testStrRight).toString()).isEqualTo("HeLLo123");
     assertThat(testStrLeft.toString()).isEqualTo("HeLLo");
     assertThat(testStrRight.toString()).isEqualTo("123");
@@ -111,14 +111,14 @@ public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void concatWithEmpty() {
-    var testStrLeft = new StdString(new char[] {'H', 'e', 'L', 'L', 'o'});
-    var testStrRight = new StdString(new char[] {});
+    var testStrLeft = new StdString(new char[]{'H', 'e', 'L', 'L', 'o'});
+    var testStrRight = new StdString(new char[]{});
     assertThat(testStrLeft.concat(testStrRight).toString()).isEqualTo("HeLLo");
   }
 
   @Test
   public void concatWithNullStr() {
-    var testStrLeft = new StdString(new char[] {'H', 'e', 'L', 'L', 'o'});
+    var testStrLeft = new StdString(new char[]{'H', 'e', 'L', 'L', 'o'});
     var testStrRight = (StdString) null;
 
     try {
@@ -133,7 +133,7 @@ public class StdStringTest extends AbstractTestExecutor {
   public void split() {
     var testStrLeft =
         new StdString(
-            new char[] {' ', ' ', 'H', 'e', 'L', 'L', 'o', ' ', '1', '2', '3', ' ', 'a', 'b', ' '});
+            new char[]{' ', ' ', 'H', 'e', 'L', 'L', 'o', ' ', '1', '2', '3', ' ', 'a', 'b', ' '});
 
     var actualResult = testStrLeft.split(' ');
     assertThat(actualResult.length).isEqualTo(5);
@@ -149,7 +149,7 @@ public class StdStringTest extends AbstractTestExecutor {
   public void splitWithNonExistingSeparator() {
     var testStrLeft =
         new StdString(
-            new char[] {' ', ' ', 'H', 'e', 'L', 'L', 'o', ' ', '1', '2', '3', ' ', 'a', 'b', ' '});
+            new char[]{' ', ' ', 'H', 'e', 'L', 'L', 'o', ' ', '1', '2', '3', ' ', 'a', 'b', ' '});
 
     var actualResult = testStrLeft.split('!');
     assertThat(actualResult.length).isEqualTo(1);
@@ -160,7 +160,7 @@ public class StdStringTest extends AbstractTestExecutor {
   public void trim() {
     var testStrLeft =
         new StdString(
-            new char[] {' ', ' ', 'H', 'e', 'L', 'L', 'o', ' ', '1', '2', '3', ' ', 'a', 'b', ' '});
+            new char[]{' ', ' ', 'H', 'e', 'L', 'L', 'o', ' ', '1', '2', '3', ' ', 'a', 'b', ' '});
 
     var actualResult = testStrLeft.trim();
     assertThat(actualResult.toString()).isEqualTo("HeLLo 123 ab");
@@ -177,7 +177,7 @@ public class StdStringTest extends AbstractTestExecutor {
 
   @Test
   public void trimWithoutSpaces() {
-    var testStrLeft = new StdString(new char[] {'1', '2', '3'});
+    var testStrLeft = new StdString(new char[]{'1', '2', '3'});
 
     var actualResult = testStrLeft.trim();
     assertThat(actualResult.toString()).isEqualTo("123");
@@ -187,7 +187,7 @@ public class StdStringTest extends AbstractTestExecutor {
   public void removeCharacter() {
     var testStrLeft =
         new StdString(
-            new char[] {' ', ' ', 'H', 'e', 'L', 'L', 'o', ' ', '1', '2', '3', ' ', 'a', 'b', ' '});
+            new char[]{' ', ' ', 'H', 'e', 'L', 'L', 'o', ' ', '1', '2', '3', ' ', 'a', 'b', ' '});
 
     var actualResult = testStrLeft.removeCharacter(' ');
     assertThat(actualResult.toString()).isEqualTo("HeLLo123ab");
