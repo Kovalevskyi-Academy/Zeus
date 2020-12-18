@@ -44,11 +44,11 @@
               <goal>single</goal>
             </goals>
             <configuration>
-              <outputDirectory>cli</outputDirectory>
+              <outputDirectory>target</outputDirectory>
               <descriptorRefs>
                 <descriptorRef>jar-with-dependencies</descriptorRef>
               </descriptorRefs>
-              <finalName>Zeus</finalName>
+              <finalName>${artifactId}-${version}</finalName>
               <appendAssemblyId>false</appendAssemblyId>
               <archive>
                 <manifest>
