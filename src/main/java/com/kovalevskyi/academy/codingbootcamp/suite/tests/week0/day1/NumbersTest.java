@@ -1,126 +1,175 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day1.Numbers;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
+import org.apache.maven.surefire.shade.org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
 
 public class NumbersTest extends AbstractTestExecutor {
 
   @Test
-  public void testGenerateNumbers() {
+  public void generateNumbers() {
     var expectedResult = IntStream.range(0, 100).toArray();
     var actualResult = Numbers.generateNumbers();
-    assertThat(actualResult).isEqualTo(expectedResult);
+    String message = "Testing 'generateNumbers()' fail!\nExpected result: %s"
+        + "\nActual result: %s\n";
+    assertArrayEquals(expectedResult, actualResult,
+        () -> String.format(message,
+            Arrays.toString(expectedResult),
+            Arrays.toString(actualResult)));
   }
 
   @Test
-  public void testFindBiggestInTuple() {
-    assertThat(Numbers.findBiggest(-2, 3)).isEqualTo(3);
-    assertThat(Numbers.findBiggest(-2, -3)).isEqualTo(-2);
-    assertThat(Numbers.findBiggest(0, 0)).isEqualTo(0);
+  public void findBiggestInTuple() {
+    String message = "\nInput 'findBiggest(%d, %d)` have result";
+    assertEquals(5, Numbers.findBiggest(5, 3), String.format(message, 5, 3));
+    assertEquals(3, Numbers.findBiggest(-2, 3), String.format(message, -2, 3));
+    assertEquals(-2, Numbers.findBiggest(-2, -3), String.format(message, -2, -3));
+    assertEquals(0, Numbers.findBiggest(0, 0), String.format(message, 0, 0));
   }
 
   @Test
-  public void testFindBiggestInTriplet() {
-    assertThat(Numbers.findBiggest(-2, 3, 0)).isEqualTo(3);
-    assertThat(Numbers.findBiggest(-2, 0, -3)).isEqualTo(0);
-    assertThat(Numbers.findBiggest(10, -1, 0)).isEqualTo(10);
+  public void findBiggestInTriplet() {
+    String message = "\nInput 'findBiggest(%d, %d, %d)` have result";
+    assertEquals(5, Numbers.findBiggest(5, 3, 1), String.format(message, 5, 3, 1));
+    assertEquals(3, Numbers.findBiggest(-2, 3, -5), String.format(message, -2, 3, -5));
+    assertEquals(-2, Numbers.findBiggest(-2, -3, -6), String.format(message, -2, -3, -6));
+    assertEquals(0, Numbers.findBiggest(0, 0, 0), String.format(message, 0, 0, 0));
   }
 
   @Test
-  public void testFindBiggestInArray() {
-    var input = new int[]{0, 1, -200, 3, 400, 5, 6, 7, 8, 9};
-    var actualResult = Numbers.findBiggest(input);
-    assertThat(actualResult).isEqualTo(400);
+  public void findBiggestInArray() {
+    String message = "\nInput array in 'findBiggest(int[] numbers)' is: \n%s"
+        + "\nThe biggest element is invalid!";
+    // RANDOM ARRAY
+    for (int i = 0; i < 11; i++) {
+      var input2 = new Random()
+          .ints(25, -49, 50)
+          .toArray();
+      var max = Collections.max(Arrays.asList(ArrayUtils.toObject(input2)));
+      assertEquals(max, Numbers.findBiggest(input2),
+          String.format(message, Arrays.toString(input2)));
+    }
   }
 
   @Test
-  public void testFindBiggestWithEmptyArray() {
-    var input = new int[]{};
+  public void findBiggestWithEmptyArray() {
+    var input = new int[] {};
     try {
       Numbers.findBiggest(input);
-      fail("findBiggest should throw IllegalArgumentException when input is empty array");
+      fail("\nThe 'findBiggest(int[] numbers)' should throw IllegalArgumentException when input "
+          + "is empty array\n");
+    } catch (ArrayIndexOutOfBoundsException e) {
+      throw new RuntimeException("\nThe 'findBiggest(int[] numbers)' should throw "
+          + "IllegalArgumentException when input is an empty array\n" + e.toString());
     } catch (IllegalArgumentException ignored) {
     }
   }
 
   @Test
-  public void testFindBiggestWithNull() {
+  public void findBiggestWithNull() {
     try {
       Numbers.findBiggest(null);
-      fail("findBiggest should throw IllegalArgumentException when input is null");
+      fail("\nThe 'findBiggest(int[] numbers)' should throw IllegalArgumentException when input "
+          + "is null\n");
+    } catch (NullPointerException e) {
+      throw new RuntimeException("\nThe 'findBiggest(int[] numbers)' should throw "
+          + "IllegalArgumentException when input is null\n" + e.toString());
     } catch (IllegalArgumentException ignored) {
     }
   }
 
   @Test
-  public void testFindIndexOfBiggestNumber() {
-    testFindIndexOfBiggestNumber(new int[]{0, 1, -200, 3, 400, 5, 6, 7, 8, 9}, 4);
-    testFindIndexOfBiggestNumber(new int[]{0, 1, -200, 3, 4, 5, 6, 7, 8, 9}, 9);
-    testFindIndexOfBiggestNumber(new int[]{0}, 0);
-    testFindIndexOfBiggestNumber(new int[]{0, 1, 200, 3, 4, 5, 6, 7, 8, 9}, 2);
-  }
-
-  private void testFindIndexOfBiggestNumber(int[] input, int index) {
-    System.out
-        .printf("Testing for input: %s, index should be: %d\n", Arrays.toString(input), index);
-    var actualResult = Numbers.findIndexOfBiggestNumber(input);
-    assertThat(actualResult).isEqualTo(index);
+  public void findIndexOfBiggestNumber() {
+    String message = "\nInput array in 'findIndexOfBiggestNumber(int[] numbers)' is: \n%s"
+        + "\nAn index of biggest element is invalid!";
+    // RANDOM ARRAY
+    for (int i = 0; i < 11; i++) {
+      var input2 = new Random()
+          .ints(25, -49, 50)
+          .toArray();
+      List<Integer> arrayAsList = Arrays.asList(ArrayUtils.toObject(input2));
+      var max = Collections.max(arrayAsList);
+      var indexOfMax = arrayAsList.indexOf(max);
+      assertEquals(indexOfMax,
+          Numbers.findIndexOfBiggestNumber(input2),
+          String.format(message, arrayAsList.toString()));
+    }
   }
 
   @Test
-  public void testFindIndexOfBiggestNumberWithEmptyArray() {
-    var input = new int[]{};
+  public void findIndexOfBiggestNumberWithEmptyArray() {
+    var input = new int[] {};
     try {
       Numbers.findIndexOfBiggestNumber(input);
-      fail("findIndexOfBiggestNumber should throw IllegalArgumentException "
-          + "when input is empty array");
+      fail("\nThe 'findIndexOfBiggestNumber(int[] numbers)' should throw IllegalArgumentException"
+          +
+          " when input is empty array\n");
+    } catch (ArrayIndexOutOfBoundsException e) {
+      throw new RuntimeException("\nThe 'findIndexOfBiggestNumber(int[] numbers)' should throw "
+          + "IllegalArgumentException when input is an empty array\n" + e.toString());
     } catch (IllegalArgumentException ignored) {
     }
   }
 
   @Test
-  public void testFindIndexOfBiggestNumberWithNull() {
+  public void findIndexOfBiggestNumberWithNull() {
     try {
       Numbers.findIndexOfBiggestNumber(null);
-      fail("findIndexOfBiggestNumber should throw IllegalArgumentException when input is null");
+      fail("\nThe 'findIndexOfBiggestNumber(int[] numbers)' should throw IllegalArgumentException"
+          + " when input is empty array\n");
+    } catch (ArrayIndexOutOfBoundsException e) {
+      throw new RuntimeException("\nThe 'findIndexOfBiggestNumber(int[] numbers)' should throw "
+          + "IllegalArgumentException when input is an empty array\n" + e.toString());
     } catch (IllegalArgumentException ignored) {
     }
   }
 
   @Test
   public void testIsNegative() {
-    testIsNegative(-1, true);
-    testIsNegative(-200, true);
-    testIsNegative(0, false);
-    testIsNegative(200, false);
-  }
+    String message = "\nTesting 'isNegative(int number)'!\n Income number is: %s and result is:";
+    assertTrue(Numbers.isNegative(-100), String.format(message, -100));
+    assertTrue(Numbers.isNegative(-1), String.format(message, -1));
+    assertTrue(Numbers.isNegative(-11), String.format(message, -11));
 
-  private void testIsNegative(int input, boolean expected) {
-    var actual = Numbers.isNegative(input);
-    System.out.printf("For input: %d, result is: %s, expected: %s\n", input, actual, expected);
-    var assertResult = assertThat(actual);
-    if (expected) {
-      assertResult.isTrue();
-    } else {
-      assertResult.isFalse();
-    }
+    assertFalse(Numbers.isNegative(11), String.format(message, 11));
+    assertFalse(Numbers.isNegative(111), String.format(message, 111));
+    assertFalse(Numbers.isNegative(0), String.format(message, 0));
   }
 
   @Test
   public void testConvertToString() {
-    assertThat(Numbers.convertToString(12)).isEqualTo(new char[]{'1', '2'});
-    assertThat(Numbers.convertToString(0)).isEqualTo(new char[]{'0'});
-    assertThat(Numbers.convertToString(-32)).isEqualTo(new char[]{'-', '3', '2'});
-    assertThat(Numbers.convertToString(Integer.MAX_VALUE))
-        .isEqualTo(String.valueOf(Integer.MAX_VALUE).toCharArray());
-    assertThat(Numbers.convertToString(Integer.MIN_VALUE))
-        .isEqualTo(String.valueOf(Integer.MIN_VALUE).toCharArray());
+    Random rnd = new Random();
+    String message =
+        "Testing 'convertToString(int number)' fail!\nIncome number was: %d\nExpected result: %s"
+            + "\nActual result: %s\n";
+    for (int i = 0; i < 100; i++) {
+      var number = rnd.nextInt();
+      var expect = String.valueOf(number).toCharArray();
+      try {
+        var actual = Numbers.convertToString(number);
+        assertArrayEquals(expect, actual,
+            () -> String.format(message,
+                number,
+                Arrays.toString(expect),
+                Arrays.toString(actual)));
+      } catch (ArrayIndexOutOfBoundsException e) {
+        throw new RuntimeException(
+            "Your algorithm has gone beyond the limits of some kind of array."
+                + " Be careful!\n" + e.toString());
+      }
+    }
   }
 }
