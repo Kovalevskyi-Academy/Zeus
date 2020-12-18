@@ -16,7 +16,6 @@ target/
 .mtj.tmp/
 
 # Package Files
-!CodingBootcamp*.jar
 *.jar
 *.war
 *.nar
