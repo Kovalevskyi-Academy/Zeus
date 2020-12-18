@@ -1,9 +1,11 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1;
 
-import static com.google.common.truth.Truth.assertThat;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day1.Alphabet;
+import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 
@@ -16,9 +18,13 @@ public class AlphabetTest extends AbstractTestExecutor {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
             'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
         };
-
     var actualResult = Alphabet.generateAlphabet();
-    assertThat(actualResult).isEqualTo(expectedResult);
+    String message = "Testing 'generateAlphabet()' fail!\nExpected result: %s"
+        + "\nActual result: %s\n";
+    assertArrayEquals(expectedResult, actualResult,
+        () -> String.format(message,
+            Arrays.toString(expectedResult),
+            Arrays.toString(actualResult)));
   }
 
   @Test
@@ -30,6 +36,11 @@ public class AlphabetTest extends AbstractTestExecutor {
         };
 
     var actualResult = Alphabet.generateReversedAlphabet();
-    assertThat(actualResult).isEqualTo(expectedResult);
+    String message = "Testing 'generateReversedAlphabet()' fail!\nExpected result: %s"
+        + "\nActual result: %s\n";
+    assertArrayEquals(expectedResult, actualResult,
+        () -> String.format(message,
+            Arrays.toString(expectedResult),
+            Arrays.toString(actualResult)));
   }
 }
