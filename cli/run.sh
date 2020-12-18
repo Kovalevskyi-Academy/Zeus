@@ -3,10 +3,14 @@
 ###Substitute your favorite week & day!####
 
 ###commands from Zeus root directory:
+### unix-like
 java -cp "../CodingBootcamp/target/CodingBootcamp-1.0.jar:target/Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus --week 0 --day 0
-## run with teacher solutions:
+## or
 java -cp "./libs/CodingBootcamp-1.0.jar:target/Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus --week 0 --day 0
-
+### Windows
+java -cp "../../CodingBootcamp/target/CodingBootcamp-1.0.jar;../target/Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -w0 -d1
+## or
+java -cp "../libs/CodingBootcamp-1.0.jar;../target/Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -w0 -d1
 
 ####Substitute your favorite week & day!####
 
