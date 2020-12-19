@@ -1,0 +1,15 @@
+steps:
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', '--recurse-submodules', 'git@github.com:Kovalevskyi-Academy/Zeus.git']
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['checkout', '$COMMIT_SHA']
+    dir: 'Zeus'
+  - name: 'maven:3.6.3-openjdk-15/git'
+    args: ['mvn', 'compile']
+    dir: 'Zeus'
+  - name: 'maven:3.6.3-openjdk-15/git'
+    args: [ 'mvn', 'test' ]
+    dir: 'Zeus'
+  - name: 'maven:3.6.3-openjdk-15/git'
+    args: [ 'mvn', 'package' ]
+    dir: 'Zeus'
