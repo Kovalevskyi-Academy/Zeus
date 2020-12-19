@@ -158,7 +158,6 @@ public class ListTest extends AbstractTestExecutor {
     List.addToEnd(firstListElement, value + 1);
     List.addToEnd(firstListElement, value + 2);
     var targetElement = List.addToEnd(firstListElement, value + 3);
-    var nextElement = List.addToEnd(firstListElement, value + 4);
     List.addToEnd(firstListElement, value + 5);
 
     targetElement.insertAfter(toAdd);

@@ -2,6 +2,7 @@ package com.kovalevskyi.academy.codingbootcamp.suite;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.DefaultInvoker;
@@ -64,8 +65,7 @@ public class Zeus implements Callable<Integer> {
 
   @CommandLine.Option(
       names = {"-m", "--maven"},
-      description = "path to the maven home",
-      required = false)
+      description = "path to the maven home")
   private String mavenHome;
 
   @CommandLine.Option(
@@ -85,14 +85,19 @@ public class Zeus implements Callable<Integer> {
 
   @Override
   public Integer call() {
+    String noSpecification = "you need to specify week and day like this: --week X --day Y";
     try {
       if (this.test != null && !this.all && (this.week == -1 || this.day == -1)) {
-        System.out.println("you need to specify week and day like this: --week X --day Y");
+        System.out.println(noSpecification);
         return 0;
       }
       if (this.show) {
-        for (var dayTest : this.classNames[this.week][this.day]) {
-          System.out.printf(String.format("test: %s\n", dayTest));
+        if (this.week == -1 || this.day == -1) {
+          System.out.println(noSpecification);
+        } else {
+          for (var dayTest : this.classNames[this.week][this.day]) {
+            System.out.printf("test: %s\n", dayTest);
+          }
         }
         return 0;
       }
@@ -124,7 +129,7 @@ public class Zeus implements Callable<Integer> {
 
   private void mavenCompile() throws Exception {
     InvocationRequest request = new DefaultInvocationRequest();
-    request.setPomFile(new File("./pom.xml"));
+    request.setPomFile(new File(System.getProperty("user.dir") + File.separator + "pom.xml"));
     request.setGoals(
         new ArrayList<>() {
           {
@@ -134,7 +139,8 @@ public class Zeus implements Callable<Integer> {
           }
         });
     Invoker invoker = new DefaultInvoker();
-    invoker.setMavenHome(new File(this.mavenHome));
+    String mavenPath = Objects.requireNonNullElse(this.mavenHome, System.getenv("M2_HOME"));
+    invoker.setMavenHome(new File(mavenPath));
     System.out.println("Zeus is about to execute 'mvn clean compile package'");
     invoker.execute(request);
   }
@@ -162,16 +168,20 @@ public class Zeus implements Callable<Integer> {
 
   private void printResultOfTestMethod(String className, TestExecutionSummary summary) {
     var ms = summary.getTimeFinished() - summary.getTimeStarted();
-    System.out.println("\n******************************");
+    System.out.print("******************************\n");
     System.out.printf("* Tests of %s finished after %d ms\n", className, ms);
     System.out.printf("* Total: %d\n", summary.getTestsFoundCount());
     System.out.printf("* Successful: %d\n", summary.getTestsSucceededCount());
     System.out.printf("* Failed : %d\n", summary.getTestsFailedCount());
-    System.out.println("******************************\n");
+    System.out.print("******************************\n");
   }
 
   public static void main(String... args) {
-    int exitCode = new CommandLine(new Zeus()).execute(args);
+    CommandLine commandLine = new CommandLine(new Zeus());
+    int exitCode = commandLine.execute(args);
+    if (exitCode < 0) {
+      commandLine.usage(System.out);
+    }
     System.exit(exitCode);
   }
 }

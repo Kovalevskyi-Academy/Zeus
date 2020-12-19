@@ -11,4 +11,6 @@ Some exciting description.
    ![use style](./pictures/HowToUseCODESTYLE.png)
 3. Remember - tests should be speaking.
 
-#### All rays of kindness.
+#### How to start this PEPELATS:
+
+See in `cli/run.sh`.

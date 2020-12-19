@@ -5,7 +5,7 @@ import com.kovalevskyi.academy.codingbootcamp.week2.day1.BoxGenerator;
 import org.junit.jupiter.api.Test;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class BoxGeneratorTest extends BasicStdTest {
 
@@ -79,7 +79,7 @@ public class BoxGeneratorTest extends BasicStdTest {
     try {
       BoxGenerator.main(inputArgs);
       fail("\"-1\", \"4\", \"*\", \"?\" does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException ignored) {
 
     }
   }
@@ -90,7 +90,7 @@ public class BoxGeneratorTest extends BasicStdTest {
     try {
       BoxGenerator.main(inputArgs);
       fail("\"1\", \"-4\", \"*\", \"?\" does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException ignored) {
 
     }
   }
@@ -101,7 +101,7 @@ public class BoxGeneratorTest extends BasicStdTest {
     try {
       BoxGenerator.main(inputArgs);
       fail("\"1\", \"4\", \"*\", \"??\" does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException ignored) {
 
     }
   }
@@ -112,7 +112,7 @@ public class BoxGeneratorTest extends BasicStdTest {
     try {
       BoxGenerator.main(inputArgs);
       fail("\"1\", \"4\", \"**\", \"?\" does not throw IllegalArgumentException");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException ignored) {
 
     }
   }
