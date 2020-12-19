@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 public class StdStringTest extends AbstractTestExecutor {
 
@@ -15,7 +16,7 @@ public class StdStringTest extends AbstractTestExecutor {
     var testStr = new StdString(new char[] {'h', 'e', 'l', 'l', 'o'});
     var testStr2 = new StdString(testStr);
 
-    assertThat(testStr2).isEqualTo(testStr);
+    assertWithMessage("testing copy constructor with: 'h', 'e', 'l', 'l', 'o'").that(testStr2).isEqualTo(testStr);
   }
 
   @Test
@@ -69,8 +70,10 @@ public class StdStringTest extends AbstractTestExecutor {
     var testStr2 = new StdString(inputChars);
     var testStr3 = new StdString(inputChars2);
 
-    assertThat(testStr.equals(testStr2)).isTrue();
-    assertThat(testStr.equals(testStr3)).isFalse();
+    assertWithMessage("testing equals on 'h', 'e', 'l', 'l', 'o' and 'h', 'e', 'l', 'l', 'o'")
+            .that(testStr.equals(testStr2)).isTrue();
+    assertWithMessage("testing equals on 'h', 'e', 'l', 'l', 'o' and 'h', 'e', 'l', 'l', 'o', '2'")
+            .that(testStr.equals(testStr3)).isFalse();
   }
 
   @Test
