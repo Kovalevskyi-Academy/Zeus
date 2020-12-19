@@ -4,21 +4,20 @@ import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 
-
 public class TestsConsolePrinter implements TestWatcher, BeforeAllCallback {
 
   @Override
   public void testSuccessful(ExtensionContext context) {
-    System.out.println("* " + context.getDisplayName() + "- OK");
+    System.out.println("* " + context.getDisplayName() + " - OK");
   }
 
   @Override
   public void testFailed(ExtensionContext context, Throwable cause) {
-    System.out.println("* " + context.getDisplayName() + "- BAD");
+    System.out.println("* " + context.getDisplayName() + " - BAD");
     var message = cause.getMessage().split("\n");
     for (String line : message) {
       if (!line.isEmpty()) {
-        System.out.println(" ~ " + line);
+        System.out.println("* ~ " + line);
       }
     }
   }
