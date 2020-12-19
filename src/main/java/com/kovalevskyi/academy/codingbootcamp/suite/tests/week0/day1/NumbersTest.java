@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import org.apache.maven.surefire.shade.org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 
 
@@ -58,7 +58,7 @@ public class NumbersTest extends AbstractTestExecutor {
       var input2 = new Random()
           .ints(25, -49, 50)
           .toArray();
-      var max = Collections.max(Arrays.asList(ArrayUtils.toObject(input2)));
+      var max = IntStream.of(input2).max().getAsInt();
       assertEquals(max, Numbers.findBiggest(input2),
           String.format(message, Arrays.toString(input2)));
     }
@@ -100,7 +100,7 @@ public class NumbersTest extends AbstractTestExecutor {
       var input2 = new Random()
           .ints(25, -49, 50)
           .toArray();
-      List<Integer> arrayAsList = Arrays.asList(ArrayUtils.toObject(input2));
+      List<Integer> arrayAsList = IntStream.of(input2).boxed().collect(Collectors.toList());
       var max = Collections.max(arrayAsList);
       var indexOfMax = arrayAsList.indexOf(max);
       assertEquals(indexOfMax,
