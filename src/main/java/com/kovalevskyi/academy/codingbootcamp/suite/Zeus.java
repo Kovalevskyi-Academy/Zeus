@@ -1,5 +1,6 @@
 package com.kovalevskyi.academy.codingbootcamp.suite;
 
+import com.kovalevskyi.academy.codingbootcamp.suite.CheckstyleUtil.Checkstyle;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -19,31 +20,77 @@ import picocli.CommandLine;
 public class Zeus implements Callable<Integer> {
 
   private final String[][][] classNames =
-    {
-        {
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest"}
-        },
-        {
-            {},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest"}
-        },
-        {
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTes"},
-            {}
-        }
-    };
+      {
+          {
+              {
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week0/day0/Main.java")
+              },
+              {
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week0/day1/Alphabet.java"),
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week0/day1/Numbers.java")
+              },
+              {
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week0/day2/Numbers.java")
+              },
+              {
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week0/day3/Point.java")
+              }
+          },
+          {
+              {},
+              {
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week1/day1/StringUtils.java"),
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week1/day1/StdString.java")
+              },
+              {
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week1/day2/List.java")
+              }
+          },
+          {
+              {
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week2/day0/MainPrintParam.java"),
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week2/day0/MainPrintReversedParam.java"),
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week2/day0/Calculator.java"),
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week2/day0/MainPrintSortedParam.java")
+              },
+              {
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week2/day1/BoxGenerator.java"),
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week2/day1/TextPrinter2.java"),
+                  TaskPathParserUtil.combine(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTest",
+                      "src/main/java/com/kovalevskyi/academy/codingbootcamp/week2/day1/TextPrinter.java")
+              },
+              {}
+          }
+      };
 
   @CommandLine.Option(
       names = {"-w", "--week"},
@@ -154,10 +201,13 @@ public class Zeus implements Callable<Integer> {
   }
 
   private void executeDayTest(String className) throws Exception {
+    var testedClassPath = TaskPathParserUtil.parseTestedClassPath(className);
+    CheckstyleUtil.runCheckstyle(Checkstyle.GOOGLE_CHECKS, testedClassPath);
+    var testsClassName = TaskPathParserUtil.parseTestClass(className);
     var testExecutor =
-        (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
+        (AbstractTestExecutor) Class.forName(testsClassName).getConstructors()[0].newInstance();
     testExecutor.executeTest();
-    printResultOfTestMethod(className, testExecutor.listener.getSummary());
+    printSummaryOfTestClass(testExecutor.listener.getSummary());
   }
 
   private void executeDayTests(String[] classNames) throws Exception {
@@ -166,14 +216,14 @@ public class Zeus implements Callable<Integer> {
     }
   }
 
-  private void printResultOfTestMethod(String className, TestExecutionSummary summary) {
+  private void printSummaryOfTestClass(TestExecutionSummary summary) {
     var ms = summary.getTimeFinished() - summary.getTimeStarted();
-    System.out.print("******************************\n");
-    System.out.printf("* Tests of %s finished after %d ms\n", className, ms);
+    System.out.print("*\n");
+    System.out.printf("* Tests finished after %d ms\n", ms);
     System.out.printf("* Total: %d\n", summary.getTestsFoundCount());
     System.out.printf("* Successful: %d\n", summary.getTestsSucceededCount());
     System.out.printf("* Failed : %d\n", summary.getTestsFailedCount());
-    System.out.print("******************************\n");
+    System.out.print("------------------------------\n");
   }
 
   public static void main(String... args) {
