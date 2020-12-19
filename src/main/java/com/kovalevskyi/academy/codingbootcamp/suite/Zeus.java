@@ -202,7 +202,11 @@ public class Zeus implements Callable<Integer> {
 
   private void executeDayTest(String className) throws Exception {
     var testedClassPath = TaskPathParserUtil.parseTestedClassPath(className);
-    CheckstyleUtil.runCheckstyle(Checkstyle.GOOGLE_CHECKS, testedClassPath);
+    if (new File(System.getProperty("user.dir") + File.separator + testedClassPath).exists()) {
+      CheckstyleUtil.runCheckstyle(Checkstyle.GOOGLE_CHECKS, testedClassPath);
+    } else {
+      System.out.printf("Zeus did not find \"%s\" to run Checkstyle!\n", testedClassPath);
+    }
     var testsClassName = TaskPathParserUtil.parseTestClass(className);
     var testExecutor =
         (AbstractTestExecutor) Class.forName(testsClassName).getConstructors()[0].newInstance();
