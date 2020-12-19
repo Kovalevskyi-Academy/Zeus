@@ -22,7 +22,7 @@ public class StringUtilsTest extends AbstractTestExecutor {
   @Test
   public void isAsciiUppercaseWithIllegalInput() {
     try {
-      StringUtils.isAsciiUppercase((char) 257);
+      StringUtils.isAsciiUppercase((char) 255);
       fail("isAsciiUppercase((char)257) does not throw IllegalArgumentException");
     } catch (IllegalArgumentException ignore) {
     }
