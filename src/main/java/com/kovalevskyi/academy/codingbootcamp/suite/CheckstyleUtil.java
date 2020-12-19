@@ -18,7 +18,8 @@ public class CheckstyleUtil {
 
   }
 
-  public static void runCheckstyle(Checkstyle checkstyle, String testedClass) throws IOException {
-    Main.main("-c", checkstyle.checksFile, testedClass);
+  public static void runCheckstyle(Checkstyle checkstyle, String testedClassPath)
+      throws IOException {
+    Main.main("-c", checkstyle.checksFile, testedClassPath);
   }
 }
