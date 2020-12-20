@@ -1,10 +1,21 @@
-package com.kovalevskyi.academy.codingbootcamp.suite;
+package com.kovalevskyi.academy.codingbootcamp.suite.view;
 
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
+import org.junit.platform.launcher.listeners.TestExecutionSummary;
 
 public class TestsConsolePrinter implements TestWatcher, BeforeAllCallback {
+
+  public static void printSummary(TestExecutionSummary summary) {
+    var ms = summary.getTimeFinished() - summary.getTimeStarted();
+    System.out.print("*\n");
+    System.out.printf("* Tests finished after %d ms\n", ms);
+    System.out.printf("* Total: %d\n", summary.getTestsFoundCount());
+    System.out.printf("* Successful: %d\n", summary.getTestsSucceededCount());
+    System.out.printf("* Failed : %d\n", summary.getTestsFailedCount());
+    System.out.print("------------------------------\n");
+  }
 
   @Override
   public void testSuccessful(ExtensionContext context) {
