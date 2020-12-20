@@ -1,11 +1,16 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -14,12 +19,31 @@ import org.junit.jupiter.api.Test;
 public class NumbersTest extends AbstractTestExecutor {
 
   @Test
+  public void testSort() {
+    String message = "\nTest method 'sort(int[] target)'!\nInput array does not sorted!";
+    // RANDOM ARRAY
+    for (int i = 0; i < 11; i++) {
+      var input2 = new Random()
+          .ints(25, -49, 50)
+          .toArray();
+      var expectedArray = IntStream.of(input2).sorted().toArray();
+      Numbers.sort(input2);
+      assertWithMessage(String.format(message, Arrays.toString(input2))).that(input2).isEqualTo(expectedArray);
+    }
+  }
+
+  @Test
+  public void testSortWithNull() {
+    Numbers.sort(null);
+  }
+
+  @Test
   public void testGenerateTriplets() {
     var expected = new HashSet<String>();
-    IntStream.range(0, 10)
+    IntStream.range(0, 8)
         .forEach(
             n1 -> {
-              IntStream.range(n1 + 1, 10)
+              IntStream.range(n1 + 1, 9)
                   .forEach(
                       n2 -> {
                         IntStream.range(n2 + 1, 10)
@@ -34,22 +58,29 @@ public class NumbersTest extends AbstractTestExecutor {
 
     var actualResult = Numbers.generateTriplets();
 
-    Stream.of(actualResult).forEach(value -> {
-      if (!expected.contains(new String(value))) {
-        fail(String.format("Value from your result: %s is not expected\n", new String(value)));
-      }
+    // Only assertEquals fo length! No tips!
+    assertEquals(expected.size(), actualResult.length,
+        "\nTripletTest:\nWrong result array length!\n");
+
+
+    Stream.of(actualResult).forEach(chArray -> {
+      assertWithMessage("\nTripletTest:\nThe subarrays are of the wrong length.")
+          .that(chArray).hasLength(3);
+      assertTrue(expected.contains(new String(chArray)),
+          "\nTripletTest:\nThe resulting array contains an invalid element: "
+              + Arrays.toString(chArray));
+      //TODO Come up with a check for consistency and ordering of the result.
     });
-    System.out.print("Checking if element 0 is 012:");
-    assertThat(new String(actualResult[0])).isEqualTo("012");
-    System.out.println(" so far so good");
-    System.out.print("Checking if element 1 is 013");
-    assertThat(new String(actualResult[1])).isEqualTo("013");
-    System.out.println(" so far so good");
-    assertThat(actualResult).hasLength(expected.size());
+
+    assertWithMessage("TripletTest:")
+        .that(new String(actualResult[0])).isEqualTo("012");
+    assertWithMessage("TripletTest:")
+        .that(new String(actualResult[1])).isEqualTo("013");
   }
 
   @Test
   public void testGenerateTuples() {
+    String message = "\ntestGenerateTuples\n";
     var expected = new HashSet<String>();
     IntStream.range(0, 10)
         .forEach(
@@ -69,18 +100,24 @@ public class NumbersTest extends AbstractTestExecutor {
                       });
             });
 
-    var actualResult = Numbers.generateTuples();
+    var actualResult = Numbers.generateNtuples();
 
-    Stream.of(actualResult).forEach(value -> {
-      if (!expected.contains(new String(value))) {
-        fail(String.format("Value from your result: %s is not expected\n", new String(value)));
-      }
+    Stream.of(actualResult).forEach(chArray -> {
+      assertWithMessage(message + "The subarrays are of the wrong length.")
+          .that(chArray).hasLength(5);
+      assertTrue(expected.contains(new String(chArray)),
+          message + "The resulting array contains an invalid element: "
+              + Arrays.toString(chArray));
+      //TODO Come up with a check for consistency and ordering of the result.
     });
-    assertThat(actualResult).hasLength(expected.size());
+    // Only assertEquals fo length! No tips!
+    assertEquals(expected.size(), actualResult.length,
+        message + "Wrong result array length!\n");
   }
 
   @Test
-  public void testGenerateNTuples() {
+  public void testGenerateNtuples() {
+    String message = "\ntestGenerateNtuples\n";
     var n = 5;
     var expected = new HashSet<String>();
     IntStream.range(0, (int) Math.pow(10, n))
@@ -89,57 +126,38 @@ public class NumbersTest extends AbstractTestExecutor {
               expected.add(String.format("%05d", value));
             });
 
-    var actualResult = Numbers.generateTuples(n);
+    var actualResult = Numbers.generateNtuples(n);
 
-    Stream.of(actualResult).forEach(value -> {
-      if (!expected.contains(new String(value))) {
-        fail(String.format("Value from your result: %s is not expected\n", new String(value)));
-      }
+    Stream.of(actualResult).forEach(chArray -> {
+      assertWithMessage(message + "The subarrays are of the wrong length.")
+          .that(chArray).hasLength(5);
+      assertTrue(expected.contains(new String(chArray)),
+          message + "The resulting array contains an invalid element: "
+              + Arrays.toString(chArray));
+      //TODO Come up with a check for consistency and ordering of the result.
     });
+    // Only assertEquals fo length! No tips!
+    assertEquals(expected.size(), actualResult.length,
+        message + "Wrong result array length!\n");
   }
 
   @Test
   public void testGenerateNTuplesWithNegativeNumber() {
+    String message = "\ntestGenerateNTuplesWithNegativeNumber\n";
     var n = -1;
 
     try {
-      Numbers.generateTuples(n);
-      fail();
-    } catch (IllegalArgumentException ignored) {
-    }
+      Numbers.generateNtuples(n);
+      fail(message + "amount < 0! Where is your IllegalArgumentException?");
+    } catch (IllegalArgumentException ignored) { }
   }
 
   @Test
   public void testGenerateNTuplesWithZero() {
+    String message = "\ntestGenerateNTuplesWithZero\n";
     var n = 0;
 
-    var actualResult = Numbers.generateTuples(n);
-    assertThat(actualResult).isEmpty();
-  }
-
-  @Test
-  public void testToString() {
-    assertThat(Numbers.convertToString(12)).isEqualTo(new char[]{'1', '2'});
-    assertThat(Numbers.convertToString(0)).isEqualTo(new char[]{'0'});
-    assertThat(Numbers.convertToString(-32)).isEqualTo(new char[]{'-', '3', '2'});
-    assertThat(Numbers.convertToString(Integer.MAX_VALUE))
-        .isEqualTo(String.valueOf(Integer.MAX_VALUE).toCharArray());
-    assertThat(Numbers.convertToString(Integer.MIN_VALUE))
-        .isEqualTo(String.valueOf(Integer.MIN_VALUE).toCharArray());
-  }
-
-  @Test
-  public void testSort() {
-    var input = new int[]{3, 8, -1, 5, 0};
-    var expected = new int[]{-1, 0, 3, 5, 8};
-
-    Numbers.sort(input);
-
-    assertThat(input).isEqualTo(expected);
-  }
-
-  @Test
-  public void testSortWithNull() {
-    Numbers.sort(null);
+    var actualResult = Numbers.generateNtuples(n);
+    assertWithMessage(message + "amount = 0").that(actualResult).isEmpty();
   }
 }

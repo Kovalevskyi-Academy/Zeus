@@ -1,37 +1,47 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day3.Point;
+import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 
 public class PointTest extends AbstractTestExecutor {
 
   @Test
-  public void sum() {
-    var left = new Point(2, 3);
-    var right = new Point(-80, 100);
-
-    var result = left.sum(right);
-
-    assertThat(result.getX()).isEqualTo(-78);
-    assertThat(result.getY()).isEqualTo(103);
-  }
-
-  @Test
   public void getX() {
     var point = new Point(1, 2);
 
-    assertThat(point.getX()).isEqualTo(1);
+    assertWithMessage("testing getX()")
+        .that(point.getX()).isEqualTo(1);
   }
 
   @Test
   public void getY() {
     var point = new Point(1, 2);
 
-    assertThat(point.getY()).isEqualTo(2);
+    assertWithMessage("testing getY()")
+        .that(point.getY()).isEqualTo(2);
+  }
+
+  @Test
+  public void sum() {
+    String message = "\nTesting sum()\nNew Point coordinate%s must be %d\n";
+    var left = new Point(2, 3);
+    var right = new Point(-80, 100);
+
+    var result = left.sum(right);
+
+    assertWithMessage(String.format(message, "X", -78))
+        .that(result.getX()).isEqualTo(-78);
+
+    assertWithMessage(String.format(message, "Y", 103))
+        .that(result.getY()).isEqualTo(103);
   }
 
   @Test
@@ -40,7 +50,13 @@ public class PointTest extends AbstractTestExecutor {
     var point = new Point(1, 2);
     var newPoint = point.updateX(newX);
 
-    assertThat(newPoint.getX()).isEqualTo(newX);
+
+    assertWithMessage("testing updateX() on newPoint\n"
+        + "newPoint with newX have incorrect value!")
+        .that(newPoint.getX()).isEqualTo(newX);
+    assertWithMessage("testing updateX() on old point\n"
+        + "old Point should be final!")
+        .that(point.getX()).isEqualTo(1);
   }
 
   @Test
@@ -49,7 +65,12 @@ public class PointTest extends AbstractTestExecutor {
     var point = new Point(1, 2);
     var newPoint = point.updateY(newY);
 
-    assertThat(newPoint.getY()).isEqualTo(newY);
+    assertWithMessage("testing updateY() on newPoint\n"
+        + "newPoint with newX have incorrect value!")
+        .that(newPoint.getY()).isEqualTo(newY);
+    assertWithMessage("testing updateY() on old point\n"
+        + "old Point should be final!")
+        .that(point.getY()).isEqualTo(2);
   }
 
   @Test
@@ -64,6 +85,9 @@ public class PointTest extends AbstractTestExecutor {
 
     var expectedDistance = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
     assertThat(left.distanceTo(right)).isEqualTo(expectedDistance);
+    assertWithMessage("testing distanceTo()\n"
+        + "Distance fail!")
+        .that(left.distanceTo(right)).isEqualTo(expectedDistance);
   }
 
   @Test
@@ -72,32 +96,64 @@ public class PointTest extends AbstractTestExecutor {
     var left2 = new Point(100, 200);
     var right = new Point(100, 300);
 
-    assertThat(left.equals(left2)).isTrue();
-    assertThat(left.equals(right)).isFalse();
-    assertThat(left.equals(null)).isFalse();
-    assertThat(left.equals("1")).isFalse();
+    assertEquals(left, left2, "\ntestEquals()\nExpected true");
+    assertNotEquals(left, right, "\ntestEquals()\nExpected false");
   }
 
   @Test
   public void testHashCode() {
-    var point = new Point(100, 200);
+    Point point;
+    Random rnd = new Random();
 
-    assertThat(point.hashCode()).isEqualTo(300);
+    int x;
+    int y;
+    for (int i = 0; i < 10; i++) {
+      x = rnd.nextInt(500);
+      y = rnd.nextInt(500);
+      point = new Point(x, y);
+      assertWithMessage("\ntesting hashCode()\n")
+          .that(point.hashCode()).isEqualTo(x + y);
+    }
+
   }
 
   @Test
   public void testToString() {
-    var point = new Point(100, 200);
+    Point point;
+    Random rnd = new Random();
+    String expected = "Point{X: %d, Y: %d}";
 
-    assertThat(point.toString()).isEqualTo("Point{X: 100, Y: 200}");
+    int x;
+    int y;
+    for (int i = 0; i < 10; i++) {
+      x = rnd.nextInt(500);
+      y = rnd.nextInt(500);
+      point = new Point(x, y);
+      assertWithMessage("\ntesting toString()\n")
+          .that(point.toString()).isEqualTo(String.format(expected, x, y));
+    }
   }
 
   @Test
   public void testCompareTo() {
+    String message = "\nTesting compareTo()\n";
     var pointLeft = new Point(100, 200);
     var pointRight = new Point(-10, -50);
-    var expected = pointRight.getY() - pointLeft.getY() + pointRight.getX() - pointLeft.getX();
+    assertWithMessage(message)
+        .that(pointRight)
+        .isAtMost(pointLeft);
 
-    assertThat(pointLeft.compareTo(pointRight)).isEqualTo(expected);
+    pointLeft = new Point(-300, 100);
+    pointRight = new Point(400, -100);
+    assertWithMessage(message)
+        .that(pointLeft)
+        .isAtMost(pointRight);
+
+    pointLeft = new Point(100, 100);
+    pointRight = new Point(100, 100);
+    assertWithMessage(message + "It is the same objects!")
+        .that(pointLeft.compareTo(pointRight))
+        .isEqualTo(0);
+
   }
 }
