@@ -1,14 +1,19 @@
 package com.kovalevskyi.academy.codingbootcamp.suite;
 
+import com.kovalevskyi.academy.codingbootcamp.suite.util.Checkstyle;
+import com.kovalevskyi.academy.codingbootcamp.suite.util.Checkstyle.Checks;
+import com.kovalevskyi.academy.codingbootcamp.suite.util.PathParser;
+import com.kovalevskyi.academy.codingbootcamp.suite.view.TestsConsolePrinter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.DefaultInvoker;
 import org.apache.maven.shared.invoker.InvocationRequest;
 import org.apache.maven.shared.invoker.Invoker;
-import org.junit.platform.launcher.listeners.TestExecutionSummary;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -19,31 +24,46 @@ import picocli.CommandLine;
 public class Zeus implements Callable<Integer> {
 
   private final String[][][] classNames =
-    {
-        {
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest"}
-        },
-        {
-            {},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest"}
-        },
-        {
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest"},
-            {"com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test",
-                "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTes"},
-            {}
-        }
-    };
+      {
+          {
+              {PathParser.putAndGet(
+                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest")},
+              {PathParser.putAndGet(
+                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest"),
+                  PathParser.putAndGet(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest")},
+              {PathParser.putAndGet(
+                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest")},
+              {PathParser.putAndGet(
+                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest")}
+          },
+          {
+              {},
+              {PathParser.putAndGet(
+                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest"),
+                  PathParser.putAndGet(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest")},
+              {PathParser.putAndGet(
+                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest")}
+          },
+          {
+              {PathParser.putAndGet(
+                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest"),
+                  PathParser.putAndGet(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest"),
+                  PathParser.putAndGet(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest"),
+                  PathParser.putAndGet(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest")},
+              {PathParser.putAndGet(
+                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest"),
+                  PathParser.putAndGet(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test"),
+                  PathParser.putAndGet(
+                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTest")},
+              {}
+          }
+      };
 
   @CommandLine.Option(
       names = {"-w", "--week"},
@@ -74,6 +94,11 @@ public class Zeus implements Callable<Integer> {
   private boolean show;
 
   @CommandLine.Option(
+      names = {"-c", "--checkstyle"},
+      description = "run checkstyle for week/day")
+  private boolean checkstyle;
+
+  @CommandLine.Option(
       names = {"-t", "--test"},
       description = "specific test to executed")
   private String test;
@@ -97,6 +122,16 @@ public class Zeus implements Callable<Integer> {
         } else {
           for (var dayTest : this.classNames[this.week][this.day]) {
             System.out.printf("test: %s\n", dayTest);
+          }
+        }
+        return 0;
+      }
+      if (this.checkstyle) {
+        if (this.week == -1 || this.day == -1) {
+          System.out.println(noSpecification);
+        } else {
+          for (var dayTest : this.classNames[this.week][this.day]) {
+            Checkstyle.check(Checks.GOOGLE_CHECKS, dayTest);
           }
         }
         return 0;
@@ -139,7 +174,9 @@ public class Zeus implements Callable<Integer> {
           }
         });
     Invoker invoker = new DefaultInvoker();
-    String mavenPath = Objects.requireNonNullElse(this.mavenHome, System.getenv("M2_HOME"));
+    var mavenDefault = Optional.of(System.getenv("M2_HOME"));
+    var mavenPath = Objects.requireNonNullElse(this.mavenHome, mavenDefault
+        .orElseThrow(() -> new FileNotFoundException("Configure Maven on your system!")));
     invoker.setMavenHome(new File(mavenPath));
     System.out.println("Zeus is about to execute 'mvn clean compile package'");
     invoker.execute(request);
@@ -157,23 +194,12 @@ public class Zeus implements Callable<Integer> {
     var testExecutor =
         (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
     testExecutor.executeTest();
-    printResultOfTestMethod(className, testExecutor.listener.getSummary());
   }
 
   private void executeDayTests(String[] classNames) throws Exception {
     for (var className : classNames) {
       executeDayTest(className);
     }
-  }
-
-  private void printResultOfTestMethod(String className, TestExecutionSummary summary) {
-    var ms = summary.getTimeFinished() - summary.getTimeStarted();
-    System.out.print("******************************\n");
-    System.out.printf("* Tests of %s finished after %d ms\n", className, ms);
-    System.out.printf("* Total: %d\n", summary.getTestsFoundCount());
-    System.out.printf("* Successful: %d\n", summary.getTestsSucceededCount());
-    System.out.printf("* Failed : %d\n", summary.getTestsFailedCount());
-    System.out.print("******************************\n");
   }
 
   public static void main(String... args) {
