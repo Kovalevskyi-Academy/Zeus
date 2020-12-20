@@ -2,6 +2,7 @@ package com.kovalevskyi.academy.codingbootcamp.suite;
 
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 
+import com.kovalevskyi.academy.codingbootcamp.suite.view.TestsConsolePrinter;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.launcher.Launcher;
 import org.junit.platform.launcher.LauncherDiscoveryRequest;
