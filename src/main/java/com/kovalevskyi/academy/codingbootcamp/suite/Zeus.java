@@ -194,7 +194,6 @@ public class Zeus implements Callable<Integer> {
     var testExecutor =
         (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
     testExecutor.executeTest();
-    TestsConsolePrinter.printSummary(testExecutor.listener.getSummary());
   }
 
   private void executeDayTests(String[] classNames) throws Exception {
