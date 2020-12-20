@@ -26,6 +26,7 @@ public class Checkstyle {
         + File.separator
         + relativeClassPath);
     if (testedClass.exists()) {
+      System.out.printf("Searching for \"%s\"\n", relativeClassPath);
       Main.main("-c", checkstyle.checksFile, relativeClassPath);
     } else {
       throw new FileNotFoundException(String.format("%s is not exist!", testedClass.getPath()));

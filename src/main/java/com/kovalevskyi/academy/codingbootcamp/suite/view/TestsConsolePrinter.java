@@ -13,17 +13,17 @@ public class TestsConsolePrinter implements TestWatcher, BeforeAllCallback, Afte
   @Override
   public void testSuccessful(ExtensionContext context) {
     successful++;
-    System.out.println("* " + context.getDisplayName() + " - OK");
+    System.out.println(context.getDisplayName() + " - OK");
   }
 
   @Override
   public void testFailed(ExtensionContext context, Throwable cause) {
     failed++;
-    System.out.println("* " + context.getDisplayName() + " - BAD");
+    System.out.println(context.getDisplayName() + " - BAD");
     var message = cause.getMessage().split("\n");
     for (String line : message) {
       if (!line.isEmpty()) {
-        System.err.println("* ~ " + line);
+        System.out.println(" " + line);
       }
     }
   }
@@ -31,19 +31,14 @@ public class TestsConsolePrinter implements TestWatcher, BeforeAllCallback, Afte
   @Override
   public void beforeAll(ExtensionContext extensionContext) {
     var testClass = extensionContext.getTestClass();
-    if (testClass.isPresent()) {
-      System.out.print("------------------------------\n");
-      System.out.printf("* Result of %s\n", testClass.get().getSimpleName());
-      System.out.print("*\n");
-    }
+    testClass.ifPresent(entry -> System.out.printf("Result of %s\n\n", entry.getSimpleName()));
   }
 
   @Override
   public void afterAll(ExtensionContext extensionContext) {
-    System.out.print("*\n");
-    System.out.printf("* Total: %d\n", successful + failed);
-    System.out.printf("* Successful: %d\n", successful);
-    System.out.printf("* Failed : %d\n", failed);
+    System.out.printf("\nTotal: %d\n", successful + failed);
+    System.out.printf("Successful: %d\n", successful);
+    System.out.printf("Failed : %d\n", failed);
     System.out.print("------------------------------\n");
   }
 }
