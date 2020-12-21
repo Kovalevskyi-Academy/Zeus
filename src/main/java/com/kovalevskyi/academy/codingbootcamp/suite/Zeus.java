@@ -23,47 +23,62 @@ import picocli.CommandLine;
     description = "Zeus the Mighty")
 public class Zeus implements Callable<Integer> {
 
-  private final String[][][] classNames =
+  private final String[][][] classNames = {
+    {
       {
-          {
-              {PathParser.putAndGet(
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest")},
-              {PathParser.putAndGet(
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest"),
-                  PathParser.putAndGet(
-                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest")},
-              {PathParser.putAndGet(
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest")},
-              {PathParser.putAndGet(
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest")}
-          },
-          {
-              {},
-              {PathParser.putAndGet(
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest"),
-                  PathParser.putAndGet(
-                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest")},
-              {PathParser.putAndGet(
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest")}
-          },
-          {
-              {PathParser.putAndGet(
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest"),
-                  PathParser.putAndGet(
-                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest"),
-                  PathParser.putAndGet(
-                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest"),
-                  PathParser.putAndGet(
-                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest")},
-              {PathParser.putAndGet(
-                  "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest"),
-                  PathParser.putAndGet(
-                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test"),
-                  PathParser.putAndGet(
-                      "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTest")},
-              {}
-          }
-      };
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest")
+      },
+      {
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest"),
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest")
+      },
+      {
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest")
+      },
+      {
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest")
+      }
+    },
+    {
+      {},
+      {
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest"),
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest")
+      },
+      {
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest")
+      }
+    },
+    {
+      {
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest"),
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest"),
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest"),
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest")
+      },
+      {
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest"),
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test"),
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTest")
+      },
+      {}
+    }
+  };
 
   @CommandLine.Option(
       names = {"-w", "--week"},
@@ -180,9 +195,14 @@ public class Zeus implements Callable<Integer> {
           }
         });
     Invoker invoker = new DefaultInvoker();
-    var mavenDefault = Optional.of(System.getenv("M2_HOME"));
-    var mavenPath = Objects.requireNonNullElse(this.mavenHome, mavenDefault
-        .orElseThrow(() -> new FileNotFoundException("Configure Maven on your system!")));
+    var mavenDefault = Optional.ofNullable(System.getenv("M2_HOME"));
+    var mavenPath =
+        Objects.requireNonNullElse(
+            this.mavenHome,
+            mavenDefault.orElseThrow(
+                () ->
+                    new FileNotFoundException(
+                        "Configure Maven on your system! Either set M2_HOME or use key -m")));
     invoker.setMavenHome(new File(mavenPath));
     System.out.println("Zeus is about to execute 'mvn clean compile package'");
     invoker.execute(request);
