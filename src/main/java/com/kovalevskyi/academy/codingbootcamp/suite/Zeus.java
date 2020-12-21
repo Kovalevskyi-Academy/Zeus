@@ -180,7 +180,7 @@ public class Zeus implements Callable<Integer> {
           }
         });
     Invoker invoker = new DefaultInvoker();
-    var mavenDefault = Optional.of(System.getenv("M2_HOME"));
+    var mavenDefault = Optional.ofNullable(System.getenv("M2_HOME"));
     var mavenPath = Objects.requireNonNullElse(this.mavenHome, mavenDefault
         .orElseThrow(() -> new FileNotFoundException("Configure Maven on your system!")));
     invoker.setMavenHome(new File(mavenPath));
