@@ -5,6 +5,8 @@ import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 
+import java.util.Arrays;
+
 public class TestsConsolePrinter implements TestWatcher, BeforeAllCallback, AfterAllCallback {
 
   private int successful = 0;
@@ -28,12 +30,14 @@ public class TestsConsolePrinter implements TestWatcher, BeforeAllCallback, Afte
     failed++;
     if (!isSilentMode) {
       System.out.println(context.getDisplayName() + " - BAD");
-      var message = cause.getMessage().split("\n");
-      for (String line : message) {
-        if (!line.isEmpty()) {
-          System.out.println(" " + line);
-        }
+      if (cause instanceof java.lang.NoClassDefFoundError) {
+        System.out.println(
+            "class under test not found, very-very likely you have incorrectly set class path so Zeus can not find it.");
       }
+      Arrays.stream(cause.getMessage().split("\n"))
+          .sequential()
+          .filter(s -> !s.isEmpty())
+          .forEach(System.out::println);
     } else {
       System.out.println(cause.getMessage());
     }
