@@ -2,6 +2,7 @@
 *.iml
 target/
 !libs/
+.DS_Store
 
 # Compiled class file
 *.class
