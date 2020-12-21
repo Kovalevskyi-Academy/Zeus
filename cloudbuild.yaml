@@ -13,9 +13,6 @@ steps:
   - name: 'maven:3.6.3-openjdk-15'
     args: [ 'mvn', 'package' ]
     dir: 'Zeus'
-  - name: 'maven:3.6.3-openjdk-15'
-    args: [ 'mvn', 'deploy' ]
-    dir: 'Zeus'
   - name: 'gcr.io/cloud-builders/gsutil'
     args: [ 'cp', 'Zeus-1.0.jar', 'gs://zeus-artifacts/per-push-builds/Zeus-1.0.jar' ]
     dir: 'Zeus'
