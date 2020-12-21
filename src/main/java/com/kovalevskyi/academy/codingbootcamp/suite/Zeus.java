@@ -99,6 +99,11 @@ public class Zeus implements Callable<Integer> {
   private boolean checkstyle;
 
   @CommandLine.Option(
+      names = {"-e", "--error"},
+      description = "JUnit error mode (only error prints)")
+  private boolean error;
+
+  @CommandLine.Option(
       names = {"-t", "--test"},
       description = "specific test to executed")
   private String test;
@@ -111,6 +116,7 @@ public class Zeus implements Callable<Integer> {
   @Override
   public Integer call() {
     String noSpecification = "you need to specify week and day like this: --week X --day Y";
+    TestsConsolePrinter.setSilentMode(this.error);
     try {
       if (this.test != null && !this.all && (this.week == -1 || this.day == -1)) {
         System.out.println(noSpecification);
