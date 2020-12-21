@@ -10,7 +10,7 @@ java -cp "./libs/CodingBootcamp-1.0.jar:target/Zeus-1.0.jar" com.kovalevskyi.aca
 ### Windows
 java -cp "../../CodingBootcamp/target/CodingBootcamp-1.0.jar;../target/Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -w0 -d1
 ## or
-java -cp "../libs/CodingBootcamp-1.0.jar;../target/Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -w0 -d1
+java -cp "../libs/CodingBootcamp-1.0.jar;target/Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -w0 -d1
 
 ####Substitute your favorite week & day!####
 

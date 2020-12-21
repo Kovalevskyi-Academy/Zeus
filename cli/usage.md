@@ -37,7 +37,7 @@ project root.*
 |---|---|---|
 |`-a`|`--all`|Run all tests|
 |`-b`|`--build`|Build jar|
-|`-c`|`--checkstyle`|Run checkstyle for week/day|
+|`-c`|`--checkstyle`|Run checkstyle for week/day. Cannot be applied to `*.jaк` files!|
 |`-d`|`--day=<day>`|Number of the day|
 |`-e`|`--error`|JUnit error mode (only error prints)|
 |`-h`|`--help`|Show help message|

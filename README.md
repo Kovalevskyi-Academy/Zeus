@@ -13,4 +13,4 @@ Some exciting description.
 
 #### How to start this PEPELATS:
 
-See in `cli/run.sh`.
+See in [usage.md](./cli/usage.md).
