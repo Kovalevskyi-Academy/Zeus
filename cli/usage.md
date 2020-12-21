@@ -8,11 +8,11 @@
 
 ## Importantly
 
-- Zeus jar archive should be in the root of the student's project
+- Zeus jar archive should be in the root folder of the student's project
 
 ## How to use
 
-Launch the command line from the root of your project and input the code below
+Launch the command line from the root folder of your project and input the code below
 
 ##### run Zeus only
 
@@ -37,7 +37,7 @@ project root.*
 |---|---|---|
 |`-a`|`--all`|Run all tests|
 |`-b`|`--build`|Build jar|
-|`-c`|`--checkstyle`|Run checkstyle for week/day. Cannot be applied to `*.jaк` files!|
+|`-c`|`--checkstyle`|Run checkstyle for week/day. Cannot be applied to `*.jar` files!|
 |`-d`|`--day=<day>`|Number of the day|
 |`-e`|`--error`|JUnit error mode (only error prints)|
 |`-h`|`--help`|Show help message|
@@ -62,8 +62,8 @@ Check a style of code for week 0 day 1
 
 Test for week 0 day 1
 
-`java -cp "CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -w0 -d1`
+`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -w0 -d1`
 
 Test for week 0 day 1 with no prints (only error prints)
 
-`java -cp "CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -e -w0 -d1`
+`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -e -w0 -d1`
