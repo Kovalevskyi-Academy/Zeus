@@ -76,7 +76,11 @@ public class Zeus implements Callable<Integer> {
         PathParser.putAndGet(
             "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTest")
       },
-      {}
+      {},
+      {
+        PathParser.putAndGet(
+            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day3.ListTest")
+      }
     }
   };
 
