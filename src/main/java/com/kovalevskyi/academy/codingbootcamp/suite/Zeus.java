@@ -3,7 +3,8 @@ package com.kovalevskyi.academy.codingbootcamp.suite;
 import com.kovalevskyi.academy.codingbootcamp.suite.util.Checkstyle;
 import com.kovalevskyi.academy.codingbootcamp.suite.util.Checkstyle.Checks;
 import com.kovalevskyi.academy.codingbootcamp.suite.util.PathParser;
-import com.kovalevskyi.academy.codingbootcamp.suite.view.TestsConsolePrinter;
+import com.kovalevskyi.academy.testing.AbstractTestExecutor;
+import com.kovalevskyi.academy.testing.view.TestsConsolePrinter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -27,59 +28,59 @@ public class Zeus implements Callable<Integer> {
     {
       {
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day0.MainTest")
+            "com.kovalevskyi.academy.codingbootcamp.week0.day0.MainTest")
       },
       {
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.AlphabetTest"),
+            "com.kovalevskyi.academy.codingbootcamp.week0.day1.AlphabetTest"),
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1.NumbersTest")
+            "com.kovalevskyi.academy.codingbootcamp.week0.day1.NumbersTest")
       },
       {
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2.NumbersTest")
+            "com.kovalevskyi.academy.codingbootcamp.week0.day2.NumbersTest")
       },
       {
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day3.PointTest")
+            "com.kovalevskyi.academy.codingbootcamp.week0.day3.PointTest")
       }
     },
     {
       {},
       {
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StringUtilsTest"),
+            "com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtilsTest"),
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1.StdStringTest")
+            "com.kovalevskyi.academy.codingbootcamp.week1.day1.StdStringTest")
       },
       {
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day2.ListTest")
+            "com.kovalevskyi.academy.codingbootcamp.week1.day2.ListTest")
       }
     },
     {
       {
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintParamTest"),
+            "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintParamTest"),
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintReversedParamTest"),
+            "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintReversedParamTest"),
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.CalculatorTest"),
+            "com.kovalevskyi.academy.codingbootcamp.week2.day0.CalculatorTest"),
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day0.MainPrintSortedParamTest")
+            "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintSortedParamTest")
       },
       {
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.BoxGeneratorTest"),
+            "com.kovalevskyi.academy.codingbootcamp.week2.day1.BoxGeneratorTest"),
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinter2Test"),
+            "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinter2Test"),
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1.TextPrinterTest")
+            "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinterTest")
       },
       {},
       {
         PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day3.ListTest")
+            "com.kovalevskyi.academy.codingbootcamp.week2.day3.ListTest")
       }
     }
   };

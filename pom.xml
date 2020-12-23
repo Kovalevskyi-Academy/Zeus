@@ -49,24 +49,6 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <!-- annotationProcessorPaths requires maven-compiler-plugin version 3.5 or higher -->
-        <version>3.8.1</version>
-        <configuration>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>info.picocli</groupId>
-              <artifactId>picocli-codegen</artifactId>
-              <version>4.5.2</version>
-            </path>
-          </annotationProcessorPaths>
-          <compilerArgs>
-            <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
-          </compilerArgs>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.3.0</version>
         <executions>
@@ -99,9 +81,7 @@
     <dependency>
       <groupId>com.kovalevskyi.academy</groupId>
       <artifactId>CodingBootcamp</artifactId>
-      <version>1.0</version>
-      <scope>system</scope>
-      <systemPath>${pom.basedir}/libs/CodingBootcamp-1.0.jar</systemPath>
+      <version>1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>info.picocli</groupId>
@@ -134,6 +114,11 @@
       <groupId>com.puppycrawl.tools</groupId>
       <artifactId>checkstyle</artifactId>
       <version>8.38</version>
+    </dependency>
+    <dependency>
+      <groupId>com.kovalevskyi.academy.testing</groupId>
+      <artifactId>TestingFramework</artifactId>
+      <version>1.0</version>
     </dependency>
   </dependencies>
 </project>
