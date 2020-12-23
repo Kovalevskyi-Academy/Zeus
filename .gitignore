@@ -2,11 +2,11 @@
 *.iml
 target/
 !libs/
-.DS_Store
+
 
 # Compiled class file
 *.class
-
+.DS_Store
 # Log file
 *.log
 
@@ -17,7 +17,7 @@ target/
 .mtj.tmp/
 
 # Package Files
-*.jar
+
 *.war
 *.nar
 *.ear
