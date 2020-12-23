@@ -1,10 +1,11 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week2.day1;
 
-import com.kovalevskyi.academy.codingbootcamp.suite.tests.common.BasicStdTest;
+import static com.google.common.truth.Truth.assertThat;
+
 import com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinter;
+import com.kovalevskyi.academy.testing.common.BasicStdTest;
 import org.junit.jupiter.api.Test;
 
-import static com.google.common.truth.Truth.assertThat;
 
 public class TextPrinterTest extends BasicStdTest {
 

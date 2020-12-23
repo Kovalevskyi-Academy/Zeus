@@ -1,8 +1,8 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day0;
 
-import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day3.Point;
 import com.kovalevskyi.academy.codingbootcamp.week1.day0.PointWithLabel;
+import com.kovalevskyi.academy.testing.AbstractTestExecutor;
 import org.junit.jupiter.api.Test;
 
 import static com.google.common.truth.Truth.assertWithMessage;

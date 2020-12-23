@@ -1,13 +1,12 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day2;
 
-import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers;
+import com.kovalevskyi.academy.testing.AbstractTestExecutor;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;

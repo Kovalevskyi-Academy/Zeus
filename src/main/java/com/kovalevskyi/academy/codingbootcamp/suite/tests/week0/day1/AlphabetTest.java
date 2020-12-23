@@ -3,8 +3,8 @@ package com.kovalevskyi.academy.codingbootcamp.suite.tests.week0.day1;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day1.Alphabet;
+import com.kovalevskyi.academy.testing.AbstractTestExecutor;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 

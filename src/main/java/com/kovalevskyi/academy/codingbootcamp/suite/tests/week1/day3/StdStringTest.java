@@ -1,11 +1,12 @@
 package com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day3;
 
-import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
-import com.kovalevskyi.academy.codingbootcamp.week1.day3.StdString;
-import org.junit.jupiter.api.Test;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import com.kovalevskyi.academy.codingbootcamp.week1.day3.StdString;
+import com.kovalevskyi.academy.testing.AbstractTestExecutor;
+import org.junit.jupiter.api.Test;
+
 
 public class StdStringTest extends AbstractTestExecutor {
 
@@ -33,9 +34,7 @@ public class StdStringTest extends AbstractTestExecutor {
       testStr.toAsciiLowerCase();
       fail(
           "toAsciiLowerCase does not throw IllegalArgumentException with new char[]{(char)299, 'e', 'L', 'L', 'o', '1', ' '}");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException e) { }
   }
 
   @Test
@@ -61,9 +60,7 @@ public class StdStringTest extends AbstractTestExecutor {
       testStr.toAsciiUpperCase();
       fail(
           "toAsciiUpperCase() is not throwing IllegalArgumentException with new char[]{(char)299, '!', 'H', 'e', 'L', 'L', 'o'}");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException e) { }
   }
 
   @Test
@@ -82,9 +79,7 @@ public class StdStringTest extends AbstractTestExecutor {
       testStr.subString(-1, 6);
       fail(
           "testStr.subString(-1, 6) does not throw IndexOutOfBoundsException with new char[]{'H', 'e', 'L', 'L', 'o', '1', '2', '3'}");
-    } catch (IndexOutOfBoundsException e) {
-
-    }
+    } catch (IndexOutOfBoundsException e) { }
   }
 
   @Test
@@ -95,9 +90,7 @@ public class StdStringTest extends AbstractTestExecutor {
       testStr.subString(7, 6);
       fail(
           "testStr.subString(7, 6) does not throw IllegalArgumentException with new char[]{'H', 'e', 'L', 'L', 'o', '1', '2', '3'}");
-    } catch (IllegalArgumentException e) {
-
-    }
+    } catch (IllegalArgumentException e) { }
   }
 
   @Test
@@ -124,9 +117,7 @@ public class StdStringTest extends AbstractTestExecutor {
     try {
       testStrLeft.concat(testStrRight);
       fail("testStrLeft.concat(null) is not throwing NullPointerException");
-    } catch (NullPointerException e) {
-
-    }
+    } catch (NullPointerException e) { }
   }
 
   @Test

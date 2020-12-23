@@ -5,8 +5,8 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week0.day3.Point;
+import com.kovalevskyi.academy.testing.AbstractTestExecutor;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
 

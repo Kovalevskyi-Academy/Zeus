@@ -3,8 +3,8 @@ package com.kovalevskyi.academy.codingbootcamp.suite.tests.week1.day1;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import com.kovalevskyi.academy.codingbootcamp.suite.AbstractTestExecutor;
 import com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtils;
+import com.kovalevskyi.academy.testing.AbstractTestExecutor;
 import org.junit.jupiter.api.Test;
 
 public class StringUtilsTest extends AbstractTestExecutor {

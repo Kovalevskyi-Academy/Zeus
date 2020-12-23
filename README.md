@@ -76,7 +76,3 @@ Test for week 0 day 1 with no prints (only error prints)
    How to apply "intellij-java-google-style.xml" fo current project:
    ![use style](./pictures/HowToUseCODESTYLE.png)
 3. Remember - tests should be speaking.
-
-## How to start this PEPELATS:
-
-See in [usage.md](./cli/usage.md).
