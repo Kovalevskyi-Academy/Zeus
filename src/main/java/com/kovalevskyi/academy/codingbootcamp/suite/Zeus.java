@@ -25,65 +25,44 @@ import picocli.CommandLine;
 public class Zeus implements Callable<Integer> {
 
   private final String[][][] classNames = {
-    {
       {
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week0.day0.MainTest")
+        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day0.MainTest")},
+        {
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day1.AlphabetTest"),
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day1.NumbersTest")
+        },
+        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day2.NumbersTest")},
+        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day3.PointTest")}
       },
       {
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week0.day1.AlphabetTest"),
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week0.day1.NumbersTest")
+        {},
+        {
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtilsTest"),
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week1.day1.StdStringTest")
+        },
+        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week1.day2.ListTest")}
       },
       {
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week0.day2.NumbersTest")
-      },
-      {
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week0.day3.PointTest")
+        {
+          PathParser.putAndGet(
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintParamTest"),
+          PathParser.putAndGet(
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintReversedParamTest"),
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day0.CalculatorTest"),
+          PathParser.putAndGet(
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintSortedParamTest")
+        },
+        {
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day1"
+                  + ".BoxGeneratorTest"),
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day1"
+                  + ".TextPrinter2Test"),
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinterTest")
+        },
+        {},
+        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day3.ListTest")}
       }
-    },
-    {
-      {},
-      {
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtilsTest"),
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week1.day1.StdStringTest")
-      },
-      {
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week1.day2.ListTest")
-      }
-    },
-    {
-      {
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintParamTest"),
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintReversedParamTest"),
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week2.day0.CalculatorTest"),
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintSortedParamTest")
-      },
-      {
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week2.day1.BoxGeneratorTest"),
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinter2Test"),
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinterTest")
-      },
-      {},
-      {
-        PathParser.putAndGet(
-            "com.kovalevskyi.academy.codingbootcamp.week2.day3.ListTest")
-      }
-    }
-  };
+    };
 
   @CommandLine.Option(
       names = {"-w", "--week"},
