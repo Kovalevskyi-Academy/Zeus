@@ -178,7 +178,12 @@ public class Zeus implements Callable<Integer> {
       } else if (this.test != null) {
         executeDayTest(this.test);
       } else {
-        executeDayTests(this.classNames[this.week][this.day]);
+        if (this.week == -1 || this.day == -1) {
+          System.out.println(noSpecification);
+          return -1;
+        } else {
+          executeDayTests(this.classNames[this.week][this.day]);
+        }
       }
     } catch (Exception e) {
       System.out.println("Zeus is VERY unhappy!!!!");
