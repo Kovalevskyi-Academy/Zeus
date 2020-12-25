@@ -115,7 +115,7 @@ public class Zeus implements Callable<Integer> {
 
   @CommandLine.Option(
       names = {"-c", "--checkstyle"},
-      description = "run checkstyle for week/day")
+      description = "run only checkstyle for week/day")
   private boolean checkstyle;
 
   @CommandLine.Option(
@@ -229,6 +229,7 @@ public class Zeus implements Callable<Integer> {
 
   private void executeDayTests(String[] classNames) throws Exception {
     for (var className : classNames) {
+      Checkstyle.check(Checks.GOOGLE_CHECKS, className);
       executeDayTest(className);
     }
   }
