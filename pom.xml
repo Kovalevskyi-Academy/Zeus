@@ -128,11 +128,6 @@
       <version>1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>com.kovalevskyi.academy.testing</groupId>
-      <artifactId>TestingFramework</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
       <groupId>info.picocli</groupId>
       <artifactId>picocli</artifactId>
       <version>4.5.2</version>
@@ -165,7 +160,7 @@
       <version>8.38</version>
     </dependency>
     <dependency>
-      <groupId>com.kovalevskyi.academy.testing</groupId>
+      <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
       <version>1.0</version>
     </dependency>

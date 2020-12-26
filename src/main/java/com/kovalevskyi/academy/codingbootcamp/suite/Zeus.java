@@ -1,10 +1,10 @@
 package com.kovalevskyi.academy.codingbootcamp.suite;
 
+import academy.kovalevskyi.testing.AbstractTestExecutor;
+import academy.kovalevskyi.testing.view.TestsConsolePrinter;
 import com.kovalevskyi.academy.codingbootcamp.suite.util.Checkstyle;
 import com.kovalevskyi.academy.codingbootcamp.suite.util.Checkstyle.Checks;
 import com.kovalevskyi.academy.codingbootcamp.suite.util.PathParser;
-import com.kovalevskyi.academy.testing.AbstractTestExecutor;
-import com.kovalevskyi.academy.testing.view.TestsConsolePrinter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
