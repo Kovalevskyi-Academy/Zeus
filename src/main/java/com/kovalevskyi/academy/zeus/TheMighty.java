@@ -1,10 +1,10 @@
-package com.kovalevskyi.academy.codingbootcamp.suite;
+package com.kovalevskyi.academy.zeus;
 
 import academy.kovalevskyi.testing.AbstractTestExecutor;
 import academy.kovalevskyi.testing.view.TestsConsolePrinter;
-import com.kovalevskyi.academy.codingbootcamp.suite.util.Checkstyle;
-import com.kovalevskyi.academy.codingbootcamp.suite.util.Checkstyle.Checks;
-import com.kovalevskyi.academy.codingbootcamp.suite.util.PathParser;
+import com.kovalevskyi.academy.zeus.util.Checkstyle;
+import com.kovalevskyi.academy.zeus.util.Checkstyle.Checks;
+import com.kovalevskyi.academy.zeus.util.PathParser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import picocli.CommandLine;
     mixinStandardHelpOptions = true,
     version = Constants.VERSION,
     description = "Zeus the Mighty")
-public class Zeus implements Callable<Integer> {
+public class TheMighty implements Callable<Integer> {
 
   private final String[][][] classNames = {
       {
@@ -219,7 +219,7 @@ public class Zeus implements Callable<Integer> {
   }
 
   public static void main(String... args) {
-    CommandLine commandLine = new CommandLine(new Zeus());
+    CommandLine commandLine = new CommandLine(new TheMighty());
     int exitCode = commandLine.execute(args);
     if (exitCode < 0) {
       commandLine.usage(System.out);

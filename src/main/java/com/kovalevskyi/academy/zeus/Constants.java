@@ -1,4 +1,4 @@
-package com.kovalevskyi.academy.codingbootcamp.suite;
+package com.kovalevskyi.academy.zeus;
 
 abstract class Constants {
 

@@ -16,17 +16,17 @@ Launch the command line from the root folder of your project and input the code 
 
 ##### run Zeus only
 
-`java -cp "Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus <parameters>`
+`java -cp "Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 ##### run Zeus with a student's jar archive
 
 ###### Unix-like
 
-`java -cp "CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus <parameters>`
+`java -cp "CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 ###### Windows
 
-`java -cp "CodingBootcamp-1.0.jar;Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus <parameters>`
+`java -cp "CodingBootcamp-1.0.jar;Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 **If your CodingBootcamp-1.0.jar location is different, you should write a path to this file from the
 project root.*
@@ -54,19 +54,19 @@ project root.*
 
 Build jar archive
 
-`java -cp "Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -b`
+`java -cp "Zeus-1.0.jar" Zeus -b`
 
 Check a style of code for week 0 day 1
 
-`java -cp "Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -c -w0 -d1`
+`java -cp "Zeus-1.0.jar" Zeus -c -w0 -d1`
 
 Test for week 0 day 1
 
-`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -w0 -d1`
+`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" Zeus -w0 -d1`
 
 Test for week 0 day 1 with no prints (only error prints)
 
-`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -e -w0 -d1`
+`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" Zeus -e -w0 -d1`
 
 # To contributors:
 0. Examples of dev usage:
@@ -75,11 +75,11 @@ Test for week 0 day 1 with no prints (only error prints)
 
 Test for week 0 day 1
 
-`java -cp "target/<NAME>.jar:Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -w0 -d1`
+`java -cp "target/<NAME>.jar:Zeus-1.0.jar" Zeus -w0 -d1`
 
 Test for week 0 day 1 with no prints (only error prints)
 
-`java -cp "target/<NAME>.jar:Zeus-1.0.jar" com.kovalevskyi.academy.codingbootcamp.suite.Zeus -e -w0 -d1`
+`java -cp "target/<NAME>.jar:Zeus-1.0.jar" Zeus -e -w0 -d1`
 
 1. Do not forget make a separate branch for your fixes.
 2. Use the [intellij-java-google-style.xml](https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml)

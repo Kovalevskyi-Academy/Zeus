@@ -1,4 +1,4 @@
-package com.kovalevskyi.academy.codingbootcamp.suite.util;
+package com.kovalevskyi.academy.zeus.util;
 
 import java.util.HashMap;
 import java.util.Map;
