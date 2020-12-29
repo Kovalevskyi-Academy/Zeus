@@ -62,11 +62,11 @@ Check a style of code for week 0 day 1
 
 Test for week 0 day 1
 
-`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" Zeus -w0 -d1`
+`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d1`
 
 Test for week 0 day 1 with no prints (only error prints)
 
-`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" Zeus -e -w0 -d1`
+`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d1`
 
 # To contributors:
 0. Examples of dev usage:
@@ -75,11 +75,11 @@ Test for week 0 day 1 with no prints (only error prints)
 
 Test for week 0 day 1
 
-`java -cp "target/<NAME>.jar:Zeus-1.0.jar" Zeus -w0 -d1`
+`java -cp "target/<NAME>.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d1`
 
 Test for week 0 day 1 with no prints (only error prints)
 
-`java -cp "target/<NAME>.jar:Zeus-1.0.jar" Zeus -e -w0 -d1`
+`java -cp "target/<NAME>.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d1`
 
 1. Do not forget make a separate branch for your fixes.
 2. Use the [intellij-java-google-style.xml](https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml)
