@@ -49,6 +49,17 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.3.0</version>
         <executions>
@@ -58,17 +69,14 @@
               <goal>single</goal>
             </goals>
             <configuration>
+              <finalName>${project.artifactId}</finalName>
               <outputDirectory>target</outputDirectory>
-              <descriptorRefs>
-                <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
-              <finalName>${project.artifactId}-${project.version}</finalName>
-              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>assembly.xml</descriptor>
+              </descriptors>
               <archive>
                 <manifest>
-                  <mainClass>
-                    com.kovalevskyi.academy.zeus.TheMighty
-                  </mainClass>
+                  <mainClass>com.kovalevskyi.academy.zeus.TheMighty</mainClass>
                 </manifest>
               </archive>
             </configuration>
