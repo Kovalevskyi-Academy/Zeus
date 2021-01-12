@@ -16,17 +16,17 @@ Launch the command line from the root folder of your project and input the code 
 
 ##### run Zeus only
 
-`java -cp "Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 ##### run Zeus with a student's jar archive
 
 ###### Unix-like
 
-`java -cp "CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "CodingBootcamp-1.0.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 ###### Windows
 
-`java -cp "CodingBootcamp-1.0.jar;Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "CodingBootcamp-1.0.jar;Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 **If your CodingBootcamp-1.0.jar location is different, you should write a path to this file from the
 project root.*
@@ -54,32 +54,16 @@ project root.*
 
 Build jar archive
 
-`java -cp "Zeus-1.0.jar" Zeus -b`
+`java -cp "Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -b`
 
-Check a style of code for week 0 day 1
+Check a style of code for week 0 day 0
 
-`java -cp "Zeus-1.0.jar" Zeus -c -w0 -d1`
+`java "Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -c -w0 -d0`
 
-Test for week 0 day 1
+Run test for week 0 day 0
 
-`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d1`
+`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d0`
 
-Test for week 0 day 1 with no prints (only error prints)
+Test for week 0 day 0 with no prints (only error prints)
 
-`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d1`
-
-# To contributors:
-0. Examples of dev usage:
-
-`<NAME>` = `CodingBootcamp-1.0-SNAPSHOT` or `CodingBootcamp-1.0-SNAPSHOT-tests-only`.
-
-Test for week 0 day 1
-
-`java -cp "target/<NAME>.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d1`
-
-Test for week 0 day 1 with no prints (only error prints)
-
-`java -cp "target/<NAME>.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d1`
-
-1. Do not forget make a separate branch for your fixes.
-2. Remember - tests should be speaking.
+`java -cp "target/CodingBootcamp-1.0.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d0`
