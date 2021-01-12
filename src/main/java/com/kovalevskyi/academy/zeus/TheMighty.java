@@ -26,13 +26,19 @@ public class TheMighty implements Callable<Integer> {
 
   private final String[][][] classNames = {
       {
-        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day0.MainTest")},
+        {
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day0.MainTest")
+        },
         {
           PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day1.AlphabetTest"),
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day1.NumbersTest")
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day1.Numbers1Test")
         },
-        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day2.NumbersTest")},
-        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day3.PointTest")}
+        {
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers2Test")
+        },
+        {
+          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day3.PointTest")
+        }
       },
       {
         {},
