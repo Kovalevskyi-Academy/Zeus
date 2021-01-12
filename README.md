@@ -16,22 +16,15 @@ Launch the command line from the root folder of your project and input the code 
 
 ##### run Zeus only
 
-`java -cp "Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
-
-or
-
 `java -jar Zeus-1.2.jar <parameters>`
 
+##### Build your project
+
+`java -jar Zeus-1.2.jar -b`
 
 ##### run only check-style
 
-###### Unix-like
-
-`java -cp "./target/<NAME>.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -c <parameters>`
-
-###### Windows
-
-`java -cp "./target/<NAME>.jar;Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -c <parameters>`
+`java -jar Zeus-1.2.jar -c <week/day params>`
 
 ##### run tests & check-style
 
@@ -46,7 +39,7 @@ or
 **<NAME>** — the name of your jar file.
 
 **If your <NAME>.jar location is different, you should write a path to this file from the
-project root.*
+project root.**
 
 ## Available parameters
 
@@ -69,13 +62,13 @@ project root.*
 **If your <NAME>.jar location is different, you should write a path to this file from the
 project root.**
 
-Build your jar archive
-
-`java -cp "Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -b`
-
 Check only a style of code for week 0 day 0
 
-`java -cp "./target/CodingBootcamp-1.1.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -c -w0 -d0`
+`java -jar Zeus-1.2.jar -c -w0 -d0`
+
+Build your jar archive
+
+`java -jar Zeus-1.2.jar -b`
 
 Run test for week 0 day 0
 
