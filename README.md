@@ -2,9 +2,9 @@
 
 ## Features
 
-- Testing students solutions with jUnit
-- Checking a style of code with Checkstyle
 - Packaging students projects into .jar archive
+- Checking a style of code with Checkstyle
+- Testing students solutions with jUnit
 
 ## Importantly
 
@@ -18,15 +18,30 @@ Launch the command line from the root folder of your project and input the code 
 
 `java -cp "Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
-##### run Zeus with a student's jar archive
+or
+
+`java -jar Zeus-1.2.jar <parameters>`
+
+
+##### run only check-style
 
 ###### Unix-like
 
-`java -cp "<NAME>.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "./target/<NAME>.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -c <parameters>`
 
 ###### Windows
 
-`java -cp "<NAME>.jar;Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "./target/<NAME>.jar;Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -c <parameters>`
+
+##### run tests & check-style
+
+###### Unix-like
+
+`java -cp "./target/<NAME>.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+
+###### Windows
+
+`java -cp "./target/<NAME>.jar;Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 **<NAME>** — the name of your jar file.
 
@@ -51,21 +66,25 @@ project root.*
 
 ## Examples of usage
 
-**If your CodingBootcamp-1.0.jar location is different, you should write a path to this file from the
-project root.*
+**If your <NAME>.jar location is different, you should write a path to this file from the
+project root.**
 
-Build jar archive
+Build your jar archive
 
 `java -cp "Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -b`
 
-Check a style of code for week 0 day 0
+Check only a style of code for week 0 day 0
 
-`java -cp "Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -c -w0 -d0`
+`java -cp "./target/CodingBootcamp-1.1.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -c -w0 -d0`
 
 Run test for week 0 day 0
 
-`java -cp "target/CodingBootcamp-1.1.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d0`
+`java -cp "./target/CodingBootcamp-1.1.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d0`
 
 Test for week 0 day 0 with no prints (only error prints)
 
-`java -cp "target/CodingBootcamp-1.1.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d0`
+`java -cp "./target/CodingBootcamp-1.1.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d0`
+
+Run all tests that contains in Zeus
+
+`java -jar Zeus-1.2.jar -a`
