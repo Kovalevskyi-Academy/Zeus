@@ -16,25 +16,25 @@ Launch the command line from the root folder of your project and input the code 
 
 ##### run Zeus only
 
-`java -jar Zeus-1.2.jar <parameters>`
+`java -jar Zeus-1.3.jar <parameters>`
 
 ##### Build your project
 
-`java -jar Zeus-1.2.jar -b`
+`java -jar Zeus-1.3.jar -b`
 
 ##### run only check-style
 
-`java -jar Zeus-1.2.jar -c <week/day params>`
+`java -jar Zeus-1.3.jar -c <week/day params>`
 
 ##### run tests & check-style
 
 ###### Unix-like
 
-`java -cp "./target/<NAME>.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "./target/<NAME>.jar:Zeus-1.3.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 ###### Windows
 
-`java -cp "./target/<NAME>.jar;Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "./target/<NAME>.jar;Zeus-1.3.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 **<NAME>** — the name of your jar file.
 
@@ -64,20 +64,20 @@ project root.**
 
 Check only a style of code for week 0 day 0
 
-`java -jar Zeus-1.2.jar -c -w0 -d0`
+`java -jar Zeus-1.3.jar -c -w0 -d0`
 
 Build your jar archive
 
-`java -jar Zeus-1.2.jar -b`
+`java -jar Zeus-1.3.jar -b`
 
 Run test for week 0 day 0
 
-`java -cp "./target/CodingBootcamp-1.1.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d0`
+`java -cp "./target/CodingBootcamp-1.1.jar:Zeus-1.3.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d0`
 
 Test for week 0 day 0 with no prints (only error prints)
 
-`java -cp "./target/CodingBootcamp-1.1.jar:Zeus-1.2.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d0`
+`java -cp "./target/CodingBootcamp-1.1.jar:Zeus-1.3.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d0`
 
 Run all tests that contains in Zeus
 
-`java -jar Zeus-1.2.jar -a`
+`java -cp "./target/tam-masla-w0d0-SNAPSHOT.jar:Zeus-1.3.jar" com.kovalevskyi.academy.zeus.TheMighty -a`
