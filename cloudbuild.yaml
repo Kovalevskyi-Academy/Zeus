@@ -14,8 +14,8 @@ steps:
     args: [ 'mvn', 'package' ]
     dir: 'Zeus'
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: [ 'cp', 'target/Zeus-1.2.jar', 'gs://zeus-artifacts/per-push-builds/Zeus-1.2.jar' ]
+    args: [ 'cp', 'target/Zeus-1.3.jar', 'gs://zeus-artifacts/per-push-builds/Zeus-1.3.jar' ]
     dir: 'Zeus'
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: [ 'acl', 'ch', '-u', 'AllUsers:R', 'gs://zeus-artifacts/per-push-builds/Zeus-1.2.jar' ]
+    args: [ 'acl', 'ch', '-u', 'AllUsers:R', 'gs://zeus-artifacts/per-push-builds/Zeus-1.3.jar' ]
     dir: 'Zeus'
