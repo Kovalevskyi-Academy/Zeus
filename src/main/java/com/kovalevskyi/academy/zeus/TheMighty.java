@@ -5,6 +5,7 @@ import academy.kovalevskyi.testing.view.TestsConsolePrinter;
 import com.kovalevskyi.academy.zeus.util.Checkstyle;
 import com.kovalevskyi.academy.zeus.util.Checkstyle.Checks;
 import com.kovalevskyi.academy.zeus.util.FileExplorer;
+import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -167,7 +168,7 @@ public class TheMighty implements Callable<Integer> {
     return 0;
   }
 
-  private void checkAllClasses() throws IOException {
+  private void checkAllClasses() throws IOException, CheckstyleException {
     var directory = new File(String.format(".%1$ssrc%1$smain%1$sjava", File.separator));
     if (!directory.exists()) {
       throw new FileNotFoundException("Directory of java source files is not exist!");
@@ -184,7 +185,7 @@ public class TheMighty implements Callable<Integer> {
     }
   }
 
-  private void mavenCompile() throws IOException, MavenInvocationException {
+  private void mavenCompile() throws IOException, MavenInvocationException, CheckstyleException {
     checkAllClasses();
     var request = new DefaultInvocationRequest();
     request.setPomFile(new File(String.format(".%spom.xml", File.separator)));

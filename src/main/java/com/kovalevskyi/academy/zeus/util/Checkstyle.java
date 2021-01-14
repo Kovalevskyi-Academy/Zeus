@@ -2,6 +2,7 @@ package com.kovalevskyi.academy.zeus.util;
 
 import com.kovalevskyi.academy.zeus.view.CheckstyleConsolePrinter;
 import com.puppycrawl.tools.checkstyle.Main;
+import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +23,8 @@ public class Checkstyle {
 
   }
 
-  public static void check(final Checks checkstyle, final File javaFile) throws IOException {
+  public static void check(final Checks checkstyle, final File javaFile)
+      throws IOException, CheckstyleException {
     if (javaFile.isDirectory()) {
       throw new IllegalArgumentException("Directory is not supported!");
     }

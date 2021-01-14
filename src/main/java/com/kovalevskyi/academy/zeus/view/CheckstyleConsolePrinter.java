@@ -1,5 +1,6 @@
 package com.kovalevskyi.academy.zeus.view;
 
+import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class CheckstyleConsolePrinter {
     this.fileName = fileName;
   }
 
-  public void processPrints() {
+  public void processPrints() throws CheckstyleException {
     if (captor.toString().isEmpty()) {
       throw new IllegalArgumentException("Checkstyle console captor is empty!");
     }
@@ -35,7 +36,7 @@ public class CheckstyleConsolePrinter {
       warnings.forEach(line -> System.out.println(Ansi.ansi().fgRed().a(line).reset()));
       AnsiConsole.systemUninstall();
       var message = String.format("You have %d checkstyle problem(s)!", warnings.size());
-      throw new IllegalArgumentException(message);
+      throw new CheckstyleException(message);
     }
   }
 }
