@@ -22,9 +22,6 @@ public class CheckstyleConsolePrinter {
       throw new IllegalArgumentException("Checkstyle console captor is empty!");
     }
     var warnings = Arrays.stream(captor.toString().split("\n"))
-        .filter(message -> !message.contains("[MissingJavadocType]"))
-        .filter(message -> !message.contains("[MissingJavadocMethod]"))
-        .filter(message -> !message.contains("[MissingJavadocVariable]"))
         .filter(message -> !message.contains("Starting audit..."))
         .filter(message -> !message.contains("Audit done."))
         .collect(Collectors.toList());
