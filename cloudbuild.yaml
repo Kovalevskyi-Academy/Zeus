@@ -5,13 +5,13 @@ steps:
     args: ['checkout', '$COMMIT_SHA']
     dir: 'Zeus'
   - name: 'maven:3.6.3-openjdk-15'
-    args: ['mvn', 'compile']
+    args: ['mvn', '-Dmaven.wagon.http.retryHandler.count=3', 'compile']
     dir: 'Zeus'
   - name: 'maven:3.6.3-openjdk-15'
-    args: [ 'mvn', 'test' ]
+    args: [ 'mvn', '-Dmaven.wagon.http.retryHandler.count=3', 'test' ]
     dir: 'Zeus'
   - name: 'maven:3.6.3-openjdk-15'
-    args: [ 'mvn', 'package' ]
+    args: [ 'mvn', '-Dmaven.wagon.http.retryHandler.count=3', 'package' ]
     dir: 'Zeus'
   - name: 'gcr.io/cloud-builders/gsutil'
     args: [ 'cp', 'target/Zeus-1.4.jar', 'gs://zeus-artifacts/per-push-builds/Zeus-1.4.jar' ]
