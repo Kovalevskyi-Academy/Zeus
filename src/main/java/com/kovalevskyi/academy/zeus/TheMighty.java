@@ -4,17 +4,18 @@ import academy.kovalevskyi.testing.AbstractTestExecutor;
 import academy.kovalevskyi.testing.view.TestsConsolePrinter;
 import com.kovalevskyi.academy.zeus.util.Checkstyle;
 import com.kovalevskyi.academy.zeus.util.Checkstyle.Checks;
-import com.kovalevskyi.academy.zeus.util.PathParser;
+import com.kovalevskyi.academy.zeus.util.FileExplorer;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.DefaultInvoker;
-import org.apache.maven.shared.invoker.InvocationRequest;
-import org.apache.maven.shared.invoker.Invoker;
+import org.apache.maven.shared.invoker.MavenInvocationException;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -26,81 +27,72 @@ public class TheMighty implements Callable<Integer> {
 
   private final String[][][] classNames = {
       {
-        {
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day0.MainTest")
-        },
-        {
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day1.AlphabetTest"),
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day1.Numbers1Test")
-        },
-        {
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers2Test")
-        },
-        {
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week0.day3.PointTest")
-        }
+          {"com.kovalevskyi.academy.codingbootcamp.week0.day0.MainTest"},
+          {
+              "com.kovalevskyi.academy.codingbootcamp.week0.day1.AlphabetTest",
+              "com.kovalevskyi.academy.codingbootcamp.week0.day1.Numbers1Test"
+          },
+          {"com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers2Test"},
+          {"com.kovalevskyi.academy.codingbootcamp.week0.day3.PointTest"}
       },
       {
-        {},
-        {
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtilsTest"),
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week1.day1.StdStringTest")
-        },
-        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week1.day2.ListTest")}
+          {
+              "com.kovalevskyi.academy.codingbootcamp.week1.day0.PointWithLabelTest",
+              "com.kovalevskyi.academy.codingbootcamp.week1.day0.PointWithValueTest",
+              "com.kovalevskyi.academy.codingbootcamp.week1.day0.SortingTest"
+          },
+          {
+              "com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtilsTest",
+              "com.kovalevskyi.academy.codingbootcamp.week1.day1.StdStringTest"
+          },
+          {"com.kovalevskyi.academy.codingbootcamp.week1.day2.ListTest"},
+          {"com.kovalevskyi.academy.codingbootcamp.week1.day3.StdStringTest"}
       },
       {
-        {
-          PathParser.putAndGet(
-              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintParamTest"),
-          PathParser.putAndGet(
-              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintReversedParamTest"),
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day0.CalculatorTest"),
-          PathParser.putAndGet(
-              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintSortedParamTest")
-        },
-        {
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day1"
-                  + ".BoxGeneratorTest"),
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day1"
-                  + ".TextPrinter2Test"),
-          PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinterTest")
-        },
-        {},
-        {PathParser.putAndGet("com.kovalevskyi.academy.codingbootcamp.week2.day3.ListTest")}
+          {
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintParamTest",
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintReversedParamTest",
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.CalculatorTest",
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintSortedParamTest"
+          },
+          {
+              "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinter2Test",
+              "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinterTest"
+          },
       }
-    };
+  };
 
   @CommandLine.Option(
       names = {"-w", "--week"},
-      description = "number of the week to test",
+      description = "Number of the week to test",
       defaultValue = "-1")
   private int week;
 
   @CommandLine.Option(
       names = {"-d", "--day"},
-      description = "number of the day to test",
+      description = "Number of the day to test",
       defaultValue = "-1")
   private int day;
 
   @CommandLine.Option(
       names = {"-a", "--all"},
-      description = "run all tests",
+      description = "Run all tests",
       defaultValue = "false")
   private boolean all;
 
   @CommandLine.Option(
       names = {"-m", "--maven"},
-      description = "path to the maven home")
+      description = "Path to the maven home")
   private String mavenHome;
 
   @CommandLine.Option(
       names = {"-s", "--show"},
-      description = "show tests for week/day")
+      description = "Show tests for week/day")
   private boolean show;
 
   @CommandLine.Option(
       names = {"-c", "--checkstyle"},
-      description = "run only checkstyle for week/day")
+      description = "Run only checkstyle for week/day")
   private boolean checkstyle;
 
   @CommandLine.Option(
@@ -110,17 +102,17 @@ public class TheMighty implements Callable<Integer> {
 
   @CommandLine.Option(
       names = {"-t", "--test"},
-      description = "specific test to executed")
+      description = "Specific test to executed")
   private String test;
 
   @CommandLine.Option(
       names = {"-b", "--build"},
-      description = "build jar")
+      description = "Build jar")
   private boolean build;
 
   @Override
   public Integer call() {
-    String noSpecification = "you need to specify week and day like this: --week X --day Y";
+    var noSpecification = "You need to specify week and day like this: --week X --day Y";
     TestsConsolePrinter.setSilentMode(this.error);
     try {
       if (this.test != null && !this.all && (this.week == -1 || this.day == -1)) {
@@ -132,30 +124,23 @@ public class TheMighty implements Callable<Integer> {
           System.out.println(noSpecification);
         } else {
           for (var dayTest : this.classNames[this.week][this.day]) {
-            System.out.printf("test: %s\n", dayTest);
+            System.out.printf("Test: %s\n", dayTest);
           }
         }
         return 0;
       }
       if (this.checkstyle) {
-        if (this.week == -1 || this.day == -1) {
-          System.out.println(noSpecification);
-        } else {
-          for (var dayTest : this.classNames[this.week][this.day]) {
-            Checkstyle.check(Checks.GOOGLE_CHECKS, dayTest);
-          }
-        }
+        checkAllClasses();
         return 0;
       }
       if (this.build) {
         System.out.println("Zeus is about to start compiling your project");
         mavenCompile();
-        System.out.println("Zeus happy");
         return 0;
       } else if (this.all) {
         if (this.week != -1 && this.day != -1) {
           System.out.println(
-              "one can not ask Zeus to run all test and specific tests (week/day) "
+              "One can not ask Zeus to run all test and specific tests (week/day) "
                   + "at the same time!");
           return -1;
         }
@@ -163,6 +148,10 @@ public class TheMighty implements Callable<Integer> {
       } else if (this.test != null) {
         executeDayTest(this.test);
       } else {
+        if (this.week == -1 && this.day == -1) {
+          System.out.println("Launch Zeus with '-h' or '--help' to see instructions.");
+          return -1;
+        }
         if (this.week == -1 || this.day == -1) {
           System.out.println(noSpecification);
           return -1;
@@ -178,9 +167,27 @@ public class TheMighty implements Callable<Integer> {
     return 0;
   }
 
-  private void mavenCompile() throws Exception {
-    InvocationRequest request = new DefaultInvocationRequest();
-    request.setPomFile(new File(System.getProperty("user.dir") + File.separator + "pom.xml"));
+  private void checkAllClasses() throws IOException {
+    var directory = new File(String.format(".%1$ssrc%1$smain%1$sjava", File.separator));
+    if (!directory.exists()) {
+      throw new FileNotFoundException("Directory of java source files is not exist!");
+    }
+    var javaFiles = FileExplorer.getFiles(directory.getAbsolutePath())
+        .stream()
+        .filter(entry -> entry.getName().endsWith(".java"))
+        .collect(Collectors.toList());
+    if (javaFiles.isEmpty()) {
+      throw new FileNotFoundException("You have blank project! Nothing to check!");
+    }
+    for (var file : javaFiles) {
+      Checkstyle.check(Checks.GOOGLE_CHECKS, file);
+    }
+  }
+
+  private void mavenCompile() throws IOException, MavenInvocationException {
+    checkAllClasses();
+    var request = new DefaultInvocationRequest();
+    request.setPomFile(new File(String.format(".%spom.xml", File.separator)));
     request.setGoals(
         new ArrayList<>() {
           {
@@ -189,7 +196,7 @@ public class TheMighty implements Callable<Integer> {
             add("package");
           }
         });
-    Invoker invoker = new DefaultInvoker();
+    var invoker = new DefaultInvoker();
     var mavenDefault = Optional.ofNullable(System.getenv("M2_HOME"));
     var mavenPath =
         Objects.requireNonNullElse(
@@ -219,17 +226,12 @@ public class TheMighty implements Callable<Integer> {
 
   private void executeDayTests(String[] classNames) throws Exception {
     for (var className : classNames) {
-      Checkstyle.check(Checks.GOOGLE_CHECKS, className);
       executeDayTest(className);
     }
   }
 
   public static void main(String... args) {
     CommandLine commandLine = new CommandLine(new TheMighty());
-    int exitCode = commandLine.execute(args);
-    if (exitCode < 0) {
-      commandLine.usage(System.out);
-    }
-    System.exit(exitCode);
+    System.exit(commandLine.execute(args));
   }
 }
