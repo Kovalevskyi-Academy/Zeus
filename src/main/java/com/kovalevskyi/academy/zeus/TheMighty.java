@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.DefaultInvoker;
 import org.apache.maven.shared.invoker.MavenInvocationException;
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -131,11 +133,14 @@ public class TheMighty implements Callable<Integer> {
         return 0;
       }
       if (this.checkstyle) {
-        checkAllClasses();
+        try {
+          checkAllSourceFilesWithCheckstyle();
+        } catch (CheckstyleException exception) {
+          System.out.println(exception.getMessage());
+        }
         return 0;
       }
       if (this.build) {
-        System.out.println("Zeus is about to start compiling your project");
         mavenCompile();
         return 0;
       } else if (this.all) {
@@ -161,14 +166,20 @@ public class TheMighty implements Callable<Integer> {
         }
       }
     } catch (Exception e) {
-      System.out.println("Zeus is VERY unhappy!!!!");
-      e.printStackTrace();
+      AnsiConsole.systemInstall();
+      System.out.print(Ansi
+          .ansi()
+          .fgRed()
+          .a("Zeus is VERY unhappy!!!!\n")
+          .a(String.format("Error message: %s\n", e.getMessage()))
+          .reset());
+      AnsiConsole.systemUninstall();
       return -1;
     }
     return 0;
   }
 
-  private void checkAllClasses() throws IOException, CheckstyleException {
+  private void checkAllSourceFilesWithCheckstyle() throws IOException, CheckstyleException {
     var directory = new File(String.format(".%1$ssrc%1$smain%1$sjava", File.separator));
     if (!directory.exists()) {
       throw new FileNotFoundException("Directory of java source files is not exist!");
@@ -180,13 +191,12 @@ public class TheMighty implements Callable<Integer> {
     if (javaFiles.isEmpty()) {
       throw new FileNotFoundException("You have blank project! Nothing to check!");
     }
-    for (var file : javaFiles) {
-      Checkstyle.check(Checks.GOOGLE_CHECKS, file);
-    }
+    Checkstyle.checkAll(Checks.GOOGLE_CHECKS, javaFiles);
   }
 
   private void mavenCompile() throws IOException, MavenInvocationException, CheckstyleException {
-    checkAllClasses();
+    checkAllSourceFilesWithCheckstyle();
+    System.out.println("Zeus is about to start compiling your project");
     var request = new DefaultInvocationRequest();
     request.setPomFile(new File(String.format(".%spom.xml", File.separator)));
     request.setGoals(
