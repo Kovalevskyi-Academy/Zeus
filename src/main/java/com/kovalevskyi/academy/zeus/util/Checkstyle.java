@@ -7,8 +7,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.List;
 
 public class Checkstyle {
+
+  private static int totalErrors;
 
   public enum Checks {
 
@@ -23,8 +26,19 @@ public class Checkstyle {
 
   }
 
-  public static void check(final Checks checkstyle, final File javaFile)
+  public static void checkAll(final Checks checkstyle, final List<File> javaFiles)
       throws IOException, CheckstyleException {
+    for (var javaFile : javaFiles) {
+      check(checkstyle, javaFile);
+    }
+    if (totalErrors > 0) {
+      throw new CheckstyleException(String.format("You have %d style error(s)", totalErrors));
+    } else {
+      System.out.println("Your project is passed checkstyle successfully!");
+    }
+  }
+
+  private static void check(final Checks checkstyle, final File javaFile) throws IOException {
     if (javaFile.isDirectory()) {
       throw new IllegalArgumentException("Directory is not supported!");
     }
@@ -37,6 +51,7 @@ public class Checkstyle {
     System.setOut(new PrintStream(outputStreamCaptor));
     Main.main("-c", checkstyle.checksFile, javaFile.getAbsolutePath());
     System.setOut(defaultPrintStream);
-    new CheckstyleConsolePrinter(outputStreamCaptor, javaFile.getName()).processPrints();
+    var checkstyleCaptor = new CheckstyleConsolePrinter(outputStreamCaptor, javaFile.getName());
+    totalErrors += checkstyleCaptor.processPrints();
   }
 }
