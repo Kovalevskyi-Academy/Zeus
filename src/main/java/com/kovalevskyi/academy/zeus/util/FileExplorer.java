@@ -7,6 +7,15 @@ import java.util.Objects;
 
 public class FileExplorer {
 
+  public static boolean isJarAbsentInClasspath() {
+    final var directory = new File(System.getProperty("java.class.path"));
+    return FileExplorer.getFiles(directory.getAbsolutePath())
+        .stream()
+        .filter(File::isFile)
+        .filter(file -> file.getName().toLowerCase().endsWith(".jar"))
+        .count() == 1;
+  }
+
   public static List<File> getFiles(final String directory) {
     final var filesList = new ArrayList<File>();
     for (var path : directory.split(File.pathSeparator)) {
