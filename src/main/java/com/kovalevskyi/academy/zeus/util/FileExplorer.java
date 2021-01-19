@@ -8,8 +8,7 @@ import java.util.Objects;
 public class FileExplorer {
 
   public static boolean isJarAbsentInClasspath() {
-    final var directory = new File(System.getProperty("java.class.path"));
-    return FileExplorer.getFiles(directory.getAbsolutePath())
+    return FileExplorer.getFiles(System.getProperty("java.class.path"))
         .stream()
         .filter(File::isFile)
         .filter(file -> file.getName().toLowerCase().endsWith(".jar"))
@@ -30,7 +29,7 @@ public class FileExplorer {
   }
 
   private static void getFile(final List<File> filesList, final File f) {
-    var list = f.listFiles();
+    final var list = f.listFiles();
     if (Objects.nonNull(list)) {
       for (var file : list) {
         if (file.isDirectory()) {
