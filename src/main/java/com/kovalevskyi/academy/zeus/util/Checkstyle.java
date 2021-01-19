@@ -23,7 +23,6 @@ public class Checkstyle {
     Checks(String checksFile) {
       this.checksFile = checksFile;
     }
-
   }
 
   public static void checkAll(final Checks checkstyle, final List<File> javaFiles)
@@ -42,9 +41,8 @@ public class Checkstyle {
     if (javaFile.isDirectory()) {
       throw new IllegalArgumentException("Directory is not supported!");
     }
-    if (!javaFile.getName().endsWith(".java")) {
-      var message = String.format("%s is not supported!", javaFile.getName());
-      throw new IllegalArgumentException(message);
+    if (!javaFile.getName().toLowerCase().endsWith(".java")) {
+      throw new IllegalArgumentException(String.format("%s is not supported!", javaFile.getName()));
     }
     var outputStreamCaptor = new ByteArrayOutputStream();
     var defaultPrintStream = System.out;
