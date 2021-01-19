@@ -26,6 +26,7 @@ import picocli.CommandLine;
     description = "Zeus the Mighty")
 public class TheMighty implements Callable<Integer> {
 
+  private final boolean isEmptyClasspath;
   private final String[][][] classNames = {
       {
           {"com.kovalevskyi.academy.codingbootcamp.week0.day0.MainTest"},
@@ -61,7 +62,7 @@ public class TheMighty implements Callable<Integer> {
               "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinterTest"
           },
       }
-    };
+  };
 
   @CommandLine.Option(
       names = {"-w", "--week"},
@@ -110,6 +111,10 @@ public class TheMighty implements Callable<Integer> {
       names = {"-b", "--build"},
       description = "Build jar")
   private boolean build;
+
+  public TheMighty() {
+    isEmptyClasspath = FileExplorer.isJarAbsentInClasspath();
+  }
 
   @Override
   public Integer call() {
@@ -222,7 +227,7 @@ public class TheMighty implements Callable<Integer> {
   }
 
   private void executeDayTest(String className) throws Exception {
-    if (FileExplorer.isJarAbsentInClasspath()) {
+    if (isEmptyClasspath) {
       throw new FileNotFoundException("Classpath is empty! See README on Zeus on how to use it.");
     }
     var testExecutor =
