@@ -222,6 +222,9 @@ public class TheMighty implements Callable<Integer> {
   }
 
   private void executeDayTest(String className) throws Exception {
+    if (FileExplorer.isJarAbsentInClasspath()) {
+      throw new FileNotFoundException("Classpath is empty! See README on Zeus on how to use it.");
+    }
     var testExecutor =
         (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
     testExecutor.executeTest();
