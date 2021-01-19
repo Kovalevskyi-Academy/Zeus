@@ -17,12 +17,10 @@ import java.util.stream.Collectors;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.DefaultInvoker;
 import org.apache.maven.shared.invoker.MavenInvocationException;
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 import picocli.CommandLine;
 
 @CommandLine.Command(
-    name = "zeus",
+    name = "Zeus",
     mixinStandardHelpOptions = true,
     version = Constants.VERSION,
     description = "Zeus the Mighty")
@@ -166,14 +164,7 @@ public class TheMighty implements Callable<Integer> {
         }
       }
     } catch (Exception e) {
-      AnsiConsole.systemInstall();
-      System.out.print(Ansi
-          .ansi()
-          .fgRed()
-          .a("Zeus is VERY unhappy!!!!\n")
-          .a(String.format("Error message: %s\n", e.getMessage()))
-          .reset());
-      AnsiConsole.systemUninstall();
+      System.out.printf("%nZeus is VERY unhappy: %s%n", e.getMessage());
       return -1;
     }
     return 0;
@@ -186,7 +177,8 @@ public class TheMighty implements Callable<Integer> {
     }
     var javaFiles = FileExplorer.getFiles(directory.getAbsolutePath())
         .stream()
-        .filter(entry -> entry.getName().endsWith(".java"))
+        .filter(File::isFile)
+        .filter(entry -> entry.getName().toLowerCase().endsWith(".java"))
         .collect(Collectors.toList());
     if (javaFiles.isEmpty()) {
       throw new FileNotFoundException("You have blank project! Nothing to check!");
