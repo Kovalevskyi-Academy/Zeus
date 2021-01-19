@@ -26,7 +26,7 @@ public class CheckstyleConsolePrinter {
         .collect(Collectors.toList());
     if (!warnings.isEmpty()) {
       AnsiConsole.systemInstall();
-      System.out.printf("%s has %d style error(s)\n", fileName, warnings.size());
+      System.out.printf("%s has %d style error(s):\n", fileName, warnings.size());
       warnings.forEach(line -> System.out.println(Ansi.ansi().fgRed().a(line).reset()));
       AnsiConsole.systemUninstall();
     }
