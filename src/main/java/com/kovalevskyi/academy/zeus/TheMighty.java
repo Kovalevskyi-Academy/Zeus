@@ -62,7 +62,7 @@ public class TheMighty implements Callable<Integer> {
               "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinterTest"
           },
       }
-  };
+    };
 
   @CommandLine.Option(
       names = {"-w", "--week"},
