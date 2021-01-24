@@ -52,12 +52,14 @@ public class TheMighty implements Callable<Integer> {
       },
       {
           {
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.CalculatorTest",
               "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintParamTest",
               "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintReversedParamTest",
-              "com.kovalevskyi.academy.codingbootcamp.week2.day0.CalculatorTest",
-              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintSortedParamTest"
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintSortedParamTest",
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.NumberUtilsTest"
           },
           {
+              "com.kovalevskyi.academy.codingbootcamp.week2.day1.BoxGeneratorTest",
               "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinter2Test",
               "com.kovalevskyi.academy.codingbootcamp.week2.day1.TextPrinterTest"
           },
