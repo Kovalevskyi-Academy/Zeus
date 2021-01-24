@@ -1,7 +1,5 @@
 ### How to build:
-just `mvn clean package`
 
-_Я не уверен, что я все в этой жизни сделал правильно, но очень хотелось ))_
 
 while I'm running the release here are some rules, we have CI system that for each commit doing following things:
 
@@ -28,18 +26,13 @@ for Zeus you also need to update cloudbuild.yaml with the new version
 hopefully one does not need to do release of everything each time:)
 so I'm doing the release now
 
-### Howe to run:
-0. Examples of dev usage:
+______________________
+Этот Зевс имеет две зависимости:
+- CodingBootcamp
+- testing-framework
 
-`<NAME>` = `CodingBootcamp-1.0-SNAPSHOT` or `CodingBootcamp-1.0-SNAPSHOT-tests-only`.
+Каждую из этих зависимостей нужно собрать на GCB, что положит их в нашу maven-репу.
 
-Test for week 0 day 1
-
-`java -cp "target/<NAME>.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d0`
-
-Test for week 0 day 1 with no prints (only error prints)
-
-`java -cp "target/<NAME>.jar:Zeus-1.0.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d0`
-
-1. Do not forget make a separate branch for your fixes.
-2. Remember - tests should be speaking.
+Если в версии нет слова `SNAPSHOT`, то такой билд может произойти только раз с одним и тем же номером версии.
+Если с номером версии идет слово `SNAPSHOT`, то былд может быть произведен множество раз.
+Все билды со `SNAPSHOT` доступны в maven-репе и их можно подгружать в проект Зевса для тестирования текущих изменений.

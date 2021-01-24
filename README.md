@@ -17,33 +17,33 @@ Launch the command line from the root folder of your project and input the code 
 
 ##### run Zeus only
 
-`java -jar Zeus-1.5.jar <parameters>`
+`java -jar Zeus-1.7.jar <parameters>`
 
 ##### build your project
 
-`java -jar Zeus-1.5.jar -b`
+`java -jar Zeus-1.7.jar -b`
 
 ##### run check-style 
 
-`java -jar Zeus-1.5.jar -c` (for all source files in your project)
+`java -jar Zeus-1.7.jar -c` (for all source files in your project)
 
 ##### run tests
 
 ###### Unix-like
 
-`java -cp "./target/<NAME>.jar:Zeus-1.5.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "./target/<NAME>.jar:Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 or
 
-`java -cp "./target/*:Zeus-1.5.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "./target/*:Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 ###### Windows
 
-`java -cp "./target/<NAME>.jar;Zeus-1.5.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "./target/<NAME>.jar;Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 or
 
-`java -cp "./target/*;Zeus-1.5.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+`java -cp "./target/*;Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
 
 **`<NAME>`** — the name of your jar file.
 
@@ -72,19 +72,19 @@ project root.**
 
 Check all source files in the project
 
-`java -jar Zeus-1.5.jar -c`
+`java -jar Zeus-1.7.jar -c`
 
 Build your project to `*.jar` archive
 
-`java -jar Zeus-1.5.jar -b`
+`java -jar Zeus-1.7.jar -b`
 
 Run test for week 0 day 0
 
-`java -cp "./target/*:Zeus-1.5.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d0`
+`java -cp "./target/*:Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d0`
 
 Test for week 0 day 0 with no prints (only error prints)
 
-`java -cp "./target/*:Zeus-1.5.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d0`
+`java -cp "./target/*:Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d0`
 
 ________________________________________________________
 
