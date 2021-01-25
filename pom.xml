@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.kovalevskyi.academy</groupId>
   <artifactId>Zeus</artifactId>
-  <version>1.9-SNAPSHOT</version>
+  <version>1.8</version>
   <properties>
     <!--        write your java -version-->
     <javaVersion>13</javaVersion>
@@ -166,12 +166,12 @@
     <dependency>
       <groupId>com.kovalevskyi.academy</groupId>
       <artifactId>CodingBootcamp</artifactId>
-      <version>1.6</version>
+      <version>1.7.1</version>
     </dependency>
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>1.7</version>
+      <version>1.8</version>
     </dependency>
   </dependencies>
 </project>
