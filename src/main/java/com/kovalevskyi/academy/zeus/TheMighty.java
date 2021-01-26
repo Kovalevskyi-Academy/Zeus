@@ -1,7 +1,7 @@
 package com.kovalevskyi.academy.zeus;
 
 import academy.kovalevskyi.testing.AbstractTestExecutor;
-import academy.kovalevskyi.testing.view.TestsConsolePrinter;
+import academy.kovalevskyi.testing.view.TestHandler;
 import com.kovalevskyi.academy.zeus.util.Checkstyle;
 import com.kovalevskyi.academy.zeus.util.Checkstyle.Checks;
 import com.kovalevskyi.academy.zeus.util.FileExplorer;
@@ -131,7 +131,7 @@ public class TheMighty implements Callable<Integer> {
   @Override
   public Integer call() {
     var noSpecification = "You need to specify week and day like this: --week X --day Y";
-    TestsConsolePrinter.setSilentMode(this.error);
+    TestHandler.setSilentMode(this.error);
     try {
       if (this.test != null && !this.all && (this.week == -1 || this.day == -1)) {
         System.out.println(noSpecification);
@@ -181,7 +181,7 @@ public class TheMighty implements Callable<Integer> {
         }
       }
     } catch (Exception e) {
-      System.out.printf("%nZeus is VERY unhappy: %n");
+      System.out.printf("%nZeus is VERY unhappy!!!%n");
       e.printStackTrace();
     }
     return 0;
@@ -242,9 +242,8 @@ public class TheMighty implements Callable<Integer> {
     if (isEmptyClasspath) {
       throw new FileNotFoundException("Classpath is empty! See README on Zeus on how to use it.");
     }
-    var testExecutor =
-        (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
-    testExecutor.executeTest();
+    var test = (AbstractTestExecutor) Class.forName(className).getConstructors()[0].newInstance();
+    test.execute();
   }
 
   private void executeDayTests(String[] classNames) throws Exception {
