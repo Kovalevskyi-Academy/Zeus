@@ -14,8 +14,8 @@ steps:
     args: [ 'mvn', '-Dmaven.wagon.http.retryHandler.count=3', 'package' ]
     dir: 'Zeus'
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: [ 'cp', 'target/Zeus-1.9.2-SNAPSHOT.jar', 'gs://zeus-artifacts/per-push-builds/Zeus-1.9.2-SNAPSHOT.jar' ]
+    args: [ 'cp', 'target/Zeus-1.9.2.jar', 'gs://zeus-artifacts/per-push-builds/Zeus-1.9.2.jar' ]
     dir: 'Zeus'
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: [ 'acl', 'ch', '-u', 'AllUsers:R', 'gs://zeus-artifacts/per-push-builds/Zeus-1.9.2-SNAPSHOT.jar' ]
+    args: [ 'acl', 'ch', '-u', 'AllUsers:R', 'gs://zeus-artifacts/per-push-builds/Zeus-1.9.2.jar' ]
     dir: 'Zeus'
