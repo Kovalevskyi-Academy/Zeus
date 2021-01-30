@@ -29,35 +29,34 @@ public class TheMighty implements Callable<Integer> {
   private final boolean isEmptyClasspath;
   private final String[][][] classNames = {
       {   // week 0 begin
-          {    // day 0
-              "com.kovalevskyi.academy.codingbootcamp.week0.day0.MainTest"
-          },
-          {    // day 1
-              "com.kovalevskyi.academy.codingbootcamp.week0.day1.AlphabetTest",
-              "com.kovalevskyi.academy.codingbootcamp.week0.day1.Numbers1Test"
-          },
-          {    // day 2
-              "com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers2Test"
-          },
           {    // day 3
-              "com.kovalevskyi.academy.codingbootcamp.week0.day3.PointTest"
+              "com.kovalevskyi.academy.codingbootcamp.week0.day3.MainTest"
+          },
+          {    // day 4
+              "com.kovalevskyi.academy.codingbootcamp.week0.day4.AlphabetTest",
+              "com.kovalevskyi.academy.codingbootcamp.week0.day5.NumberUtilsTest"
           }
       }, // end week 0
       {  // week 1 begin
           {    // day 0
-              "com.kovalevskyi.academy.codingbootcamp.week1.day0.PointWithLabelTest",
-              "com.kovalevskyi.academy.codingbootcamp.week1.day0.PointWithValueTest",
-              "com.kovalevskyi.academy.codingbootcamp.week1.day0.SortingTest"
+              "com.kovalevskyi.academy.codingbootcamp.week0.day0.Numbers1Test",
+              "com.kovalevskyi.academy.codingbootcamp.week0.day0.PointTest"
           },
+
           {    // day 1
-              "com.kovalevskyi.academy.codingbootcamp.week1.day1.StringUtilsTest",
-              "com.kovalevskyi.academy.codingbootcamp.week1.day1.StdString1Test"
+              "com.kovalevskyi.academy.codingbootcamp.week1.day1.PointWithLabelTest",
+              "com.kovalevskyi.academy.codingbootcamp.week1.day1.PointWithValueTest",
+              "com.kovalevskyi.academy.codingbootcamp.week1.day1.SortingTest"
           },
           {    // day 2
-              "com.kovalevskyi.academy.codingbootcamp.week1.day2.ListTest"
+              "com.kovalevskyi.academy.codingbootcamp.week1.day2.StringUtilsTest",
+              "com.kovalevskyi.academy.codingbootcamp.week1.day2.StdString1Test"
           },
-          {   // day 3
-              "com.kovalevskyi.academy.codingbootcamp.week1.day3.StdString2Test"
+          {    // day 3
+              "com.kovalevskyi.academy.codingbootcamp.week1.day3.ListTest"
+          },
+          {   // day 4
+              "com.kovalevskyi.academy.codingbootcamp.week1.day4.StdString2Test"
           }
       },  // end week 1
       {   // week 2 BEGIN
@@ -66,7 +65,7 @@ public class TheMighty implements Callable<Integer> {
               "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintParamTest",
               "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintReversedParamTest",
               "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintSortedParamTest",
-              "com.kovalevskyi.academy.codingbootcamp.week2.day0.NumberUtilsTest"
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.Numbers2Test"
           },
           {    // day 1
               "com.kovalevskyi.academy.codingbootcamp.week2.day1.BoxGeneratorTest",
