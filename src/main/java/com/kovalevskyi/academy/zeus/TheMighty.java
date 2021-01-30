@@ -37,7 +37,7 @@ public class TheMighty implements Callable<Integer> {
               "com.kovalevskyi.academy.codingbootcamp.week0.day1.Numbers1Test"
           },
           {    // day 2
-              "com.kovalevskyi.academy.codingbootcamp.week0.day2.Numbers2Test"
+              "com.kovalevskyi.academy.codingbootcamp.week0.day2.NumberUtilsTest"
           },
           {    // day 3
               "com.kovalevskyi.academy.codingbootcamp.week0.day3.PointTest"
@@ -66,7 +66,7 @@ public class TheMighty implements Callable<Integer> {
               "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintParamTest",
               "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintReversedParamTest",
               "com.kovalevskyi.academy.codingbootcamp.week2.day0.MainPrintSortedParamTest",
-              "com.kovalevskyi.academy.codingbootcamp.week2.day0.NumberUtilsTest"
+              "com.kovalevskyi.academy.codingbootcamp.week2.day0.Numbers2Test"
           },
           {    // day 1
               "com.kovalevskyi.academy.codingbootcamp.week2.day1.BoxGeneratorTest",
