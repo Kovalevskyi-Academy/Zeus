@@ -21,7 +21,7 @@ public class Test implements Callable<Integer> {
 
   public Integer call() throws Exception {
     if (FileExplorer.isJarAbsentInClasspath()) {
-      System.out.println("Add your jar file first, because classpath is empty!");
+      System.out.println("Add your jar file first into classpath, because classpath is empty!");
     } else {
       TestHandler.setErrorMode(error);
       if (request.getId() >= 0) {
