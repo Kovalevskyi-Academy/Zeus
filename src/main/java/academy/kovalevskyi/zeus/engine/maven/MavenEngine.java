@@ -14,20 +14,6 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 public class MavenEngine {
 
-  private static final Model MAVEN_POM_FILE;
-
-  static {
-    try {
-      MAVEN_POM_FILE = new MavenXpp3Reader().read(new FileReader("pom.xml"));
-    } catch (XmlPullParserException | IOException exception) {
-      throw new ExceptionInInitializerError(exception.getMessage());
-    }
-  }
-
-  public static Model getConfig() {
-    return MAVEN_POM_FILE;
-  }
-
   public static int execute(final File maven, final List<String> request)
       throws MavenInvocationException {
     final var invocationRequest = new DefaultInvocationRequest()
