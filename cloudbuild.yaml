@@ -1,15 +1,15 @@
 steps:
   - name: 'gcr.io/cloud-builders/git'
-    args: ['clone', '--recurse-submodules', 'https://github.com/Kovalevskyi-Academy/Zeus.git']
+    args: [ 'clone', '--recurse-submodules', 'https://github.com/Kovalevskyi-Academy/Zeus.git' ]
   - name: 'gcr.io/cloud-builders/git'
-    args: ['checkout', '$COMMIT_SHA']
+    args: [ 'checkout', '$COMMIT_SHA' ]
     dir: 'Zeus'
   - name: 'maven:3.6.3-openjdk-15'
-    args: ['mvn', '-Dmaven.wagon.http.retryHandler.count=3', 'compile', 'test', 'package']
+    args: [ 'mvn', '-Dmaven.wagon.http.retryHandler.count=3', 'compile', 'test', 'package' ]
     dir: 'Zeus'
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: [ 'cp', 'target/Zeus-2.4.jar', 'gs://zeus-artifacts/per-push-builds/Zeus-2.4.jar' ]
+    args: [ 'cp', 'target/Zeus-2.5-SNAPSHOT.jar', 'gs://zeus-artifacts/per-push-builds/Zeus-2.5-SNAPSHOT.jar' ]
     dir: 'Zeus'
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: [ 'acl', 'ch', '-u', 'AllUsers:R', 'gs://zeus-artifacts/per-push-builds/Zeus-2.4.jar' ]
+    args: [ 'acl', 'ch', '-u', 'AllUsers:R', 'gs://zeus-artifacts/per-push-builds/Zeus-2.5-SNAPSHOT.jar' ]
     dir: 'Zeus'
