@@ -12,7 +12,7 @@ public class VersionProvider implements IVersionProvider {
 //        String.format("Version: %s", mavenConfig.getVersion())};
     return new String[] {
         "academy.kovalevskyi",
-        "2.3"
+        "2.4"
     };
   }
 }
