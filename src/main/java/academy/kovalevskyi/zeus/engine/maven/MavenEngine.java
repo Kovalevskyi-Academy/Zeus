@@ -17,8 +17,8 @@ public class MavenEngine {
 
   static {
     try {
-      final var inputSteam = MavenEngine.class.getResourceAsStream("/pom.xml");
-      MAVEN_POM_FILE = new MavenXpp3Reader().read(inputSteam);
+      final var inputStream = MavenEngine.class.getResourceAsStream("/pom.xml");
+      MAVEN_POM_FILE = new MavenXpp3Reader().read(inputStream);
     } catch (XmlPullParserException | IOException exception) {
       throw new ExceptionInInitializerError(exception.getMessage());
     }
