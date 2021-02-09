@@ -31,29 +31,29 @@
 
 `<COMMAND>` — any available command, example **test**
 
-- all commands have own help menu
+- all commands have own help menu, use it to get more information!
 
-##### run Zeus only
+##### run Zeus
 
 `java -jar <ZEUS>`
 
-##### run Zeus only with key
+##### run Zeus with key
 
 `java -jar <ZEUS> <KEY>`
 
-##### run Zeus only with keys
+##### run Zeus with keys
 
 `java -jar <ZEUS> <KEY> <KEY>...`
 
-##### run Zeus only with command
+##### run Zeus command
 
 `java -jar <ZEUS> <COMMAND>`
 
-##### run Zeus only with command with key
+##### run Zeus command with key
 
 `java -jar <ZEUS> <COMMAND> <KEY>`
 
-##### run Zeus only with key and command with key
+##### run Zeus with key and command with key
 
 `java -jar <ZEUS> <KEY> <COMMAND> <KEY>`
 
@@ -65,15 +65,19 @@
 
 `java -cp "./target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>`
 
+##### run Zeus command with key with another jar file
+
+`java -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <COMMAND> <KEY>`
+
 ## Examples of usage
 
 ##### show Zeus help
 
-`java Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty -h`
+`java -jar Zeus-2.6.jar -h`
 
 ##### show Zeus checkstyle help
 
-`java Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty checkstyle -h`
+`java -jar Zeus-2.6.jar checkstyle -h`
 
 ##### run tests
 
@@ -85,4 +89,4 @@
 
 ##### run tests with debug mode
 
-`java -cp "./target/*:Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty -d test -c0 -w0 -d0`
+`java -cp "./target/Homework.jar:Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty -d test -c0 -w0 -d0`
