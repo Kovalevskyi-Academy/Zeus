@@ -13,79 +13,76 @@
 
 ## How to use
 
-for details see [the wiki](https://github.com/Kovalevskyi-Academy/Zeus/wiki)!
+**_Zeus jar archive should be in the root folder of the student's project!_**
 
-Launch the command line from the root folder of your project and input the code below
+**_Launch the command line from the root folder of your project and input the code below_**
+
+`<ZEUS>` — Zeus jar file, example **Zeus-2.6.jar**
+
+`<HOMEWORK>` — the name of your jar file, example **Homework.jar**
+
+`<DELIMITER>` — classpath delimiter:
+
+- `:` - unix-like
+
+- `;` - windows
+
+`<KEY>` — any available key, example **-h**
+
+`<COMMAND>` — any available command, example **test**
+
+- all commands have own help menu
 
 ##### run Zeus only
 
-`java -jar Zeus-1.7.jar <parameters>`
+`java -jar <ZEUS>`
 
-##### build your project
+##### run Zeus only with key
 
-`java -jar Zeus-1.7.jar -b`
+`java -jar <ZEUS> <KEY>`
 
-##### run check-style 
+##### run Zeus only with keys
 
-`java -jar Zeus-1.7.jar -c` (for all source files in your project)
+`java -jar <ZEUS> <KEY> <KEY>...`
 
-##### run tests
+##### run Zeus only with command
 
-###### Unix-like
+`java -jar <ZEUS> <COMMAND>`
 
-`java -cp "./target/<NAME>.jar:Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+##### run Zeus only with command with key
 
-or
+`java -jar <ZEUS> <COMMAND> <KEY>`
 
-`java -cp "./target/*:Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+##### run Zeus only with key and command with key
 
-###### Windows
+`java -jar <ZEUS> <KEY> <COMMAND> <KEY>`
 
-`java -cp "./target/<NAME>.jar;Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+##### run Zeus with another jar file with key
 
-or
+`java -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>`
 
-`java -cp "./target/*;Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty <parameters>`
+##### run Zeus with another jars with key using wildcards (get all jars from 'target' folder)
 
-**`<NAME>`** — the name of your jar file.
-
-**If your `<NAME>.jar` location is different, you should write a path to this file from the
-project root.**
-
-## Available parameters
-
-|Short|Full|Description|
-|---|---|---|
-|`-a`|`--all`|Run all tests|
-|`-b`|`--build`|Build jar|
-|`-c`|`--checkstyle`|Run checkstyle for week/day. Cannot be applied to `*.jar` files!|
-|`-d`|`--day=<day>`|Number of the day|
-|`-e`|`--error`|JUnit error mode (only error prints)|
-|`-h`|`--help`|Show help message|
-|`-m`|`--maven=<mavenHome>`|Set a path to the maven home|
-|`-s`|`--show`|Show tests' path for week/day|
-|`-t`|`--test=<test>`|Specific test to executed according path to week/day|
-|`-V`|`--version`|Print version information|
-|`-w`|`--week=<week>`|Number of the week|
+`java -cp "./target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>`
 
 ## Examples of usage
 
-**Zeus jar archive should be in the root folder of the student's project!**
+##### show Zeus help
 
-Check all source files in the project
+`java Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty -h`
 
-`java -jar Zeus-1.7.jar -c`
+##### show Zeus checkstyle help
 
-Build your project to `*.jar` archive
+`java Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty checkstyle -h`
 
-`java -jar Zeus-1.7.jar -b`
+##### run tests
 
-Run test for week 0 day 0
+`java -cp "./target/Homework.jar:Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty test -c0 -w0 -d0`
 
-`java -cp "./target/*:Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty -w0 -d0`
+##### run tests (wildcards version, same that above)
 
-Test for week 0 day 0 with no prints (only error prints)
+`java -cp "./target/*:Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty test -c0 -w0 -d0`
 
-`java -cp "./target/*:Zeus-1.7.jar" com.kovalevskyi.academy.zeus.TheMighty -e -w0 -d0`
+##### run tests with debug mode
 
-________________________________________________________
+`java -cp "./target/*:Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty -d test -c0 -w0 -d0`
