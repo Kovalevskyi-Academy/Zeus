@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
-  <version>2.7-SNAPSHOT</version>
+  <version>2.7</version>
   <properties>
     <!--write your java version-->
     <javaVersion>15</javaVersion>
@@ -125,7 +125,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>3.5</version>
+      <version>3.6</version>
       <scope>compile</scope>
     </dependency>
     <!--    Courses add below-->
@@ -138,7 +138,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>JavaDeepDive</artifactId>
-      <version>1.5</version>
+      <version>1.7</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
