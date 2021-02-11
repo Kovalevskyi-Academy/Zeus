@@ -31,7 +31,7 @@
 
 `<COMMAND>` — any available command, example **test**
 
-- all commands have own help menu, use it to get more information!
+- all commands have own help menu, use key **-h** to get more information!
 
 ##### run Zeus
 
