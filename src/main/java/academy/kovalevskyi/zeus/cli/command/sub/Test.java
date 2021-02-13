@@ -1,10 +1,12 @@
 package academy.kovalevskyi.zeus.cli.command.sub;
 
 import academy.kovalevskyi.testing.AbstractTestExecutor;
+import academy.kovalevskyi.testing.service.ContainerRequest;
 import academy.kovalevskyi.testing.util.CourseManager;
 import academy.kovalevskyi.testing.view.TestHandler;
 import academy.kovalevskyi.zeus.cli.group.CourseRequest;
 import academy.kovalevskyi.zeus.util.FileExplorer;
+import java.util.List;
 import java.util.concurrent.Callable;
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
@@ -24,21 +26,26 @@ public class Test implements Callable<Integer> {
       System.out.println("Add your jar file first into classpath, because classpath is empty!");
     } else {
       TestHandler.setErrorMode(error);
+      var containers = (List<Class<? extends AbstractTestExecutor>>) null;
       if (request.getId() >= 0) {
-        var container = CourseManager.getContainerBy(
-            request.getCourse(),
-            request.getWeek(),
-            request.getDay(),
-            request.getId());
-        execute(container);
+        containers = CourseManager.getContainers(ContainerRequest
+            .builder()
+            .course(request.getCourse())
+            .week(request.getWeek())
+            .day(request.getDay())
+            .id(request.getId())
+            .build());
+
       } else {
-        var containers = CourseManager.getContainersBy(
-            request.getCourse(),
-            request.getWeek(),
-            request.getDay());
-        for (var container : containers) {
-          execute(container);
-        }
+        containers = CourseManager.getContainers(ContainerRequest
+            .builder()
+            .course(request.getCourse())
+            .week(request.getWeek())
+            .day(request.getDay())
+            .build());
+      }
+      for (var container : containers) {
+        execute(container);
       }
     }
     return 0;
