@@ -125,7 +125,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>3.7</version>
+      <version>3.9</version>
       <scope>compile</scope>
     </dependency>
     <!--    Courses add below-->
@@ -138,7 +138,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>JavaDeepDive</artifactId>
-      <version>1.8</version>
+      <version>1.9</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
