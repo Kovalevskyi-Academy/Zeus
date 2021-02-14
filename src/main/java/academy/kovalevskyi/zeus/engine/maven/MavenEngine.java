@@ -1,6 +1,7 @@
 package academy.kovalevskyi.zeus.engine.maven;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -13,19 +14,18 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 public class MavenEngine {
 
-  private static final Model MAVEN_POM_FILE;
+  private static final Model MAVEN_CONFIG;
 
   static {
     try {
-      final var inputStream = MavenEngine.class.getResourceAsStream("/pom.xml");
-      MAVEN_POM_FILE = new MavenXpp3Reader().read(inputStream);
-    } catch (XmlPullParserException | IOException exception) {
-      throw new ExceptionInInitializerError(exception.getMessage());
+      MAVEN_CONFIG = initialize();
+    } catch (XmlPullParserException | IOException e) {
+      throw new ExceptionInInitializerError(e);
     }
   }
 
   public static Model getConfig() {
-    return MAVEN_POM_FILE;
+    return MAVEN_CONFIG;
   }
 
   public static int execute(final File maven, final List<String> request)
@@ -34,5 +34,16 @@ public class MavenEngine {
         .setInputStream(InputStream.nullInputStream())
         .setGoals(request);
     return new DefaultInvoker().setMavenHome(maven).execute(invocationRequest).getExitCode();
+  }
+
+  private static Model initialize() throws XmlPullParserException, IOException {
+    final var xpp3Reader = new MavenXpp3Reader();
+    try (var inputStream = MavenEngine.class.getResourceAsStream("/pom.xml")) {
+      return xpp3Reader.read(inputStream);
+    } catch (IOException e) {
+      try (var fileReader = new FileReader("pom.xml")) {
+        return xpp3Reader.read(fileReader);
+      }
+    }
   }
 }
