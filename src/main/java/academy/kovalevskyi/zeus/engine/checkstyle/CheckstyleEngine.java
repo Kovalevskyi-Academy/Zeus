@@ -73,13 +73,15 @@ public class CheckstyleEngine {
 
   private static List<String> collectResult(final ByteArrayOutputStream captor) {
     final var result = captor.toString();
-    if (result.isEmpty()) {
+    if (result.trim().isEmpty()) {
       throw new IllegalArgumentException("Checkstyle console captor is empty!");
     } else {
       return Arrays
           .stream(result.split("\n"))
           .filter(message -> !message.contains("Starting audit..."))
           .filter(message -> !message.contains("Audit done."))
+          .filter(message -> !message.contains("[MissingJavadocType]"))
+          .filter(message -> !message.contains("[MissingJavadocMethod]"))
           .collect(Collectors.toUnmodifiableList());
     }
   }
