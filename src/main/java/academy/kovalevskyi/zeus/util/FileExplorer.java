@@ -3,6 +3,7 @@ package academy.kovalevskyi.zeus.util;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,7 +65,7 @@ public class FileExplorer {
         files.add(file);
       }
     }
-    return files;
+    return Collections.unmodifiableList(files);
   }
 
   private static void getFile(final List<File> files, final File folder) {
