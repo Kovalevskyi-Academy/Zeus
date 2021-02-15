@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
@@ -19,51 +18,66 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
 @Command(name = "checkstyle", description = "Run checkstyle", mixinStandardHelpOptions = true)
-public class Checkstyle implements Callable<Integer> {
+public class Checkstyle implements Callable<Void> {
 
   @Parameters(description = "Classes names to check with checkstyle")
   private final List<String> classNames = new ArrayList<>();
 
-  public Integer call() throws Exception {
+  public Void call() throws Exception {
     final var style = Style.GOOGLE;
     if (classNames.isEmpty()) {
       checkAllSourceFiles(style);
     } else {
       checkAllSourceFiles(classNames, style);
     }
-    return 0;
+    return null;
   }
 
-  public int checkAllSourceFiles(final List<String> classes, final Style style) throws IOException {
-    Function<File, String> dropType = file -> file.getName()
-        .replaceFirst(FileType.JAVA.extension, "");
+  public void checkAllSourceFiles(final List<String> classes, final Style style)
+      throws IOException {
+    final var preparedNames = classes
+        .stream()
+        .map(name -> {
+          if (!name.endsWith(FileType.JAVA.extension)) {
+            return String.format("%s%s", name, FileType.JAVA.extension);
+          }
+          return name;
+        })
+        .collect(Collectors.toUnmodifiableList());
+
     final var result = FileExplorer
         .getFiles(getSourceFilesDirectory(), FileType.JAVA)
         .stream()
-        .filter(file -> classes.contains(dropType.apply(file)))
+        .filter(file -> preparedNames.contains(file.getName()))
         .collect(Collectors.toUnmodifiableList());
+
     if (result.size() != classes.size()) {
-      var foundClasses = result.stream().map(dropType).collect(Collectors.toList());
+      var existedFileNames = result.stream().map(File::getName).collect(Collectors.toList());
+
       AnsiConsole.systemInstall();
-      classes.forEach(clazz -> {
-        if (!foundClasses.contains(clazz)) {
-          var message = Ansi
-              .ansi()
-              .fg(State.FAILED.color)
-              .format("%s%s is not found on your project!", clazz, FileType.JAVA.extension)
-              .reset()
-              .toString();
-          System.out.println(message);
+      preparedNames.forEach(name -> {
+        if (!existedFileNames.contains(name)) {
+          System.out.println(prepareFileNotFoundMessage(name));
         }
       });
       AnsiConsole.systemUninstall();
     }
-    return CheckstyleEngine.checkAll(style, result);
+
+    CheckstyleEngine.checkAll(style, result);
   }
 
-  public int checkAllSourceFiles(final Style style) throws IOException {
+  public void checkAllSourceFiles(final Style style) throws IOException {
     final var javaFiles = FileExplorer.getFiles(getSourceFilesDirectory(), FileType.JAVA);
-    return CheckstyleEngine.checkAll(style, javaFiles);
+    CheckstyleEngine.checkAll(style, javaFiles);
+  }
+
+  private String prepareFileNotFoundMessage(final String name) {
+    return Ansi
+        .ansi()
+        .fg(State.FAILED.color)
+        .format("%s is not found on your project!", name)
+        .reset()
+        .toString();
   }
 
   private File getSourceFilesDirectory() throws FileNotFoundException {

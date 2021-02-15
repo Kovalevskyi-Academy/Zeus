@@ -35,55 +35,54 @@ public class CheckstyleEngine {
     if (files.isEmpty()) {
       System.out.println("You have nothing to verify with checkstyle!");
       return 0;
-    } else {
-      var verified = 0;
-      var warnings = 0;
-      for (var file : files) {
-        var result = check(style, file);
-        if (result == 0) {
-          verified++;
-        } else {
-          warnings += result;
-        }
-      }
-      if (warnings > 0) {
-        var footer = prepareFooter(files.size(), verified, files.size() - verified, warnings);
-        System.out.println(footer);
-      } else {
-        System.out.println("Your source files are verified by checkstyle successfully!");
-      }
-      return warnings;
     }
+    var verified = 0;
+    var warnings = 0;
+    for (var file : files) {
+      var result = check(style, file);
+      if (result == 0) {
+        verified++;
+      } else {
+        warnings += result;
+      }
+    }
+    if (warnings > 0) {
+      var footer = prepareFooter(files.size(), verified, files.size() - verified, warnings);
+      System.out.println(footer);
+    } else {
+      System.out.println("Your source files are verified by checkstyle successfully!");
+    }
+    return warnings;
+  }
+
+  public static void main(String[] args) throws IOException {
+    process(Style.GOOGLE, new File("pom.xml"));
   }
 
   private static List<String> process(final Style style, final File file) throws IOException {
-    if (file.isDirectory()) {
-      throw new IllegalArgumentException("Directory is not supported!");
-    } else if (!FileExplorer.match(file, FileType.JAVA)) {
-      throw new IllegalArgumentException(String.format("%s is not supported!", file.getName()));
-    } else {
-      final var outputStreamCaptor = new ByteArrayOutputStream();
-      final var defaultPrintStream = System.out;
-      System.setOut(new PrintStream(outputStreamCaptor));
-      Main.main("-c", style.config, file.getAbsolutePath());
-      System.setOut(defaultPrintStream);
-      return collectResult(outputStreamCaptor);
+    if (!FileExplorer.match(file, FileType.JAVA)) {
+      throw new IllegalArgumentException(String.format("%s is not supported", file.getName()));
     }
+    final var outputStreamCaptor = new ByteArrayOutputStream();
+    final var defaultPrintStream = System.out;
+    System.setOut(new PrintStream(outputStreamCaptor));
+    Main.main("-c", style.config, file.getAbsolutePath());
+    System.setOut(defaultPrintStream);
+    return collectResult(outputStreamCaptor);
   }
 
   private static List<String> collectResult(final ByteArrayOutputStream captor) {
-    final var result = captor.toString();
-    if (result.trim().isEmpty()) {
-      throw new IllegalArgumentException("Checkstyle console captor is empty!");
-    } else {
-      return Arrays
-          .stream(result.split("\n"))
-          .filter(message -> !message.contains("Starting audit..."))
-          .filter(message -> !message.contains("Audit done."))
-          .filter(message -> !message.contains("[MissingJavadocType]"))
-          .filter(message -> !message.contains("[MissingJavadocMethod]"))
-          .collect(Collectors.toUnmodifiableList());
+    final var result = captor.toString().trim();
+    if (result.isEmpty()) {
+      throw new IllegalArgumentException("Checkstyle console captor is empty");
     }
+    return Arrays
+        .stream(result.split("\n"))
+        .filter(message -> !message.contains("Starting audit..."))
+        .filter(message -> !message.contains("Audit done."))
+        .filter(message -> !message.contains("[MissingJavadocType]"))
+        .filter(message -> !message.contains("[MissingJavadocMethod]"))
+        .collect(Collectors.toUnmodifiableList());
   }
 
   private static String prepareFooter(
