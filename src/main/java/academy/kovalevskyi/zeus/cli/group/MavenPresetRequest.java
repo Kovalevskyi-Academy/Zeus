@@ -1,8 +1,7 @@
 package academy.kovalevskyi.zeus.cli.group;
 
 import academy.kovalevskyi.zeus.engine.maven.Lifecycle;
-import java.util.ArrayList;
-import java.util.List;
+import academy.kovalevskyi.zeus.engine.maven.Request;
 import picocli.CommandLine.Option;
 
 public class MavenPresetRequest {
@@ -19,20 +18,17 @@ public class MavenPresetRequest {
   @Option(names = {"-b", "--build"}, description = "Package a project")
   private boolean isBuild;
 
-  public List<String> prepareRequest() {
-    ArrayList<String> request = new ArrayList<>();
-    if (this.isClean) {
-      request.add(Lifecycle.CLEAN.command);
-    } else if (this.isCompile) {
-      request.add(Lifecycle.CLEAN.command);
-      request.add(Lifecycle.COMPILE.command);
-    } else if (this.isTest) {
-      request.add(Lifecycle.CLEAN.command);
-      request.add(Lifecycle.TEST.command);
-    } else if (this.isBuild) {
-      request.add(Lifecycle.CLEAN.command);
-      request.add(Lifecycle.PACKAGE.command);
+  public Request getRequest() {
+    final var request = Request.builder();
+    if (isClean) {
+      request.add(Lifecycle.CLEAN);
+    } else if (isCompile) {
+      request.add(Lifecycle.CLEAN).add(Lifecycle.COMPILE);
+    } else if (isTest) {
+      request.add(Lifecycle.CLEAN).add(Lifecycle.TEST);
+    } else if (isBuild) {
+      request.add(Lifecycle.CLEAN).add(Lifecycle.PACKAGE);
     }
-    return request;
+    return request.build();
   }
 }

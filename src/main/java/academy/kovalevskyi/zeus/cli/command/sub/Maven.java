@@ -2,8 +2,8 @@ package academy.kovalevskyi.zeus.cli.command.sub;
 
 import academy.kovalevskyi.zeus.cli.group.MavenCustomRequest;
 import academy.kovalevskyi.zeus.cli.group.MavenPresetRequest;
-import academy.kovalevskyi.zeus.util.FileExplorer;
 import academy.kovalevskyi.zeus.engine.maven.MavenEngine;
+import academy.kovalevskyi.zeus.util.FileExplorer;
 import java.io.File;
 import java.util.concurrent.Callable;
 import org.apache.maven.shared.invoker.MavenInvocationException;
@@ -27,12 +27,11 @@ public class Maven implements Callable<Integer> {
   }
 
   public Integer call() throws MavenInvocationException {
-    if (!group.mavenPresetRequest.prepareRequest().isEmpty()) {
-      return MavenEngine.execute(mavenHome, group.mavenPresetRequest.prepareRequest());
-    } else if (!group.mavenCustomRequest.getCommands().isEmpty()) {
-      return MavenEngine.execute(mavenHome, group.mavenCustomRequest.getCommands());
+    final var customRequest = group.mavenCustomRequest.getCommands();
+    if (!customRequest.isEmpty()) {
+      return MavenEngine.execute(mavenHome, customRequest);
     }
-    return 0;
+    return MavenEngine.execute(mavenHome, group.mavenPresetRequest.getRequest());
   }
 
   private static class Group {

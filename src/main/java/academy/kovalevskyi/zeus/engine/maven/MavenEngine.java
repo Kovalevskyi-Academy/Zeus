@@ -3,7 +3,6 @@ package academy.kovalevskyi.zeus.engine.maven;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -28,10 +27,16 @@ public class MavenEngine {
     return MAVEN_CONFIG;
   }
 
+
+  public static int execute(final File maven, final Request request)
+      throws MavenInvocationException {
+    return execute(maven, request.getCommands());
+  }
+
   public static int execute(final File maven, final List<String> request)
       throws MavenInvocationException {
     final var invocationRequest = new DefaultInvocationRequest()
-        .setInputStream(InputStream.nullInputStream())
+        .setInputStream(null)
         .setGoals(request);
     return new DefaultInvoker().setMavenHome(maven).execute(invocationRequest).getExitCode();
   }
