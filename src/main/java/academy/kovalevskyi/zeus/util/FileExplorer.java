@@ -1,6 +1,7 @@
 package academy.kovalevskyi.zeus.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,8 +23,11 @@ public class FileExplorer {
   }
 
   public static boolean match(final File file, final FileType type) {
+    if (!file.exists()) {
+      throw new IllegalArgumentException(String.format("%s is absent", file.getAbsolutePath()));
+    }
     if (!file.isFile()) {
-      throw new IllegalArgumentException("Wrong file!");
+      throw new IllegalArgumentException(String.format("%s is not a file", file.getAbsolutePath()));
     }
     return file.getName().toLowerCase().endsWith(type.extension);
   }
