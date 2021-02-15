@@ -9,17 +9,17 @@ import java.util.concurrent.Callable;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
 
-@Command(name = "maven",
+@Command(
+    name = "maven",
     description = "Run presets or invoke any maven commands",
     mixinStandardHelpOptions = true)
 public class Maven implements Callable<Integer> {
 
   @ArgGroup(multiplicity = "1")
-  private final Group group = new Group();
+  private final Request request = new Request();
 
-  @Option(names = {"-m", "--maven"}, description = "Maven home directory")
+  @picocli.CommandLine.Option(names = {"-m", "--maven"}, description = "Maven home directory")
   private final File mavenHome;
 
   public Maven() {
@@ -27,19 +27,18 @@ public class Maven implements Callable<Integer> {
   }
 
   public Integer call() throws MavenInvocationException {
-    final var customRequest = group.mavenCustomRequest.getCommands();
-    if (!customRequest.isEmpty()) {
-      return MavenEngine.execute(mavenHome, customRequest);
+    if (request.mavenCustomRequest != null) {
+      return MavenEngine.execute(mavenHome, request.mavenCustomRequest.getCommands());
     }
-    return MavenEngine.execute(mavenHome, group.mavenPresetRequest.getRequest());
+    return MavenEngine.execute(mavenHome, request.mavenPresetRequest.getRequest());
   }
 
-  private static class Group {
+  private static class Request {
 
     @ArgGroup
-    private final MavenPresetRequest mavenPresetRequest = new MavenPresetRequest();
+    private MavenPresetRequest mavenPresetRequest;
 
     @ArgGroup
-    private final MavenCustomRequest mavenCustomRequest = new MavenCustomRequest();
+    private MavenCustomRequest mavenCustomRequest;
   }
 }

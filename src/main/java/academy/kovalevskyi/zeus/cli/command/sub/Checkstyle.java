@@ -1,6 +1,6 @@
 package academy.kovalevskyi.zeus.cli.command.sub;
 
-import academy.kovalevskyi.testing.view.State;
+import academy.kovalevskyi.testing.service.State;
 import academy.kovalevskyi.zeus.engine.checkstyle.CheckstyleEngine;
 import academy.kovalevskyi.zeus.engine.checkstyle.Style;
 import academy.kovalevskyi.zeus.util.FileExplorer;
@@ -8,7 +8,6 @@ import academy.kovalevskyi.zeus.util.FileType;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
@@ -21,11 +20,11 @@ import picocli.CommandLine.Parameters;
 public class Checkstyle implements Callable<Void> {
 
   @Parameters(description = "Classes names to check with checkstyle")
-  private final List<String> classNames = new ArrayList<>();
+  private List<String> classNames;
 
   public Void call() throws Exception {
     final var style = Style.GOOGLE;
-    if (classNames.isEmpty()) {
+    if (classNames == null) {
       checkAllSourceFiles(style);
     } else {
       checkAllSourceFiles(classNames, style);

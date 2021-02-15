@@ -22,6 +22,7 @@ public class Zeus implements Runnable {
 
   @Override
   public void run() {
+    System.out.println("Zeus the Mighty greets you, stranger ;)");
   }
 
   public boolean isDebug() {

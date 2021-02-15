@@ -1,6 +1,6 @@
 package academy.kovalevskyi.zeus.engine.checkstyle;
 
-import academy.kovalevskyi.testing.view.State;
+import academy.kovalevskyi.testing.service.State;
 import academy.kovalevskyi.zeus.util.FileExplorer;
 import academy.kovalevskyi.zeus.util.FileType;
 import com.puppycrawl.tools.checkstyle.Main;
@@ -60,6 +60,12 @@ public class CheckstyleEngine {
   }
 
   private static List<String> process(final Style style, final File file) throws IOException {
+    if (!file.exists()) {
+      throw new IllegalArgumentException(String.format("%s is absent", file.getAbsolutePath()));
+    }
+    if (!file.isFile()) {
+      throw new IllegalArgumentException(String.format("%s is not a file", file.getAbsolutePath()));
+    }
     if (!FileExplorer.match(file, FileType.JAVA)) {
       throw new IllegalArgumentException(String.format("%s is not supported", file.getName()));
     }
