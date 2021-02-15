@@ -1,34 +1,49 @@
 package academy.kovalevskyi.zeus.cli.group;
 
+import academy.kovalevskyi.testing.service.ContainerRequest;
+import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Option;
+import picocli.CommandLine.Parameters;
 
 public class CourseRequest {
 
-  @Option(required = true, names = {"-c", "--course"}, description = "Course number")
-  private int course;
+  @ArgGroup(multiplicity = "1")
+  private final CourseArg course = new CourseArg();
 
-  @Option(required = true, names = {"-w", "--week"}, description = "Week number")
+  @Option(defaultValue = "-1", names = {"-w", "--week"}, description = "Week number")
   private int week;
 
-  @Option(required = true, names = {"-d", "--day"}, description = "Day number")
+  @Option(defaultValue = "-1", names = {"-d", "--day"}, description = "Day number")
   private int day;
 
   @Option(defaultValue = "-1", names = {"-i", "--id"}, description = "Container id")
   private int id;
 
-  public int getCourse() {
-    return course;
+  public ContainerRequest prepareRequest() {
+    final var request = ContainerRequest.builder();
+    if (course.key != null) {
+      request.course(course.key);
+    } else {
+      request.course(course.id);
+    }
+    if (week >= 0) {
+      request.week(week);
+    }
+    if (day >= 0) {
+      request.day(day);
+    }
+    if (id >= 0) {
+      request.id(id);
+    }
+    return request.build();
   }
 
-  public int getWeek() {
-    return week;
-  }
+  public static class CourseArg {
 
-  public int getDay() {
-    return day;
-  }
+    @Option(defaultValue = "-1", names = {"-c", "--course"}, description = "Course id")
+    private int id;
 
-  public int getId() {
-    return id;
+    @Parameters(description = "Course key")
+    private String key;
   }
 }
