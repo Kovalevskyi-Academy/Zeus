@@ -6,7 +6,7 @@ import picocli.CommandLine.Parameters;
 
 public class MavenCustomRequest {
 
-  @Parameters(arity = "1", description = "Any maven commands")
+  @Parameters(arity = "1..", description = "Any maven commands")
   private final List<String> commands = new ArrayList<>();
 
   public List<String> getCommands() {
