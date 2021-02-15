@@ -6,11 +6,9 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <version>6-SNAPSHOT</version>
+
   <properties>
-    <!--write your java version-->
-    <javaVersion>15</javaVersion>
-    <maven.compiler.target>${javaVersion}</maven.compiler.target>
-    <maven.compiler.source>${javaVersion}</maven.compiler.source>
+    <java.version>15</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -88,11 +86,11 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
-        <!--Remove this little block if you are using Java 8 or below.-->
         <configuration>
-          <release>${javaVersion}</release>
+          <release>${java.version}</release>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
         </configuration>
-        <!--Remove this little block if you are using Java 8 or below.-->
       </plugin>
     </plugins>
   </build>
@@ -101,45 +99,38 @@
       <groupId>info.picocli</groupId>
       <artifactId>picocli</artifactId>
       <version>4.6.1</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.shared</groupId>
       <artifactId>maven-invoker</artifactId>
       <version>2.2</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-model</artifactId>
       <version>3.6.3</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.puppycrawl.tools</groupId>
       <artifactId>checkstyle</artifactId>
       <version>8.39</version>
-      <scope>compile</scope>
     </dependency>
     <!--    Testing Framework-->
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>3.9</version>
-      <scope>compile</scope>
+      <version>4.2</version>
     </dependency>
     <!--    Courses add below-->
     <dependency>
       <groupId>com.kovalevskyi.academy</groupId>
       <artifactId>CodingBootcamp</artifactId>
-      <version>3.2</version>
-      <scope>compile</scope>
+      <version>3.4</version>
     </dependency>
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>JavaDeepDive</artifactId>
-      <version>1.9</version>
-      <scope>compile</scope>
+      <version>2.0</version>
     </dependency>
   </dependencies>
 </project>
