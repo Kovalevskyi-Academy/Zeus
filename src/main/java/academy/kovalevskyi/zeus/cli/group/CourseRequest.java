@@ -1,14 +1,13 @@
 package academy.kovalevskyi.zeus.cli.group;
 
 import academy.kovalevskyi.testing.service.ContainerRequest;
-import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 public class CourseRequest {
 
-  @ArgGroup(multiplicity = "1")
-  private final CourseArg course = new CourseArg();
+  @Parameters(description = "Course key", arity = "1")
+  private String key;
 
   @Option(defaultValue = "-1", names = {"-w", "--week"}, description = "Week number")
   private int week;
@@ -20,12 +19,7 @@ public class CourseRequest {
   private int id;
 
   public ContainerRequest prepareRequest() {
-    final var request = ContainerRequest.builder();
-    if (course.key != null) {
-      request.course(course.key);
-    } else {
-      request.course(course.id);
-    }
+    final var request = ContainerRequest.builder().course(key);
     if (week >= 0) {
       request.week(week);
     }
@@ -36,14 +30,5 @@ public class CourseRequest {
       request.id(id);
     }
     return request.build();
-  }
-
-  public static class CourseArg {
-
-    @Option(defaultValue = "-1", names = {"-c", "--course"}, description = "Course id")
-    private int id;
-
-    @Parameters(description = "Course key")
-    private String key;
   }
 }

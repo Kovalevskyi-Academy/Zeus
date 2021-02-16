@@ -11,6 +11,7 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
@@ -25,15 +26,18 @@ public class CheckstyleEngine {
       System.out.printf(template, file.getName(), prepareStatus(State.SUCCESSFUL));
     } else {
       System.out.printf(template, file.getName(), prepareStatus(State.FAILED));
-      warnings.forEach(line -> System.out.println(Ansi.ansi().fgRed().a(line).reset()));
+      warnings.forEach(line ->
+          System.out.println(Ansi.ansi().fg(State.FAILED.color).a(line).reset()));
     }
     AnsiConsole.systemUninstall();
     return warnings.size();
   }
 
   public static int checkAll(final Style style, final List<File> files) throws IOException {
+    final Function<String, String> underline = text ->
+        String.format("%s%n%s", text, "-".repeat(text.length()));
     if (files.isEmpty()) {
-      System.out.println("You have nothing to verify with checkstyle!");
+      System.out.println(underline.apply("You have nothing to verify with checkstyle!"));
       return 0;
     }
     var verified = 0;
@@ -50,13 +54,10 @@ public class CheckstyleEngine {
       var footer = prepareFooter(files.size(), verified, files.size() - verified, warnings);
       System.out.println(footer);
     } else {
-      System.out.println("Your source files are verified by checkstyle successfully!");
+      var message = underline.apply("Your source files are verified by checkstyle successfully!");
+      System.out.println(message);
     }
     return warnings;
-  }
-
-  public static void main(String[] args) throws IOException {
-    process(Style.GOOGLE, new File("pom.xml"));
   }
 
   private static List<String> process(final Style style, final File file) throws IOException {

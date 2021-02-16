@@ -10,9 +10,11 @@ import picocli.CommandLine.Option;
 
 @Command(
     name = "test",
-    description = "Run containers by course/week/day/id",
+    description = "Run containers",
     mixinStandardHelpOptions = true)
 public class Test implements Callable<Void> {
+
+  static final String EMPTY_CLASSPATH = "Add your jar file first into classpath!";
 
   @Option(names = {"-e", "--error"}, description = "Show only errors")
   private boolean error;
@@ -22,7 +24,7 @@ public class Test implements Callable<Void> {
 
   public Void call() throws Exception {
     if (FileExplorer.isJarAbsentInClasspath()) {
-      System.out.println("Add your jar file first into classpath, because classpath is empty!");
+      System.out.println(EMPTY_CLASSPATH);
     } else {
       ContainerLauncher.execute(error, request.prepareRequest());
     }

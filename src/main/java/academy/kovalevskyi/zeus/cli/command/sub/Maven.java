@@ -12,7 +12,7 @@ import picocli.CommandLine.Command;
 
 @Command(
     name = "maven",
-    description = "Run presets or invoke any maven commands",
+    description = "Run maven presets or any custom commands",
     mixinStandardHelpOptions = true)
 public class Maven implements Callable<Integer> {
 

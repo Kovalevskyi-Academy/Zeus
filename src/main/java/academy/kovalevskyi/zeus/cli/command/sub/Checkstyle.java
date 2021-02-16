@@ -16,24 +16,32 @@ import org.fusesource.jansi.AnsiConsole;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
-@Command(name = "checkstyle", description = "Run checkstyle", mixinStandardHelpOptions = true)
+@Command(
+    name = "style",
+    description = "Run checkstyle for all project or individual sources",
+    mixinStandardHelpOptions = true)
 public class Checkstyle implements Callable<Void> {
+
+  private static final Style DEFAULT_CHECKSTYLE = Style.GOOGLE;
 
   @Parameters(description = "Classes names to check with checkstyle")
   private List<String> classNames;
 
   public Void call() throws Exception {
-    final var style = Style.GOOGLE;
     if (classNames == null) {
-      checkAllSourceFiles(style);
+      checkAllSourceFiles();
     } else {
-      checkAllSourceFiles(classNames, style);
+      checkAllSourceFiles(classNames);
     }
     return null;
   }
 
-  public void checkAllSourceFiles(final List<String> classes, final Style style)
-      throws IOException {
+  static int checkAllSourceFiles() throws IOException {
+    final var javaFiles = FileExplorer.getFiles(getSourceFilesDirectory(), FileType.JAVA);
+    return CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, javaFiles);
+  }
+
+  private void checkAllSourceFiles(final List<String> classes) throws IOException {
     final var preparedNames = classes
         .stream()
         .map(name -> {
@@ -62,12 +70,7 @@ public class Checkstyle implements Callable<Void> {
       AnsiConsole.systemUninstall();
     }
 
-    CheckstyleEngine.checkAll(style, result);
-  }
-
-  public void checkAllSourceFiles(final Style style) throws IOException {
-    final var javaFiles = FileExplorer.getFiles(getSourceFilesDirectory(), FileType.JAVA);
-    CheckstyleEngine.checkAll(style, javaFiles);
+    CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, result);
   }
 
   private String prepareFileNotFoundMessage(final String name) {
@@ -79,7 +82,7 @@ public class Checkstyle implements Callable<Void> {
         .toString();
   }
 
-  private File getSourceFilesDirectory() throws FileNotFoundException {
+  private static File getSourceFilesDirectory() throws FileNotFoundException {
     final var directory = new File(FileExplorer.JAVA_SOURCES);
     if (!directory.exists()) {
       throw new FileNotFoundException("Directory of java source files is not exist!");
