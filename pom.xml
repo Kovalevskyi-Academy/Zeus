@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
-  <version>7-SNAPSHOT</version>
+  <version>7</version>
 
   <properties>
     <java.version>15</java.version>
