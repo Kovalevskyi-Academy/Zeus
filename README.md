@@ -17,7 +17,7 @@
 
 **_Launch the command line from the root folder of your project and input the code below_**
 
-`<ZEUS>` — Zeus jar file, example **Zeus-2.6.jar**
+`<ZEUS>` — Zeus jar file, example **Zeus-6.jar**
 
 `<HOMEWORK>` — the name of your jar file, example **Homework.jar**
 
