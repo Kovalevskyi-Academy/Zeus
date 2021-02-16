@@ -45,12 +45,13 @@ public class Show implements Runnable {
       var provider = ContainerManager.initProvider(clazz);
       providers.put(provider.key(), provider);
     });
-    var template = "%s key - %s, containers - %d%n";
-    providers.forEach((key, provider) -> {
+    System.out.println("Available courses:");
+    var template = "- %s key - %s, containers - %d%n";
+    for (var provider : providers.values()) {
       var containers = ContainerManager
-          .getContainers(ContainerRequest.builder().course(key).build())
+          .getContainers(ContainerRequest.builder().course(provider.key()).build())
           .size();
       System.out.printf(template, provider.name(), provider.key(), containers);
-    });
+    }
   }
 }
