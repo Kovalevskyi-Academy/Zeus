@@ -85,10 +85,11 @@ public class CheckstyleEngine {
     }
     return Arrays
         .stream(result.split("\n"))
-        .filter(message -> !message.contains("Starting audit..."))
-        .filter(message -> !message.contains("Audit done."))
-        .filter(message -> !message.contains("[MissingJavadocType]"))
-        .filter(message -> !message.contains("[MissingJavadocMethod]"))
+        .filter(text -> !text.contains("Starting audit..."))
+        .filter(text -> !text.contains("Audit done."))
+        .filter(text -> !text.contains("[MissingJavadocType]"))
+        .filter(text -> !text.contains("[MissingJavadocMethod]"))
+        .map(text -> String.format("[ERROR] %s", text.substring(text.lastIndexOf(".java") + 6)))
         .collect(Collectors.toUnmodifiableList());
   }
 
