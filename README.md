@@ -17,7 +17,7 @@
 
 **_Launch the command line from the root folder of your project and input the code below_**
 
-`<ZEUS>` — Zeus jar file, example **Zeus-2.6.jar**
+`<ZEUS>` — Zeus jar file, example **Zeus-7.jar**
 
 `<HOMEWORK>` — the name of your jar file, example **Homework.jar**
 
@@ -73,20 +73,20 @@
 
 ##### show Zeus help
 
-`java -jar Zeus-2.6.jar -h`
+`java -jar Zeus-7.jar -h`
 
 ##### show Zeus checkstyle help
 
-`java -jar Zeus-2.6.jar checkstyle -h`
+`java -jar Zeus-7.jar style -h`
 
 ##### run tests
 
-`java -cp "./target/Homework.jar:Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty test -c0 -w0 -d0`
+`java -cp "./target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
 ##### run tests (wildcards version, same that above)
 
-`java -cp "./target/*:Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty test -c0 -w0 -d0`
+`java -cp "./target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
 ##### run tests with debug mode
 
-`java -cp "./target/Homework.jar:Zeus-2.6.jar" academy.kovalevskyi.zeus.TheMighty -d test -c0 -w0 -d0`
+`java -cp "./target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty -d test jcb -w0 -d3`
