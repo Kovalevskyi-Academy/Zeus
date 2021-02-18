@@ -27,7 +27,7 @@ public class CourseRequest {
       request.day(day);
     }
     if (id >= 0) {
-      request.id(id);
+      request.container(id);
     }
     return request.build();
   }
