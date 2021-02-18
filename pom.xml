@@ -120,7 +120,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>4.5</version>
+      <version>4.6</version>
     </dependency>
     <!--    Courses add below-->
     <dependency>
