@@ -6,6 +6,7 @@ import academy.kovalevskyi.zeus.cli.command.sub.Maven;
 import academy.kovalevskyi.zeus.cli.command.sub.Pass;
 import academy.kovalevskyi.zeus.cli.command.sub.Show;
 import academy.kovalevskyi.zeus.cli.command.sub.Test;
+import academy.kovalevskyi.zeus.cli.command.sub.Update;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
@@ -14,7 +15,7 @@ import picocli.CommandLine.Option;
     mixinStandardHelpOptions = true,
     versionProvider = VersionProvider.class,
     footer = "%nCopyright (c) 2021",
-    subcommands = {Show.class, Checkstyle.class, Test.class, Pass.class, Maven.class}
+    subcommands = {Show.class, Checkstyle.class, Test.class, Pass.class, Maven.class, Update.class}
 )
 public class Zeus implements Runnable {
 
