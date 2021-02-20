@@ -9,7 +9,7 @@ import picocli.CommandLine.Option;
 
 @Command(
     name = "test",
-    description = "Run containers",
+    description = "Run test containers",
     mixinStandardHelpOptions = true)
 public class Test implements Runnable {
 

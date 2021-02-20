@@ -12,7 +12,7 @@ import picocli.CommandLine.Command;
 
 @Command(
     name = "pass",
-    description = "Run checkstyle and containers",
+    description = "Run exam",
     mixinStandardHelpOptions = true)
 public class Pass implements Callable<Void> {
 
