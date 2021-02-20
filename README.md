@@ -9,7 +9,7 @@
 ## Importantly
 
 - Zeus jar archive should be in the root folder of the student's project
-- Use java 13 or above
+- Use java 15 with preview mode
 
 ## How to use
 
@@ -35,58 +35,58 @@
 
 ##### run Zeus
 
-`java -jar <ZEUS>`
+`java --enable-preview -jar <ZEUS>`
 
 ##### run Zeus with key
 
-`java -jar <ZEUS> <KEY>`
+`java --enable-preview -jar <ZEUS> <KEY>`
 
 ##### run Zeus with keys
 
-`java -jar <ZEUS> <KEY> <KEY>...`
+`java --enable-preview -jar <ZEUS> <KEY> <KEY>...`
 
 ##### run Zeus command
 
-`java -jar <ZEUS> <COMMAND>`
+`java --enable-preview -jar <ZEUS> <COMMAND>`
 
 ##### run Zeus command with key
 
-`java -jar <ZEUS> <COMMAND> <KEY>`
+`java --enable-preview -jar <ZEUS> <COMMAND> <KEY>`
 
 ##### run Zeus with key and command with key
 
-`java -jar <ZEUS> <KEY> <COMMAND> <KEY>`
+`java --enable-preview -jar <ZEUS> <KEY> <COMMAND> <KEY>`
 
 ##### run Zeus with another jar file with key
 
-`java -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>`
+`java --enable-preview -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>`
 
 ##### run Zeus with another jars with key using wildcards (get all jars from 'target' folder)
 
-`java -cp "./target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>`
+`java --enable-preview -cp "./target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>`
 
 ##### run Zeus command with key with another jar file
 
-`java -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <COMMAND> <KEY>`
+`java --enable-preview -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <COMMAND> <KEY>`
 
 ## Examples of usage
 
 ##### show Zeus help
 
-`java -jar Zeus-7.jar -h`
+`java --enable-preview -jar Zeus-7.jar -h`
 
 ##### show Zeus checkstyle help
 
-`java -jar Zeus-7.jar style -h`
+`java --enable-preview -jar Zeus-7.jar style -h`
 
 ##### run tests
 
-`java -cp "./target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
+`java --enable-preview -cp "./target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
 ##### run tests (wildcards version, same that above)
 
-`java -cp "./target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
+`java --enable-preview -cp "./target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
 ##### run tests with debug mode
 
-`java -cp "./target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty -d test jcb -w0 -d3`
+`java --enable-preview -cp "./target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty -d test jcb -w0 -d3`
