@@ -67,7 +67,7 @@ public class CheckstyleEngine {
     if (!file.isFile()) {
       throw new IllegalArgumentException(String.format("%s is not a file", file.getAbsolutePath()));
     }
-    if (!FileExplorer.match(file, FileType.JAVA)) {
+    if (!FileExplorer.match(file.getName(), FileType.JAVA)) {
       throw new IllegalArgumentException(String.format("%s is not supported", file.getName()));
     }
     final var outputStreamCaptor = new ByteArrayOutputStream();
