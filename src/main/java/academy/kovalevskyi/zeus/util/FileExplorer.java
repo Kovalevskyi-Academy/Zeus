@@ -21,14 +21,14 @@ public class FileExplorer {
     JAVA_SOURCES = String.format("%s%2$ssrc%2$smain%2$sjava", WORKING_DIRECTORY, File.separator);
   }
 
-  public static boolean match(final File file, final FileType type) {
-    return file.getName().toLowerCase().endsWith(type.extension);
+  public static boolean match(final String fileName, final FileType type) {
+    return fileName.toLowerCase().endsWith(type.extension);
   }
 
   public static boolean isJarAbsentInClasspath() {
     return Arrays
         .stream(JAVA_CLASSPATH.split("[;|:]"))
-        .filter(path -> match(new File(path), FileType.JAR))
+        .filter(file -> match(file, FileType.JAR))
         .distinct()
         .count() == 1;
   }
@@ -40,7 +40,7 @@ public class FileExplorer {
   public static List<File> getFiles(final String directory, final FileType type) {
     return getFiles(directory)
         .stream()
-        .filter(file -> match(file, type))
+        .filter(file -> match(file.getName(), type))
         .collect(Collectors.toUnmodifiableList());
   }
 
