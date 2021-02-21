@@ -1,6 +1,6 @@
 package academy.kovalevskyi.zeus.cli.command.sub;
 
-import academy.kovalevskyi.testing.annotation.ICourseProvider;
+import academy.kovalevskyi.testing.annotation.CourseProvider;
 import academy.kovalevskyi.testing.service.ContainerRequest;
 import academy.kovalevskyi.testing.util.ContainerManager;
 import academy.kovalevskyi.zeus.cli.group.CourseRequest;
@@ -40,7 +40,7 @@ public class Show implements Runnable {
   }
 
   private void printAvailableCourses() {
-    var providers = new HashMap<String, ICourseProvider>();
+    var providers = new HashMap<String, CourseProvider>();
     ContainerManager.getContainers().forEach(clazz -> {
       var provider = ContainerManager.initProvider(clazz);
       providers.put(provider.key(), provider);
