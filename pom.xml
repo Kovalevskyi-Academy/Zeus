@@ -155,7 +155,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>7-SNAPSHOT</version>
+      <version>8</version>
     </dependency>
     <!--    Courses add below-->
     <dependency>
