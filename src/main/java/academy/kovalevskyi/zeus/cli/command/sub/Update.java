@@ -29,11 +29,11 @@ public class Update implements Callable<Void> {
     System.out.println("Establishing internet connection...");
     final var release = ZeusRepo.getLatestRelease();
     if (isAvailableUpdate(config.getVersion(), release.getVersion())) {
+      System.out.printf("%s is available!", release.getName());
       if (!release.getBody().isBlank()) {
         System.out.printf("What is new:%n%s%n", release.getBody());
       }
-      var asset = getJarAsset(release);
-      try (var manager = new DownloadManager(asset.getLink())) {
+      try (var manager = new DownloadManager(getJarAsset(release).getLink())) {
         var result = manager.download();
         System.out.printf("%s downloaded successfully%n", result.getAbsolutePath());
       }
