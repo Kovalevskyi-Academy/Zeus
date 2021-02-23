@@ -26,6 +26,7 @@ public class Update implements Callable<Void> {
 
   @Override
   public Void call() throws Exception {
+    System.out.println("Establishing internet connection...");
     final var release = ZeusRepo.getLatestRelease();
     if (isAvailableUpdate(config.getVersion(), release.getVersion())) {
       if (!release.getBody().isBlank()) {
@@ -33,7 +34,8 @@ public class Update implements Callable<Void> {
       }
       var asset = getJarAsset(release);
       try (var manager = new DownloadManager(asset.getLink())) {
-        manager.download();
+        var result = manager.download();
+        System.out.printf("%s downloaded successfully%n", result.getAbsolutePath());
       }
     } else {
       System.out.println("You already have the latest version of Zeus");
@@ -52,7 +54,7 @@ public class Update implements Callable<Void> {
 
   private String parseVersion(final String version) {
     final var pattern = Pattern.compile("^[vV]?(\\d+(.\\d+)*)$");
-    var matcher = pattern.matcher(version);
+    final var matcher = pattern.matcher(version);
     if (matcher.find()) {
       return matcher.group(1);
     }

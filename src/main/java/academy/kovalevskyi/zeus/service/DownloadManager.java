@@ -44,7 +44,7 @@ public class DownloadManager implements AutoCloseable {
       output.write(buffer, 0, bytes);
       System.out.print(getProgressBar());
     }
-    System.out.printf("%n%s downloaded successfully%n", result.getAbsolutePath());
+    System.out.println();
     return result;
   }
 
