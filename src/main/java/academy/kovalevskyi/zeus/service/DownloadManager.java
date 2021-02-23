@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
 
 public class DownloadManager implements AutoCloseable {
 
@@ -35,6 +36,10 @@ public class DownloadManager implements AutoCloseable {
   public File download() throws IOException {
     connection = (HttpURLConnection) new URL(link).openConnection();
     final var result = prepareResultFile(connection.getURL());
+    if (result.exists()) {
+      var message = String.format("%s already exists", result.getAbsolutePath());
+      throw new FileAlreadyExistsException(message);
+    }
     parts = connection.getContentLengthLong();
     input = connection.getInputStream();
     output = new RandomAccessFile(result, "rw");
