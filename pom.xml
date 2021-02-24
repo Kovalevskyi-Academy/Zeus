@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
-  <version>14-SNAPSHOT</version>
+  <version>14</version>
 
   <properties>
     <java.version>15</java.version>
@@ -166,7 +166,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>JavaDeepDive</artifactId>
-      <version>8</version>
+      <version>9</version>
     </dependency>
   </dependencies>
 </project>
