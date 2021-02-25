@@ -30,7 +30,7 @@ public class Pass implements Callable<Void> {
         System.out.println(errorStyleMessage());
         AnsiConsole.systemUninstall();
       } else {
-        ContainerLauncher.execute(true, request.prepareRequest());
+        ContainerLauncher.execute(request.prepareRequest());
       }
     }
     return null;
