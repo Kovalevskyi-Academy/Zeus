@@ -155,7 +155,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>10</version>
+      <version>11</version>
     </dependency>
     <!--    Courses add below-->
     <dependency>
