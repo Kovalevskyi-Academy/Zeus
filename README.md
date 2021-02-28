@@ -29,15 +29,15 @@
 
 `<COMMAND>` — any available command, example **test**
 
-##### run Zeus
+### run Zeus
 
 `java --enable-preview -jar <ZEUS> <KEY> <COMMAND> <KEY>...`
 
-##### run Zeus with another JAR file
+### run Zeus with another JAR file
 
 `java --enable-preview -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
 
-##### run Zeus with another JAR files (wildcards version, same that above)
+### run Zeus with another JAR files (wildcards version, same that above)
 
 `java --enable-preview -cp "/target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
 
@@ -65,7 +65,7 @@
 
 ## Detail about each command
 
-##### show
+### show
 
 `show` - show available courses and its keys
 
@@ -79,7 +79,7 @@
 * `-i`,`--id=<id>` - container id
 * `-h`,`--help` - show help
 
-##### style
+### style
 
 `style` - launch checkstyle for all source files of your project
 
@@ -87,7 +87,7 @@
 
 * `-h`,`--help` - show help
 
-##### test
+### test
 
 `test key -wX -dX -iX` - run test containers
 
@@ -101,7 +101,7 @@
 * `-d`,`--debug` - allow std out/error prints
 * `-h`,`--help` - show help
 
-#### pass
+### pass
 
 `pass key -wX -dX -iX` - run checkstyle and test containers to pass an exam
 
@@ -113,7 +113,7 @@
 * `-i`,`--id=<id>` - container id
 * `-h`,`--help` - show help
 
-#### maven
+### maven
 
 `maven command1 command2...` - invoke any maven commands
 
@@ -128,28 +128,28 @@
 * `-t`,`--test` - test a project
 * `-h`,`--help` - show help
 
-#### update
+### update
 
 `update` - download the latest release of Zeus
 
 ## Examples of usage
 
-##### show Zeus help
+### show Zeus help
 
 `java --enable-preview -jar Zeus-7.jar -h`
 
-##### show Zeus checkstyle help
+### show Zeus checkstyle help
 
 `java --enable-preview -jar Zeus-7.jar style -h`
 
-##### run tests
+### run tests
 
 `java --enable-preview -cp "/target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
-##### run tests (wildcards version, same that above)
+### run tests (wildcards version, same that above)
 
 `java --enable-preview -cp "/target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
-##### run tests with debug mode
+### run tests with debug mode
 
 `java --enable-preview -cp "/target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3 -D`
