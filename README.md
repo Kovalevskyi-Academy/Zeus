@@ -2,24 +2,22 @@
 
 ## Features
 
-- Packaging students projects into .jar archive
-- Checking a style of code with Checkstyle
-- Testing students solutions with jUnit
+- controlling maven of your project
+- checking a style of code with Checkstyle
+- testing students solutions with jUnit
+- downloading the latest releases of Zeus from repo
 
 ## Importantly
 
-- Zeus jar archive should be in the root folder of the student's project
-- Use java 15 with preview mode
+- Zeus should lay in the root folder of the student's project
+- use Java 15
+  with [preview mode](https://docs.oracle.com/en/java/javase/15/language/preview-language-and-vm-features.html)
 
 ## How to use
 
-**_Zeus jar archive should be in the root folder of the student's project!_**
+`<ZEUS>` — Zeus JAR file, example **Zeus-7.jar**
 
-**_Launch the command line from the root folder of your project and input the code below_**
-
-`<ZEUS>` — Zeus jar file, example **Zeus-7.jar**
-
-`<HOMEWORK>` — the name of your jar file, example **Homework.jar**
+`<HOMEWORK>` — the name of your JAR file, example **Homework.jar**
 
 `<DELIMITER>` — classpath delimiter:
 
@@ -27,47 +25,112 @@
 
 - `;` - windows
 
-`<KEY>` — any available key, example **-h**
+`<KEY>` — any available key, example **-h** or **--help**
 
 `<COMMAND>` — any available command, example **test**
 
-- all commands have own help menu, use key **-h** to get more information!
-
 ##### run Zeus
 
-`java --enable-preview -jar <ZEUS>`
+`java --enable-preview -jar <ZEUS> <KEY> <COMMAND> <KEY>...`
 
-##### run Zeus with key
+##### run Zeus with another JAR file
 
-`java --enable-preview -jar <ZEUS> <KEY>`
+`java --enable-preview -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
 
-##### run Zeus with keys
+##### run Zeus with another JAR files (wildcards version, same that above)
 
-`java --enable-preview -jar <ZEUS> <KEY> <KEY>...`
+`java --enable-preview -cp "/target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
 
-##### run Zeus command
+> * launch the command line from the root folder of your project
+> * `/target/*` will add all JAR files to classpath from **target** folder, see [more](https://riptutorial.com/java/example/12854/adding-all-jars-in-a-directory-to-the-classpath)
+> * command and keys are not required, key can be one or more
+> * `...` meaning that key can be one or more
 
-`java --enable-preview -jar <ZEUS> <COMMAND>`
+## Zeus keys
 
-##### run Zeus command with key
+* `-d`,`--dev` - developer mode
+* `-h`,`--help` - show help
+* `-V`,`--version` - show version
 
-`java --enable-preview -jar <ZEUS> <COMMAND> <KEY>`
+## Zeus commands
 
-##### run Zeus with key and command with key
+* `show` - show available courses or containers
+* `style` - run checkstyle for all or selected sources
+* `test` - run test containers
+* `pass` - run exam
+* `maven` - run maven presets or custom commands
+* `update` - download the latest Zeus release
 
-`java --enable-preview -jar <ZEUS> <KEY> <COMMAND> <KEY>`
+> all commands have own help menu, use key **-h** or **--help** to get help
 
-##### run Zeus with another jar file with key
+## Detail about each command
 
-`java --enable-preview -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>`
+##### show
 
-##### run Zeus with another jars with key using wildcards (get all jars from 'target' folder)
+`show` - show available courses and its keys
 
-`java --enable-preview -cp "./target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>`
+`show key -wX -dX -iX` - show test containers and its ids
 
-##### run Zeus command with key with another jar file
+> X - specify week/day number or test container id
 
-`java --enable-preview -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <COMMAND> <KEY>`
+* `key` - course key **_(required)_**
+* `-w`,`--week=<week>` - week number
+* `-d`,`--day=<day>` - day number
+* `-i`,`--id=<id>` - container id
+* `-h`,`--help` - show help
+
+##### style
+
+`style` - launch checkstyle for all source files of your project
+
+`style ClassName1 ClassName2...` - launch checkstyle for selected source files
+
+* `-h`,`--help` - show help
+
+##### test
+
+`test key -wX -dX -iX` - run test containers
+
+> X - specify week/day number or test container id
+
+* `key` - course key **_(required)_**
+* `-w`,`--week=<week>` - week number
+* `-d`,`--day=<day>` - day number
+* `-i`,`--id=<id>` - container id
+* `-e`,`--error` - show only errors
+* `-d`,`--debug` - allow std out/error prints
+* `-h`,`--help` - show help
+
+#### pass
+
+`pass key -wX -dX -iX` - run checkstyle and test containers to pass an exam
+
+> X - specify week/day number or test container id
+
+* `key` - course key **_(required)_**
+* `-w`,`--week=<week>` - week number
+* `-d`,`--day=<day>` - day number
+* `-i`,`--id=<id>` - container id
+* `-h`,`--help` - show help
+
+#### maven
+
+`maven command1 command2...` - invoke any maven commands
+
+`maven X` - invoke maven preset
+
+> _X_ - any key from list below
+
+* `-b`,`--build` - package a project
+* `-c`,`--clean` - clean a project
+* `-C`,`--compile` - compile a project
+* `-m`,`--maven=<mavenHome>` - maven home directory _**(optional)**_
+* `-t`,`--test` - test a project
+* `-h`,`--help` - show help
+
+#### update
+
+`update` - download the latest release of Zeus
 
 ## Examples of usage
 
@@ -81,12 +144,12 @@
 
 ##### run tests
 
-`java --enable-preview -cp "./target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
+`java --enable-preview -cp "/target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
 ##### run tests (wildcards version, same that above)
 
-`java --enable-preview -cp "./target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
+`java --enable-preview -cp "/target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
 ##### run tests with debug mode
 
-`java --enable-preview -cp "./target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty -d test jcb -w0 -d3`
+`java --enable-preview -cp "/target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3 -D`
