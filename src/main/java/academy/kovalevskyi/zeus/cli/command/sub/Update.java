@@ -14,7 +14,7 @@ import picocli.CommandLine.Command;
 
 @Command(
     name = "update",
-    description = "Check and download the latest Zeus",
+    description = "Download the latest release of Zeus",
     mixinStandardHelpOptions = true)
 public class Update implements Callable<Void> {
 

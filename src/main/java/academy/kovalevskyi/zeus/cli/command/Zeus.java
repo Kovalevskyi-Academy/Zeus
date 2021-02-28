@@ -14,20 +14,20 @@ import picocli.CommandLine.Option;
     name = "Zeus",
     mixinStandardHelpOptions = true,
     versionProvider = VersionProvider.class,
-    footer = "%nCopyright (c) 2021",
+    footer = "Copyright (c) 2021",
     subcommands = {Show.class, Checkstyle.class, Test.class, Pass.class, Maven.class, Update.class}
 )
 public class Zeus implements Runnable {
 
-  @Option(names = {"-d", "--debug"}, description = "Debug mode")
-  private boolean debug;
+  @Option(names = {"-d", "--dev"}, description = "Developer mode")
+  private boolean dev;
 
   @Override
   public void run() {
     System.out.println("Zeus the Mighty greets you, stranger ;)");
   }
 
-  public boolean isDebug() {
-    return debug;
+  public boolean isDev() {
+    return dev;
   }
 }

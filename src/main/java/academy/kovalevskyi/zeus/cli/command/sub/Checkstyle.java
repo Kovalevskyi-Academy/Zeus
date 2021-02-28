@@ -18,7 +18,7 @@ import picocli.CommandLine.Parameters;
 
 @Command(
     name = "style",
-    description = "Run checkstyle for all project or individual sources",
+    description = "Run checkstyle for all or selected sources",
     mixinStandardHelpOptions = true)
 public class Checkstyle implements Callable<Void> {
 
