@@ -43,7 +43,7 @@
 
 > * launch the command line from the root folder of your project
 > * `/target/*` will add all JAR files to classpath from **target** folder, see [more](https://riptutorial.com/java/example/12854/adding-all-jars-in-a-directory-to-the-classpath)
-> * command and keys are not required, key can be one or more
+> * command and keys are not required
 > * `...` meaning that key can be one or more
 
 ## Zeus keys
