@@ -4,6 +4,7 @@ import academy.kovalevskyi.testing.service.FrameworkProperty;
 import academy.kovalevskyi.testing.util.ContainerLauncher;
 import academy.kovalevskyi.zeus.cli.group.CourseRequest;
 import academy.kovalevskyi.zeus.util.FileExplorer;
+import academy.kovalevskyi.zeus.util.JarLoader;
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -14,7 +15,8 @@ import picocli.CommandLine.Option;
     mixinStandardHelpOptions = true)
 public class Test implements Runnable {
 
-  static final String EMPTY_CLASSPATH = "Add your jar file first into classpath!";
+  static final String EMPTY_CLASSPATH = "You cannot launch tests, because Zeus did not find your "
+      + "JAR file in classpath or output folder of your project!";
 
   @Option(names = {"-e", "--error"}, description = "Show only errors")
   private boolean error;
@@ -27,12 +29,12 @@ public class Test implements Runnable {
 
   @Override
   public void run() {
-    if (FileExplorer.isJarAbsentInClasspath()) {
-      System.out.println(EMPTY_CLASSPATH);
-    } else {
+    if (JarLoader.isDynamicallyLoaded() || FileExplorer.isClasspathNotEmpty()) {
       System.setProperty(FrameworkProperty.ERROR_MODE, String.valueOf(error));
       System.setProperty(FrameworkProperty.DEBUG_MODE, String.valueOf(debug));
       ContainerLauncher.execute(request.prepareRequest());
+    } else {
+      System.out.println(EMPTY_CLASSPATH);
     }
   }
 }

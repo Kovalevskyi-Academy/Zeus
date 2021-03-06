@@ -4,6 +4,7 @@ import academy.kovalevskyi.testing.service.State;
 import academy.kovalevskyi.testing.util.ContainerLauncher;
 import academy.kovalevskyi.zeus.cli.group.CourseRequest;
 import academy.kovalevskyi.zeus.util.FileExplorer;
+import academy.kovalevskyi.zeus.util.JarLoader;
 import java.util.concurrent.Callable;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
@@ -21,9 +22,7 @@ public class Pass implements Callable<Void> {
 
   @Override
   public Void call() throws Exception {
-    if (FileExplorer.isJarAbsentInClasspath()) {
-      System.out.println(Test.EMPTY_CLASSPATH);
-    } else {
+    if (JarLoader.isDynamicallyLoaded() || FileExplorer.isClasspathNotEmpty()) {
       var errors = Checkstyle.checkAllSourceFiles();
       if (errors > 0) {
         AnsiConsole.systemInstall();
@@ -32,6 +31,8 @@ public class Pass implements Callable<Void> {
       } else {
         ContainerLauncher.execute(request.prepareRequest());
       }
+    } else {
+      System.out.println(Test.EMPTY_CLASSPATH);
     }
     return null;
   }
