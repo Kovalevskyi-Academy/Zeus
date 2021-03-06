@@ -33,6 +33,9 @@
 
 `java --enable-preview -jar <ZEUS> <KEY> <COMMAND> <KEY>...`
 
+> The two examples below demonstrate how to add your homework manually.
+> But, actually, Zeus does this automatically.
+
 ### run Zeus with another JAR file
 
 `java --enable-preview -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
@@ -144,12 +147,12 @@
 
 ### run tests
 
+`java --enable-preview -jar Zeus-7.jar test jcb -w0 -d3`
+
+### run tests (manually adding your JAR into classpath)
+
 `java --enable-preview -cp "/target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
-### run tests (wildcards version, same that above)
+### run tests (manually adding your JAR into classpath, wildcards version, same that above)
 
 `java --enable-preview -cp "/target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
-
-### run tests with debug mode
-
-`java --enable-preview -cp "/target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3 -D`
