@@ -37,7 +37,7 @@ public class Checkstyle implements Callable<Void> {
   }
 
   static int checkAllSourceFiles() throws IOException {
-    final var javaFiles = FileExplorer.getFiles(getSourceFilesDirectory(), FileType.JAVA);
+    final var javaFiles = FileExplorer.getFiles(getSourceFilesDirectory(), true, FileType.JAVA);
     return CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, javaFiles);
   }
 
@@ -45,7 +45,7 @@ public class Checkstyle implements Callable<Void> {
     final var preparedNames = classes
         .stream()
         .map(name -> {
-          if (!name.endsWith(FileType.JAVA.extension)) {
+          if (!FileExplorer.match(name, FileType.JAVA)) {
             return String.format("%s%s", name, FileType.JAVA.extension);
           }
           return name;
@@ -53,7 +53,7 @@ public class Checkstyle implements Callable<Void> {
         .collect(Collectors.toUnmodifiableList());
 
     final var result = FileExplorer
-        .getFiles(getSourceFilesDirectory(), FileType.JAVA)
+        .getFiles(getSourceFilesDirectory(), true, FileType.JAVA)
         .stream()
         .filter(file -> preparedNames.contains(file.getName()))
         .collect(Collectors.toUnmodifiableList());

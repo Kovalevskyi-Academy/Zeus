@@ -1,12 +1,13 @@
 package academy.kovalevskyi.zeus.cli.command.sub;
 
+import academy.kovalevskyi.zeus.engine.maven.Configuration;
 import academy.kovalevskyi.zeus.engine.maven.MavenEngine;
 import academy.kovalevskyi.zeus.model.github.Asset;
 import academy.kovalevskyi.zeus.model.github.Release;
 import academy.kovalevskyi.zeus.service.DownloadManager;
-import academy.kovalevskyi.zeus.service.ZeusRepo;
 import academy.kovalevskyi.zeus.util.FileExplorer;
 import academy.kovalevskyi.zeus.util.FileType;
+import academy.kovalevskyi.zeus.util.ZeusRepo;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 import org.apache.maven.model.Model;
@@ -21,7 +22,7 @@ public class Update implements Callable<Void> {
   private final Model config;
 
   public Update() {
-    config = MavenEngine.getConfig();
+    config = MavenEngine.getConfig(Configuration.ZEUS);
   }
 
   @Override

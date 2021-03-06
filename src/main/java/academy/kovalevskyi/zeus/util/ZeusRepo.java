@@ -1,4 +1,4 @@
-package academy.kovalevskyi.zeus.service;
+package academy.kovalevskyi.zeus.util;
 
 import academy.kovalevskyi.zeus.model.github.Release;
 import com.google.gson.Gson;
@@ -10,7 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ZeusRepo {
+public final class ZeusRepo {
 
   private static final URL URL;
 

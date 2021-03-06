@@ -3,13 +3,7 @@ package academy.kovalevskyi.zeus.engine.maven;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Request {
-
-  private final List<String> commands;
-
-  private Request(List<String> commands) {
-    this.commands = commands;
-  }
+public record Request(List<String> commands) {
 
   public List<String> getCommands() {
     return commands;

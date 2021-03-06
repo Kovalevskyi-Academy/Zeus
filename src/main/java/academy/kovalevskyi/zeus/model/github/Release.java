@@ -2,7 +2,7 @@ package academy.kovalevskyi.zeus.model.github;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Release {
+public final class Release {
 
   @SerializedName("html_url")
   private String link;

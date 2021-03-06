@@ -2,7 +2,7 @@ package academy.kovalevskyi.zeus.model.github;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Asset {
+public final class Asset {
 
   @SerializedName("name")
   private String name;

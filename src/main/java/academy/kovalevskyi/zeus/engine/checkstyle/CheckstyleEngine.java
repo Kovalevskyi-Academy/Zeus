@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-public class CheckstyleEngine {
+public final class CheckstyleEngine {
 
   public static int check(final Style style, final File file) throws IOException {
     final var warnings = process(style, file);
