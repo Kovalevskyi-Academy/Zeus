@@ -16,7 +16,7 @@ import picocli.CommandLine.Option;
 public class Test implements Runnable {
 
   static final String EMPTY_CLASSPATH = "You cannot launch tests, because Zeus did not find your "
-      + "JAR file in classpath or output folder of your project!";
+      + "JAR file in classpath or output folder or output folder of your project is not exist!";
 
   @Option(names = {"-e", "--error"}, description = "Show only errors")
   private boolean error;
