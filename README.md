@@ -101,7 +101,7 @@
 * `-d`,`--day=<day>` - day number
 * `-i`,`--id=<id>` - container id
 * `-e`,`--error` - show only errors
-* `-D`,`--debug` - allow std out/error prints
+* `-D`,`--debug` - allow std out/error prints and show time of each test
 * `-h`,`--help` - show help
 
 ### pass
