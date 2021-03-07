@@ -4,12 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public final class Release {
 
-  @SerializedName("html_url")
-  private String link;
-
-  @SerializedName("name")
-  private String name;
-
   @SerializedName("tag_name")
   private String version;
 
@@ -21,14 +15,6 @@ public final class Release {
 
   public Asset[] getAssets() {
     return assets;
-  }
-
-  public String getLink() {
-    return link;
-  }
-
-  public String getName() {
-    return name;
   }
 
   public String getVersion() {

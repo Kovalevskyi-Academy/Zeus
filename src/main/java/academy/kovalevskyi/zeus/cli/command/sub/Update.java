@@ -30,7 +30,7 @@ public class Update implements Callable<Void> {
     System.out.println("Establishing internet connection...");
     final var release = ZeusRepo.getLatestRelease();
     if (isAvailableUpdate(config.getVersion(), release.getVersion())) {
-      System.out.printf("%s is available!%n", release.getName());
+      System.out.printf("Zeus %s is available!%n", release.getVersion());
       if (!release.getBody().isBlank()) {
         System.out.printf("What is new:%n%s%n", release.getBody());
       }
