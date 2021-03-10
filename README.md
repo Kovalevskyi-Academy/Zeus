@@ -74,6 +74,8 @@
 
 `show key -wX -dX -iX` - show test containers and its ids
 
+`show -h` - show help of usage
+
 > X - specify week/day number or test container id
 
 * `key` - course key **_(required)_**
@@ -88,11 +90,15 @@
 
 `style ClassName1 ClassName2...` - launch checkstyle for selected source files
 
+`style -h` - show help of usage
+
 * `-h`,`--help` - show help
 
 ### test
 
-`test key -wX -dX -iX` - run test containers
+`test key -wX -dX -iX -e -D -v` - run test containers
+
+`test -h` - show help of usage
 
 > X - specify week/day number or test container id
 
@@ -101,12 +107,15 @@
 * `-d`,`--day=<day>` - day number
 * `-i`,`--id=<id>` - container id
 * `-e`,`--error` - show only errors
-* `-D`,`--debug` - allow std out/error prints and show time of each test
+* `-D`,`--debug` - show std out/error prints and time of each test
+* `-v`,`--verbose` - show extra long error messages
 * `-h`,`--help` - show help
 
 ### pass
 
 `pass key -wX -dX -iX` - run checkstyle and test containers to pass an exam
+
+`pass -h` - show help of usage
 
 > X - specify week/day number or test container id
 
@@ -118,16 +127,18 @@
 
 ### maven
 
-`maven command1 command2...` - invoke any maven commands
+`maven -m"dir" command1 command2...` - invoke any maven commands
 
-`maven X` - invoke maven preset
+`maven -m"dir" X` - invoke maven preset
+
+`maven -h` - show help of usage
 
 > _X_ - any key from list below
 
 * `-b`,`--build` - package a project
 * `-c`,`--clean` - clean a project
 * `-C`,`--compile` - compile a project
-* `-m`,`--maven=<mavenHome>` - maven home directory _**(optional)**_
+* `-m`,`--maven=<mavenHome>` - maven home directory _**(optional, if M2_HOME absent in your system)**_
 * `-t`,`--test` - test a project
 * `-h`,`--help` - show help
 
