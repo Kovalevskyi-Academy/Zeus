@@ -21,8 +21,11 @@ public class Test implements Runnable {
   @Option(names = {"-e", "--error"}, description = "Show only errors")
   private boolean error;
 
-  @Option(names = {"-D", "--debug"}, description = "Allow std out/error prints")
+  @Option(names = {"-D", "--debug"}, description = "Show std out/error prints")
   private boolean debug;
+
+  @Option(names = {"-v", "--verbose"}, description = "Show extra long error messages")
+  private boolean verbose;
 
   @ArgGroup(exclusive = false, multiplicity = "1")
   private final CourseRequest request = new CourseRequest();
@@ -32,6 +35,7 @@ public class Test implements Runnable {
     if (JarLoader.isDynamicallyLoaded() || FileExplorer.isClasspathNotEmpty()) {
       System.setProperty(FrameworkProperty.ERROR_MODE, String.valueOf(error));
       System.setProperty(FrameworkProperty.DEBUG_MODE, String.valueOf(debug));
+      System.setProperty(FrameworkProperty.VERBOSE_MODE, String.valueOf(verbose));
       ContainerLauncher.execute(request.prepareRequest());
     } else {
       System.out.println(EMPTY_CLASSPATH);
