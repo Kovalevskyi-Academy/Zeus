@@ -35,7 +35,7 @@ public class Update implements Callable<Void> {
         System.out.printf("What is new:%n%s%n", release.getBody());
       }
       try (var manager = new DownloadManager(getJarAsset(release).getLink())) {
-        var result = manager.download();
+        var result = manager.download(true);
         System.out.printf("%s downloaded successfully%n", result.getAbsolutePath());
       }
     } else {

@@ -29,27 +29,31 @@ public class DownloadManager implements AutoCloseable {
     this.link = link;
     this.directory = directory;
     this.buffer = new byte[1024];
-    this.template = "\r%3.0f%% [%-100s] %,d/%,d bytes";
+    this.template = "\r%3.1f%% [%-100s] %,d/%,d bytes";
     this.part = 0;
   }
 
-  public File download() throws IOException {
+  public File download(final boolean showProgress) throws IOException {
     connection = (HttpURLConnection) new URL(link).openConnection();
+    parts = connection.getContentLengthLong();
     final var result = prepareResultFile(connection.getURL());
-    if (result.exists()) {
+    if (result.exists() && result.length() == parts) {
       var message = String.format("%s already exists", result.getAbsolutePath());
       throw new FileAlreadyExistsException(message);
     }
-    parts = connection.getContentLengthLong();
     input = connection.getInputStream();
     output = new RandomAccessFile(result, "rw");
     var bytes = 0;
     while ((bytes = input.read(buffer)) != -1) {
       part += bytes;
       output.write(buffer, 0, bytes);
-      System.out.print(getProgressBar());
+      if (showProgress) {
+        System.out.print(getProgressBar());
+      }
     }
-    System.out.println();
+    if (showProgress) {
+      System.out.println();
+    }
     return result;
   }
 
