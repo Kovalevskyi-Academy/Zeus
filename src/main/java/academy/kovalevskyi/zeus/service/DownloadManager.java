@@ -35,8 +35,8 @@ public class DownloadManager implements AutoCloseable {
 
   public File download(final boolean showProgress) throws IOException {
     connection = (HttpURLConnection) new URL(link).openConnection();
-    parts = connection.getContentLengthLong();
     final var result = prepareResultFile(connection.getURL());
+    parts = connection.getContentLengthLong();
     if (result.exists() && result.length() == parts) {
       var message = String.format("%s already exists", result.getAbsolutePath());
       throw new FileAlreadyExistsException(message);
