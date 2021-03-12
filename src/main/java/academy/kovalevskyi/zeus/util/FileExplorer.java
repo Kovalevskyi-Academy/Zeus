@@ -2,7 +2,6 @@ package academy.kovalevskyi.zeus.util;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,14 +26,6 @@ public final class FileExplorer {
 
   public static boolean match(final String fileName, final FileType type) {
     return fileName.toLowerCase().endsWith(type.extension);
-  }
-
-  public static boolean isClasspathNotEmpty() {
-    return Arrays
-        .stream(JAVA_CLASSPATH.split(File.pathSeparator))
-        .filter(file -> match(file, FileType.JAR))
-        .distinct()
-        .count() > 1;
   }
 
   public static List<File> getFiles(

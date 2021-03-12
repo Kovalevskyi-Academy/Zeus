@@ -27,6 +27,12 @@ public class Checkstyle implements Callable<Void> {
   @Parameters(description = "Classes names to check with checkstyle")
   private List<String> classNames;
 
+  static int checkAllSourceFiles() throws IOException {
+    final var javaFiles = FileExplorer.getFiles(getSourceFilesDirectory(), true, FileType.JAVA);
+    return CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, javaFiles);
+  }
+
+  @Override
   public Void call() throws Exception {
     if (classNames == null) {
       checkAllSourceFiles();
@@ -36,10 +42,15 @@ public class Checkstyle implements Callable<Void> {
     return null;
   }
 
-  static int checkAllSourceFiles() throws IOException {
-    final var javaFiles = FileExplorer.getFiles(getSourceFilesDirectory(), true, FileType.JAVA);
-    return CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, javaFiles);
+  private static File getSourceFilesDirectory() throws FileNotFoundException {
+    final var directory = new File(FileExplorer.JAVA_SOURCES);
+    if (!directory.exists()) {
+      throw new FileNotFoundException("Directory of java source files is not exist!");
+    } else {
+      return directory;
+    }
   }
+
 
   private void checkAllSourceFiles(final List<String> classes) throws IOException {
     final var preparedNames = classes
@@ -80,14 +91,5 @@ public class Checkstyle implements Callable<Void> {
         .format("%s is not found on your project!", name)
         .reset()
         .toString();
-  }
-
-  private static File getSourceFilesDirectory() throws FileNotFoundException {
-    final var directory = new File(FileExplorer.JAVA_SOURCES);
-    if (!directory.exists()) {
-      throw new FileNotFoundException("Directory of java source files is not exist!");
-    } else {
-      return directory;
-    }
   }
 }

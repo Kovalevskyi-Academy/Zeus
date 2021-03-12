@@ -5,12 +5,12 @@ import java.util.List;
 
 public record Request(List<String> commands) {
 
-  public List<String> getCommands() {
-    return commands;
-  }
-
   public static Builder builder() {
     return new Builder();
+  }
+
+  public List<String> getCommands() {
+    return commands;
   }
 
   public static class Builder {

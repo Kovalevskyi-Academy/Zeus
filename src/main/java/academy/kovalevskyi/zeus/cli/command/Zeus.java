@@ -22,12 +22,12 @@ public class Zeus implements Runnable {
   @Option(names = {"-d", "--dev"}, description = "Developer mode")
   private static boolean dev;
 
+  public static boolean isDev() {
+    return dev;
+  }
+
   @Override
   public void run() {
     System.out.println("Zeus the Mighty greets you, stranger ;)");
-  }
-
-  public static boolean isDev() {
-    return dev;
   }
 }

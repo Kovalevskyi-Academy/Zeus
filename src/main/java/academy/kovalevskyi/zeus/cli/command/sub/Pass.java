@@ -3,7 +3,6 @@ package academy.kovalevskyi.zeus.cli.command.sub;
 import academy.kovalevskyi.testing.service.State;
 import academy.kovalevskyi.testing.util.ContainerLauncher;
 import academy.kovalevskyi.zeus.cli.group.CourseRequest;
-import academy.kovalevskyi.zeus.util.FileExplorer;
 import academy.kovalevskyi.zeus.util.JarLoader;
 import java.util.concurrent.Callable;
 import org.fusesource.jansi.Ansi;
@@ -22,7 +21,7 @@ public class Pass implements Callable<Void> {
 
   @Override
   public Void call() throws Exception {
-    if (JarLoader.isDynamicallyLoaded() || FileExplorer.isClasspathNotEmpty()) {
+    if (JarLoader.isManuallyLoaded() || JarLoader.isDynamicallyLoaded()) {
       var errors = Checkstyle.checkAllSourceFiles();
       if (errors > 0) {
         AnsiConsole.systemInstall();
