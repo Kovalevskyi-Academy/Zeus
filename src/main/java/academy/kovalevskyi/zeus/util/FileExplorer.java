@@ -13,10 +13,12 @@ public final class FileExplorer {
   public static final String JAVA_CLASSPATH;
   public static final String JAVA_SOURCES;
   public static final String WORKING_DIRECTORY;
+  public static final String TMP_DIRECTORY;
   public static final String OUTPUT_DIRECTORY;
 
   static {
     WORKING_DIRECTORY = System.getProperty("user.dir");
+    TMP_DIRECTORY = System.getProperty("java.io.tmpdir");
     M2_HOME = System.getenv("M2_HOME");
     JAVA_CLASSPATH = System.getProperty("java.class.path");
     JAVA_SOURCES = String.format("%s%2$ssrc", WORKING_DIRECTORY, File.separator);
