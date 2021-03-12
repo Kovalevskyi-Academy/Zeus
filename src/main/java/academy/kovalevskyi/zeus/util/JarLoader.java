@@ -1,8 +1,13 @@
 package academy.kovalevskyi.zeus.util;
 
+import academy.kovalevskyi.zeus.cli.command.Zeus;
 import java.io.File;
 import java.io.IOException;
-import java.lang.instrument.Instrumentation;
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.jar.JarFile;
@@ -16,28 +21,29 @@ public final class JarLoader {
     JAR_FILES = initializeList();
   }
 
-  public static void agentmain(String name, Instrumentation instrumentation) throws IOException {
-    for (var jar : JAR_FILES) {
-      instrumentation.appendToSystemClassLoaderSearch(new JarFile(jar));
-    }
-  }
-
   public static boolean isDynamicallyLoaded() {
     if (!JAR_FILES.isEmpty()) {
-      initializeJavaAgent();
+      try {
+        initializeJavaAgent();
+      } catch (Exception e) {
+        if (Zeus.isDev()) {
+          e.printStackTrace();
+        }
+        return false;
+      }
       return true;
     }
     return false;
   }
 
-  private static void initializeJavaAgent() {
-    final var pid = ProcessHandle.current().toString();
-    final var agent = new File(JarLoader.class
-        .getProtectionDomain()
-        .getCodeSource()
-        .getLocation()
-        .getPath());
-    ByteBuddyAgent.attach(agent, pid);
+  private static void initializeJavaAgent() throws IOException {
+    if (pathContainsIllegalSymbols()) {
+      throw new UnsupportedEncodingException("UTF-8 symbols is not supported in path");
+    }
+    final var instrumentation = ByteBuddyAgent.install();
+    for (var jar : JAR_FILES) {
+      instrumentation.appendToSystemClassLoaderSearch(new JarFile(jar));
+    }
   }
 
   private static List<File> initializeList() {
@@ -46,5 +52,17 @@ public final class JarLoader {
     } catch (IllegalArgumentException e) {
       return Collections.emptyList();
     }
+  }
+
+  private static boolean pathContainsIllegalSymbols() {
+    try {
+      StandardCharsets.US_ASCII.newDecoder()
+          .onMalformedInput(CodingErrorAction.REPORT)
+          .onUnmappableCharacter(CodingErrorAction.REPORT)
+          .decode(ByteBuffer.wrap(FileExplorer.WORKING_DIRECTORY.getBytes(StandardCharsets.UTF_8)));
+    } catch (CharacterCodingException e) {
+      return true;
+    }
+    return false;
   }
 }
