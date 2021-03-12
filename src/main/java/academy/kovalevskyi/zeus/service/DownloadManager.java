@@ -1,6 +1,7 @@
 package academy.kovalevskyi.zeus.service;
 
 import academy.kovalevskyi.zeus.util.FileExplorer;
+import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.FileAlreadyExistsException;
 
-public class DownloadManager implements AutoCloseable {
+public class DownloadManager implements Closeable {
 
   private final String directory;
   private final String link;
@@ -18,7 +19,6 @@ public class DownloadManager implements AutoCloseable {
   private long parts;
   private long part;
   private InputStream input;
-  private RandomAccessFile output;
   private HttpURLConnection connection;
 
   public DownloadManager(final String link) {
@@ -29,30 +29,36 @@ public class DownloadManager implements AutoCloseable {
     this.link = link;
     this.directory = directory;
     this.buffer = new byte[1024];
-    this.template = "\r%3.1f%% [%-100s] %,d/%,d bytes";
+    this.template = "\r%3.2f%% [%-100s] %,d/%,d bytes";
     this.part = 0;
   }
 
   public File download(final boolean showProgress) throws IOException {
     connection = (HttpURLConnection) new URL(link).openConnection();
-    final var result = prepareResultFile(connection.getURL());
+    final var name = parseJarName(connection.getURL());
+    final var result = prepareResultFile(name);
+    final var tmp = prepareTmpFile(name);
     parts = connection.getContentLengthLong();
     if (result.exists() && result.length() == parts) {
       var message = String.format("%s already exists", result.getAbsolutePath());
       throw new FileAlreadyExistsException(message);
     }
     input = connection.getInputStream();
-    output = new RandomAccessFile(result, "rw");
-    var bytes = 0;
-    while ((bytes = input.read(buffer)) != -1) {
-      part += bytes;
-      output.write(buffer, 0, bytes);
+    try (var output = new RandomAccessFile(tmp, "rw")) {
+      var bytes = 0;
+      while ((bytes = input.read(buffer)) != -1) {
+        part += bytes;
+        output.write(buffer, 0, bytes);
+        if (showProgress) {
+          System.out.print(prepareProgressBar());
+        }
+      }
       if (showProgress) {
-        System.out.print(getProgressBar());
+        System.out.println();
       }
     }
-    if (showProgress) {
-      System.out.println();
+    if (!tmp.renameTo(result)) {
+      throw new NullPointerException("Something went wrong while file was moving");
     }
     return result;
   }
@@ -60,19 +66,26 @@ public class DownloadManager implements AutoCloseable {
   @Override
   public void close() throws IOException {
     input.close();
-    output.close();
     connection.disconnect();
   }
 
-  private File prepareResultFile(final URL url) {
+  private File prepareResultFile(final String name) {
     if (!new File(directory).isDirectory()) {
       throw new IllegalArgumentException(String.format("%s is not a directory", directory));
     }
-    var name = url.getFile().substring(url.getFile().lastIndexOf("/") + 1);
     return new File(String.format("%s%s%s", directory, File.separator, name));
   }
 
-  private String getProgressBar() {
+  private File prepareTmpFile(final String name) {
+    return new File(String.format("%s%s%s.tmp", FileExplorer.TMP_DIRECTORY, File.separator, name));
+  }
+
+  private String parseJarName(final URL url) {
+    var file = url.getFile();
+    return file.substring(file.lastIndexOf("/") + 1);
+  }
+
+  private String prepareProgressBar() {
     return String.format(template, calculateProgress(), prepareProgressLine(), part, parts);
   }
 
