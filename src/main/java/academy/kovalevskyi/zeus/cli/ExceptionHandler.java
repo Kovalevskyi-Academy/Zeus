@@ -13,9 +13,8 @@ import picocli.CommandLine.ParseResult;
 public class ExceptionHandler implements IExecutionExceptionHandler {
 
   public int handleExecutionException(Exception e, CommandLine command, ParseResult result) {
-    final var zeus = (Zeus) command.getParent().getCommand();
     var report = Ansi.ansi().fgRed();
-    if (zeus.isDev()) {
+    if (Zeus.isDev()) {
       var byteArray = new ByteArrayOutputStream();
       try (var stream = new PrintStream(byteArray)) {
         e.printStackTrace(stream);
