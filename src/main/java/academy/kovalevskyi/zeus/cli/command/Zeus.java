@@ -20,14 +20,14 @@ import picocli.CommandLine.Option;
 public class Zeus implements Runnable {
 
   @Option(names = {"-d", "--dev"}, description = "Developer mode")
-  private boolean dev;
+  private static boolean dev;
 
   @Override
   public void run() {
     System.out.println("Zeus the Mighty greets you, stranger ;)");
   }
 
-  public boolean isDev() {
+  public static boolean isDev() {
     return dev;
   }
 }
