@@ -77,9 +77,6 @@
                 <manifest>
                   <mainClass>academy.kovalevskyi.zeus.TheMighty</mainClass>
                 </manifest>
-                <manifestEntries>
-                  <Agent-Class>academy.kovalevskyi.zeus.util.JarLoader</Agent-Class>
-                </manifestEntries>
               </archive>
             </configuration>
           </execution>
