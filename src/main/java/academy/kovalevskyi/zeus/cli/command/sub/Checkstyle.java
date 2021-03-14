@@ -32,6 +32,38 @@ public class Checkstyle implements Callable<Void> {
     return CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, javaFiles);
   }
 
+  private void checkAllSourceFiles(final List<String> classes) throws IOException {
+    final var preparedNames = classes
+            .stream()
+            .map(name -> {
+              if (!FileExplorer.match(name, FileType.JAVA)) {
+                return String.format("%s%s", name, FileType.JAVA.extension);
+              }
+              return name;
+            })
+            .collect(Collectors.toUnmodifiableList());
+
+    final var result = FileExplorer
+            .getFiles(getSourceFilesDirectory(), true, FileType.JAVA)
+            .stream()
+            .filter(file -> preparedNames.contains(file.getName()))
+            .collect(Collectors.toUnmodifiableList());
+
+    if (result.size() != classes.size()) {
+      var existedFileNames = result.stream().map(File::getName).collect(Collectors.toList());
+
+      AnsiConsole.systemInstall();
+      preparedNames.forEach(name -> {
+        if (!existedFileNames.contains(name)) {
+          System.out.println(prepareFileNotFoundMessage(name));
+        }
+      });
+      AnsiConsole.systemUninstall();
+    }
+
+    CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, result);
+  }
+
   @Override
   public Void call() throws Exception {
     if (classNames == null) {
@@ -49,39 +81,6 @@ public class Checkstyle implements Callable<Void> {
     } else {
       return directory;
     }
-  }
-
-
-  private void checkAllSourceFiles(final List<String> classes) throws IOException {
-    final var preparedNames = classes
-        .stream()
-        .map(name -> {
-          if (!FileExplorer.match(name, FileType.JAVA)) {
-            return String.format("%s%s", name, FileType.JAVA.extension);
-          }
-          return name;
-        })
-        .collect(Collectors.toUnmodifiableList());
-
-    final var result = FileExplorer
-        .getFiles(getSourceFilesDirectory(), true, FileType.JAVA)
-        .stream()
-        .filter(file -> preparedNames.contains(file.getName()))
-        .collect(Collectors.toUnmodifiableList());
-
-    if (result.size() != classes.size()) {
-      var existedFileNames = result.stream().map(File::getName).collect(Collectors.toList());
-
-      AnsiConsole.systemInstall();
-      preparedNames.forEach(name -> {
-        if (!existedFileNames.contains(name)) {
-          System.out.println(prepareFileNotFoundMessage(name));
-        }
-      });
-      AnsiConsole.systemUninstall();
-    }
-
-    CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, result);
   }
 
   private String prepareFileNotFoundMessage(final String name) {
