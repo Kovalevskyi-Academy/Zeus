@@ -34,20 +34,20 @@ public class Checkstyle implements Callable<Void> {
 
   private void checkAllSourceFiles(final List<String> classes) throws IOException {
     final var preparedNames = classes
-            .stream()
-            .map(name -> {
-              if (!FileExplorer.match(name, FileType.JAVA)) {
-                return String.format("%s%s", name, FileType.JAVA.extension);
-              }
-              return name;
-            })
-            .collect(Collectors.toUnmodifiableList());
+        .stream()
+        .map(name -> {
+          if (!FileExplorer.match(name, FileType.JAVA)) {
+            return String.format("%s%s", name, FileType.JAVA.extension);
+          }
+          return name;
+        })
+        .collect(Collectors.toUnmodifiableList());
 
     final var result = FileExplorer
-            .getFiles(getSourceFilesDirectory(), true, FileType.JAVA)
-            .stream()
-            .filter(file -> preparedNames.contains(file.getName()))
-            .collect(Collectors.toUnmodifiableList());
+        .getFiles(getSourceFilesDirectory(), true, FileType.JAVA)
+        .stream()
+        .filter(file -> preparedNames.contains(file.getName()))
+        .collect(Collectors.toUnmodifiableList());
 
     if (result.size() != classes.size()) {
       var existedFileNames = result.stream().map(File::getName).collect(Collectors.toList());
