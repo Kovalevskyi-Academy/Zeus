@@ -10,8 +10,7 @@
 ## Importantly
 
 - Zeus should lay in the root folder of the student's project
-- use Java 15
-  with [preview mode](https://docs.oracle.com/en/java/javase/15/language/preview-language-and-vm-features.html)
+- use Java 16 and above
 
 ## How to use
 
@@ -31,18 +30,18 @@
 
 ### run Zeus
 
-`java --enable-preview -jar <ZEUS> <KEY> <COMMAND> <KEY>...`
+`java -jar <ZEUS> <KEY> <COMMAND> <KEY>...`
 
 > The two examples below demonstrate how to add your homework manually.
 > But, actually, Zeus does this automatically.
 
 ### run Zeus with another JAR file
 
-`java --enable-preview -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
+`java -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
 
 ### run Zeus with another JAR files (wildcards version, same that above)
 
-`java --enable-preview -cp "/target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
+`java -cp "/target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
 
 > * launch the command line from the root folder of your project
 > * `/target/*` will add all JAR files to classpath from **target** folder, see [more](https://riptutorial.com/java/example/12854/adding-all-jars-in-a-directory-to-the-classpath)
@@ -150,20 +149,20 @@
 
 ### show Zeus help
 
-`java --enable-preview -jar Zeus-7.jar -h`
+`java -jar Zeus-7.jar -h`
 
 ### show Zeus checkstyle help
 
-`java --enable-preview -jar Zeus-7.jar style -h`
+`java -jar Zeus-7.jar style -h`
 
 ### run tests
 
-`java --enable-preview -jar Zeus-7.jar test jcb -w0 -d3`
+`java -jar Zeus-7.jar test jcb -w0 -d3`
 
 ### run tests (manually adding your JAR into classpath)
 
-`java --enable-preview -cp "/target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
+`java -cp "/target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
 
 ### run tests (manually adding your JAR into classpath, wildcards version, same that above)
 
-`java --enable-preview -cp "/target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
+`java -cp "/target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
