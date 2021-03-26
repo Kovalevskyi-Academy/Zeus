@@ -2,6 +2,7 @@ package academy.kovalevskyi.zeus.cli.command.sub;
 
 import academy.kovalevskyi.testing.service.State;
 import academy.kovalevskyi.testing.util.ContainerLauncher;
+import academy.kovalevskyi.testing.util.ContainerManager;
 import academy.kovalevskyi.zeus.cli.group.CourseRequest;
 import academy.kovalevskyi.zeus.util.JarLoader;
 import java.util.concurrent.Callable;
@@ -28,7 +29,9 @@ public class Pass implements Callable<Void> {
         System.out.println(errorStyleMessage());
         AnsiConsole.systemUninstall();
       } else {
-        ContainerLauncher.execute(request.prepareRequest());
+        var containers =
+            ContainerManager.getContainers(request.prepareRequest(), "academy.kovalevskyi");
+        ContainerLauncher.execute(containers, false, false, false);
       }
     } else {
       System.out.println(Test.EMPTY_CLASSPATH);

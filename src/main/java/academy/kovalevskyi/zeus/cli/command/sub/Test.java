@@ -1,7 +1,7 @@
 package academy.kovalevskyi.zeus.cli.command.sub;
 
-import academy.kovalevskyi.testing.service.FrameworkProperty;
 import academy.kovalevskyi.testing.util.ContainerLauncher;
+import academy.kovalevskyi.testing.util.ContainerManager;
 import academy.kovalevskyi.zeus.cli.group.CourseRequest;
 import academy.kovalevskyi.zeus.util.JarLoader;
 import picocli.CommandLine.ArgGroup;
@@ -32,10 +32,9 @@ public class Test implements Runnable {
   @Override
   public void run() {
     if (JarLoader.isManuallyLoaded() || JarLoader.isDynamicallyLoaded()) {
-      System.setProperty(FrameworkProperty.ERROR_MODE, String.valueOf(error));
-      System.setProperty(FrameworkProperty.DEBUG_MODE, String.valueOf(debug));
-      System.setProperty(FrameworkProperty.VERBOSE_MODE, String.valueOf(verbose));
-      ContainerLauncher.execute(request.prepareRequest());
+      var containers =
+          ContainerManager.getContainers(request.prepareRequest(), "academy.kovalevskyi");
+      ContainerLauncher.execute(containers, error, debug, verbose);
     } else {
       System.out.println(EMPTY_CLASSPATH);
     }
