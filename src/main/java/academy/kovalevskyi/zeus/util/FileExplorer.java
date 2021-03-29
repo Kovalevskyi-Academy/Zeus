@@ -24,8 +24,20 @@ public final class FileExplorer {
     OUTPUT_DIRECTORY = String.format("%s%2$starget", WORKING_DIRECTORY, File.separator);
   }
 
+  public static boolean match(final String fileName, final String extension) {
+    if (fileName == null || extension == null) {
+      return false;
+    }
+    var dotIndex = fileName.lastIndexOf(46);
+    if (dotIndex == -1 || dotIndex + 1 >= fileName.length()) {
+      return false;
+    }
+    var fileExtension = extension.replaceFirst("\\.", "");
+    return fileName.substring(dotIndex + 1).equalsIgnoreCase(fileExtension);
+  }
+
   public static boolean match(final String fileName, final FileType type) {
-    return fileName.toLowerCase().endsWith(type.extension);
+    return match(fileName, type.extension);
   }
 
   public static List<File> getFiles(
