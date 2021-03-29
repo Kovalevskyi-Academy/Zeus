@@ -4,7 +4,7 @@
 
 - controlling maven of your project
 - checking a style of code with Checkstyle
-- testing students solutions with jUnit
+- testing students solutions with JUnit
 - downloading the latest releases of Zeus from repo
 
 ## Importantly
@@ -30,23 +30,23 @@
 
 ### run Zeus
 
-`java -jar <ZEUS> <KEY> <COMMAND> <KEY>...`
+`java -jar <ZEUS> <KEY>.. <COMMAND> <KEY>..`
 
 > The two examples below demonstrate how to add your homework manually.
 > But, actually, Zeus does this automatically.
 
 ### run Zeus with another JAR file
 
-`java -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
+`java -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>.. <COMMAND> <KEY>..`
 
 ### run Zeus with another JAR files (wildcards version, same that above)
 
-`java -cp "/target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY> <COMMAND> <KEY>...`
+`java -cp "/target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>.. <COMMAND> <KEY>..`
 
 > * launch the command line from the root folder of your project
 > * `/target/*` will add all JAR files to classpath from **target** folder, see [more](https://riptutorial.com/java/example/12854/adding-all-jars-in-a-directory-to-the-classpath)
 > * command and keys are not required
-> * `...` meaning that key can be one or more
+> * `<KEY>..` meaning support of multiple keys (space separated)
 
 ## Zeus keys
 
