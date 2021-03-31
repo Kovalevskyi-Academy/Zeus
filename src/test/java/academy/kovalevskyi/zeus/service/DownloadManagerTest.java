@@ -22,18 +22,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class DownloadManagerTest {
 
-  private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
+  private static final Path TMP_DIR = Path.of(System.getProperty("java.io.tmpdir"));
   private static File testFile;
 
   @SuppressWarnings("ResultOfMethodCallIgnored")
   @BeforeAll
   public static void beforeAll() throws IOException {
-    testFile = new File(String.format("%s/someTmpFile.txt", TMP_DIR));
+    testFile = Path.of(TMP_DIR.toString(), "someTmpFile.txt").toFile();
     testFile.createNewFile();
     testFile.deleteOnExit();
   }
@@ -43,8 +44,6 @@ public class DownloadManagerTest {
     var link = new URL("http://example.org");
     assertThrows(IllegalArgumentException.class, () -> new DownloadManager(null, TMP_DIR));
     assertThrows(IllegalArgumentException.class, () -> new DownloadManager(link, null));
-    assertThrows(IllegalArgumentException.class, () -> new DownloadManager(link, ""));
-    assertThrows(IllegalArgumentException.class, () -> new DownloadManager(link, "    "));
     assertThrows(IllegalArgumentException.class, () -> new DownloadManager(null));
   }
 
@@ -59,6 +58,12 @@ public class DownloadManagerTest {
     assertThrows(
         FileNotFoundException.class,
         () -> new DownloadManager(new URL("http://example.org/info")).download(false));
+  }
+
+  @Test
+  public void testThrowsIllegal() throws MalformedURLException {
+    var manager = new DownloadManager(new URL("http://example.org"), testFile.toPath());
+    assertThrows(IllegalArgumentException.class, () -> manager.download(false));
   }
 
   @Test

@@ -7,12 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileExplorerTest {
 
+  private static final Path TMP_DIR =
+      Path.of(System.getProperty("java.io.tmpdir"), "ZeusTestFolder");
+  private static final Path WRONG_DIR = Path.of("someWrongPath");
   private static File tmpDir;
   private static File fileOne;
   private static File fileTwo;
@@ -21,19 +24,19 @@ public class FileExplorerTest {
   @BeforeAll
   @SuppressWarnings("ResultOfMethodCallIgnored")
   public static void beforeAll() throws IOException {
-    tmpDir = new File(String.format("%s/ZeusTestFolder", System.getProperty("java.io.tmpdir")));
+    tmpDir = TMP_DIR.toFile();
     tmpDir.mkdir();
     tmpDir.deleteOnExit();
 
-    fileOne = new File(String.format("%s/one.jar", tmpDir));
+    fileOne = Path.of(TMP_DIR.toString(), "one.jar").toFile();
     fileOne.createNewFile();
     fileOne.deleteOnExit();
 
-    fileTwo = new File(String.format("%s/two.java", tmpDir));
+    fileTwo = Path.of(TMP_DIR.toString(), "two.java").toFile();
     fileTwo.createNewFile();
     fileTwo.deleteOnExit();
 
-    fileThree = new File(String.format("%s/folder/three.jar", tmpDir));
+    fileThree = Path.of(TMP_DIR.toString(), "folder", "three.jar").toFile();
     var folder = new File(fileThree.getParent());
     folder.mkdir();
     folder.deleteOnExit();
@@ -55,107 +58,63 @@ public class FileExplorerTest {
     assertFalse(FileExplorer.match("", (String) null));
   }
 
+  @SuppressWarnings("ConstantConditions")
   @Test
-  public void testGetFilesWithFile() {
-    checkBaseFolder(FileExplorer.getFiles(tmpDir, false));
+  public void testGetFiles() {
+    var result = FileExplorer.getFiles(TMP_DIR, false);
+
+    assertEquals(2, result.size());
+    assertTrue(result.contains(fileOne));
+    assertTrue(result.contains(fileTwo));
+    assertFalse(result.contains(fileThree));
+
+    assertThrows(UnsupportedOperationException.class, () -> result.add(tmpDir));
 
     assertThrows(
         IllegalArgumentException.class,
-        () -> FileExplorer.getFiles(new File("someWrongPath"), false));
+        () -> FileExplorer.getFiles(WRONG_DIR, false));
   }
 
+  @SuppressWarnings("ConstantConditions")
   @Test
-  public void testGetFilesWithFileAndDeepSearch() {
-    checkAllFiles(FileExplorer.getFiles(tmpDir, true));
+  public void testGetFilesAndDeepSearch() {
+    var result = FileExplorer.getFiles(TMP_DIR, true);
+
+    assertEquals(3, result.size());
+    assertTrue(result.contains(fileOne));
+    assertTrue(result.contains(fileTwo));
+    assertTrue(result.contains(fileThree));
+
+    assertThrows(UnsupportedOperationException.class, () -> result.add(tmpDir));
 
     assertThrows(
         IllegalArgumentException.class,
-        () -> FileExplorer.getFiles(new File("someWrongPath"), true));
+        () -> FileExplorer.getFiles(WRONG_DIR, true));
   }
 
   @Test
-  public void testGetFilesWithFileAndType() {
-    var result = FileExplorer.getFiles(tmpDir, false, FileType.JAR);
+  public void testGetFilesWithType() {
+    var result = FileExplorer.getFiles(TMP_DIR, false, FileType.JAR);
 
     assertEquals(1, result.size());
     assertTrue(result.contains(fileOne));
 
     assertThrows(
         IllegalArgumentException.class,
-        () -> FileExplorer.getFiles(new File("someWrongPath"), false, FileType.JAR));
+        () -> FileExplorer.getFiles(WRONG_DIR, false, FileType.JAR));
   }
 
   @Test
-  public void testGetFilesWithFileAndDeepSearchAndType() {
-    checkAllJars(FileExplorer.getFiles(tmpDir, true, FileType.JAR));
+  public void testGetFilesWithDeepSearchAndType() {
+    var result = FileExplorer.getFiles(TMP_DIR, true, FileType.JAR);
 
+    assertEquals(2, result.size());
+    assertTrue(result.contains(fileOne));
+    assertTrue(result.contains(fileThree));
+
+    assertThrows(UnsupportedOperationException.class, () -> result.add(tmpDir));
     assertThrows(
         IllegalArgumentException.class,
-        () -> FileExplorer.getFiles(new File("someWrongPath"), true, FileType.JAR));
-  }
-
-  @Test
-  public void testGetFilesWithString() {
-    checkBaseFolder(FileExplorer.getFiles(tmpDir.getAbsolutePath(), false));
-
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> FileExplorer.getFiles("someWrongPath", false));
-  }
-
-  @Test
-  public void testGetFilesWithStringAndDeepSearch() {
-    checkAllFiles(FileExplorer.getFiles(tmpDir.getAbsolutePath(), true));
-
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> FileExplorer.getFiles("someWrongPath", true));
-  }
-
-  @Test
-  public void testGetFilesWithStringAndType() {
-    var result = FileExplorer.getFiles(tmpDir.getAbsolutePath(), false, FileType.JAVA);
-
-    assertEquals(1, result.size());
-    assertTrue(result.contains(fileTwo));
-
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> FileExplorer.getFiles("someWrongPath", false, FileType.JAVA));
-  }
-
-  @Test
-  public void testGetFilesWithStringAndDeepSearchAndType() {
-    checkAllJars(FileExplorer.getFiles(tmpDir.getAbsolutePath(), true, FileType.JAR));
-
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> FileExplorer.getFiles("someWrongPath", true, FileType.JAR));
-  }
-
-  private void checkAllJars(List<File> files) {
-    assertEquals(2, files.size());
-    assertTrue(files.contains(fileOne));
-    assertTrue(files.contains(fileThree));
-
-    assertThrows(UnsupportedOperationException.class, () -> files.add(tmpDir));
-  }
-
-  private void checkAllFiles(List<File> files) {
-    assertEquals(3, files.size());
-    assertTrue(files.contains(fileOne));
-    assertTrue(files.contains(fileTwo));
-    assertTrue(files.contains(fileThree));
-
-    assertThrows(UnsupportedOperationException.class, () -> files.add(tmpDir));
-  }
-
-  private void checkBaseFolder(List<File> files) {
-    assertEquals(2, files.size());
-    assertTrue(files.contains(fileOne));
-    assertTrue(files.contains(fileTwo));
-    assertFalse(files.contains(fileThree));
-
-    assertThrows(UnsupportedOperationException.class, () -> files.add(tmpDir));
+        () -> FileExplorer.getFiles(WRONG_DIR, true, FileType.JAR));
   }
 }
