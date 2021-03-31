@@ -35,7 +35,7 @@ public class MavenEngineTest {
 
   @Test
   public void testCommandExecutionWithDefaultHome() throws MavenInvocationException {
-    assumeTrue(M2_HOME != null);
+    checkMavenHome();
     var result = MavenEngine.execute(null, new ArrayList<>() {
       {
         add("-version");
@@ -46,7 +46,7 @@ public class MavenEngineTest {
 
   @Test
   public void testCommandExecution() throws MavenInvocationException {
-    assumeTrue(M2_HOME != null);
+    checkMavenHome();
     var result = MavenEngine.execute(new File(M2_HOME), new ArrayList<>() {
       {
         add("-version");
@@ -55,9 +55,10 @@ public class MavenEngineTest {
     assertEquals(0, result);
   }
 
+  // IDE may show build is failed, but it is not true
   @Test
   public void testBadCommandExecution() throws MavenInvocationException {
-    assumeTrue(M2_HOME != null);
+    checkMavenHome();
     var result = MavenEngine.execute(new File(M2_HOME), new ArrayList<>() {
       {
         add("some_wrong_command");
@@ -68,7 +69,7 @@ public class MavenEngineTest {
 
   @Test
   public void testNullAndEmptyCommands() {
-    assumeTrue(M2_HOME != null);
+    checkMavenHome();
     assertThrows(
         IllegalArgumentException.class,
         () -> MavenEngine.execute(null, new ArrayList<>()));
@@ -80,5 +81,9 @@ public class MavenEngineTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> MavenEngine.execute(null, (ArrayList<String>) null));
+  }
+
+  private void checkMavenHome() {
+    assumeTrue(M2_HOME != null, "Aborted because M2_HOME not configured on this system");
   }
 }
