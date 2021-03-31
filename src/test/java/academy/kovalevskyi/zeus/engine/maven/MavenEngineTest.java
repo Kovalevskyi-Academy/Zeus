@@ -3,6 +3,7 @@ package academy.kovalevskyi.zeus.engine.maven;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class MavenEngineTest {
 
   @Test
   public void testCommandExecutionWithDefaultHome() throws MavenInvocationException {
+    assumeTrue(M2_HOME != null);
     var result = MavenEngine.execute(null, new ArrayList<>() {
       {
         add("-version");
@@ -44,6 +46,7 @@ public class MavenEngineTest {
 
   @Test
   public void testCommandExecution() throws MavenInvocationException {
+    assumeTrue(M2_HOME != null);
     var result = MavenEngine.execute(new File(M2_HOME), new ArrayList<>() {
       {
         add("-version");
@@ -54,6 +57,7 @@ public class MavenEngineTest {
 
   @Test
   public void testBadCommandExecution() throws MavenInvocationException {
+    assumeTrue(M2_HOME != null);
     var result = MavenEngine.execute(new File(M2_HOME), new ArrayList<>() {
       {
         add("some_wrong_command");
@@ -64,6 +68,7 @@ public class MavenEngineTest {
 
   @Test
   public void testNullAndEmptyCommands() {
+    assumeTrue(M2_HOME != null);
     assertThrows(
         IllegalArgumentException.class,
         () -> MavenEngine.execute(null, new ArrayList<>()));
