@@ -16,12 +16,6 @@ import net.bytebuddy.agent.ByteBuddyAgent;
 
 public final class JarLoader {
 
-  private static final List<File> JAR_FILES;
-
-  static {
-    JAR_FILES = initializeList();
-  }
-
   public static boolean isManuallyLoaded() {
     return Arrays
         .stream(FileExplorer.JAVA_CLASSPATH.split(File.pathSeparator))
@@ -31,9 +25,10 @@ public final class JarLoader {
   }
 
   public static boolean isDynamicallyLoaded() {
-    if (!JAR_FILES.isEmpty()) {
+    var jars = initializeList();
+    if (!jars.isEmpty()) {
       try {
-        initializeJavaAgent();
+        initializeJavaAgent(jars);
       } catch (Exception e) {
         if (Zeus.isDev()) {
           e.printStackTrace();
@@ -45,13 +40,13 @@ public final class JarLoader {
     return false;
   }
 
-  private static void initializeJavaAgent() throws IOException {
+  private static void initializeJavaAgent(final List<File> jars) throws IOException {
     if (pathContainsIllegalSymbols()) {
       var message = "Zeus cannot load your JAR(s), UTF-8 symbols is not supported in path";
       throw new UnsupportedEncodingException(message);
     }
     final var instrumentation = ByteBuddyAgent.install();
-    for (var jar : JAR_FILES) {
+    for (var jar : jars) {
       instrumentation.appendToSystemClassLoaderSearch(new JarFile(jar));
     }
   }

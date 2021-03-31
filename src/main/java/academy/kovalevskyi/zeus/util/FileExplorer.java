@@ -8,21 +8,12 @@ import java.util.stream.Collectors;
 
 public final class FileExplorer {
 
-  public static final String M2_HOME;
-  public static final String JAVA_CLASSPATH;
-  public static final String JAVA_SOURCES;
-  public static final String WORKING_DIRECTORY;
-  public static final String TMP_DIRECTORY;
-  public static final String OUTPUT_DIRECTORY;
-
-  static {
-    WORKING_DIRECTORY = System.getProperty("user.dir");
-    TMP_DIRECTORY = System.getProperty("java.io.tmpdir");
-    M2_HOME = System.getenv("M2_HOME");
-    JAVA_CLASSPATH = System.getProperty("java.class.path");
-    JAVA_SOURCES = String.format("%s%2$ssrc", WORKING_DIRECTORY, File.separator);
-    OUTPUT_DIRECTORY = String.format("%s%2$starget", WORKING_DIRECTORY, File.separator);
-  }
+  public static final String M2_HOME = System.getenv("M2_HOME");
+  public static final String JAVA_CLASSPATH = System.getProperty("java.class.path");
+  public static final String WORKING_DIRECTORY = System.getProperty("user.dir");
+  public static final String TMP_DIRECTORY = System.getProperty("java.io.tmpdir");
+  public static final String JAVA_SOURCES = String.format("%s/src", WORKING_DIRECTORY);
+  public static final String OUTPUT_DIRECTORY = String.format("%s/target", WORKING_DIRECTORY);
 
   public static boolean match(final String fileName, final String extension) {
     if (fileName == null || extension == null) {

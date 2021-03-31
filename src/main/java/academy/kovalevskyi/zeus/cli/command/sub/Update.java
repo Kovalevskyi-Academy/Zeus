@@ -8,6 +8,7 @@ import academy.kovalevskyi.zeus.service.DownloadManager;
 import academy.kovalevskyi.zeus.util.FileExplorer;
 import academy.kovalevskyi.zeus.util.FileType;
 import academy.kovalevskyi.zeus.util.ZeusRepo;
+import java.net.URL;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 import org.apache.maven.model.Model;
@@ -34,7 +35,8 @@ public class Update implements Callable<Void> {
       if (!release.getBody().isBlank()) {
         System.out.printf("What is new:%n%s%n", release.getBody());
       }
-      try (var manager = new DownloadManager(getJarAsset(release).getLink())) {
+      var url = new URL(getJarAsset(release).getLink());
+      try (var manager = new DownloadManager(url)) {
         var result = manager.download(true);
         System.out.printf("%s downloaded successfully%n", result.getAbsolutePath());
       }

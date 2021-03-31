@@ -3,17 +3,19 @@ package academy.kovalevskyi.zeus.service;
 import academy.kovalevskyi.zeus.util.FileExplorer;
 import java.io.Closeable;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Path;
 
 public class DownloadManager implements Closeable {
 
   private final String directory;
-  private final String link;
+  private final URL link;
   private final byte[] buffer;
   private final String template;
   private long parts;
@@ -21,11 +23,14 @@ public class DownloadManager implements Closeable {
   private InputStream input;
   private HttpURLConnection connection;
 
-  public DownloadManager(final String link) {
+  public DownloadManager(final URL link) {
     this(link, FileExplorer.WORKING_DIRECTORY);
   }
 
-  public DownloadManager(final String link, final String directory) {
+  public DownloadManager(final URL link, final String directory) {
+    if (link == null || directory == null || directory.isBlank()) {
+      throw new IllegalArgumentException();
+    }
     this.link = link;
     this.directory = directory;
     this.buffer = new byte[1024];
@@ -34,10 +39,9 @@ public class DownloadManager implements Closeable {
   }
 
   public File download(final boolean showProgress) throws IOException {
-    connection = (HttpURLConnection) new URL(link).openConnection();
-    final var name = parseJarName(connection.getURL());
-    final var result = prepareResultFile(name);
-    final var tmp = prepareTmpFile(name);
+    final var result = prepareResultFile();
+    final var tmp = prepareTmpFile(result);
+    connection = (HttpURLConnection) link.openConnection();
     parts = connection.getContentLengthLong();
     if (result.exists() && result.length() == parts) {
       var message = String.format("%s already exists", result.getAbsolutePath());
@@ -65,24 +69,31 @@ public class DownloadManager implements Closeable {
 
   @Override
   public void close() throws IOException {
-    input.close();
-    connection.disconnect();
+    if (input != null) {
+      input.close();
+    }
+    if (connection != null) {
+      connection.disconnect();
+    }
   }
 
-  private File prepareResultFile(final String name) {
+  private File prepareResultFile() throws FileNotFoundException {
     if (!new File(directory).isDirectory()) {
       throw new IllegalArgumentException(String.format("%s is not a directory", directory));
     }
-    return new File(String.format("%s%s%s", directory, File.separator, name));
+    var path = link.getPath();
+    if (path == null || path.equals("/")) {
+      throw new FileNotFoundException("Wrong link");
+    }
+    var name = Path.of(path).getFileName().toString();
+    if (name == null || name.isBlank()) {
+      throw new FileNotFoundException("Can't parse file name");
+    }
+    return new File(String.format("%s/%s", directory, name));
   }
 
-  private File prepareTmpFile(final String name) {
-    return new File(String.format("%s%s%s.tmp", FileExplorer.TMP_DIRECTORY, File.separator, name));
-  }
-
-  private String parseJarName(final URL url) {
-    var file = url.getFile();
-    return file.substring(file.lastIndexOf("/") + 1);
+  private File prepareTmpFile(final File result) {
+    return new File(String.format("%s/%s.tmp", FileExplorer.TMP_DIRECTORY, result.getName()));
   }
 
   private String prepareProgressBar() {
