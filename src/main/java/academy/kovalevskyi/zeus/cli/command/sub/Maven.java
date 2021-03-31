@@ -3,7 +3,6 @@ package academy.kovalevskyi.zeus.cli.command.sub;
 import academy.kovalevskyi.zeus.cli.group.MavenCustomRequest;
 import academy.kovalevskyi.zeus.cli.group.MavenPresetRequest;
 import academy.kovalevskyi.zeus.engine.maven.MavenEngine;
-import academy.kovalevskyi.zeus.util.FileExplorer;
 import java.io.File;
 import java.util.concurrent.Callable;
 import org.apache.maven.shared.invoker.MavenInvocationException;
@@ -21,11 +20,7 @@ public class Maven implements Callable<Integer> {
   private final Request request = new Request();
 
   @Option(names = {"-m", "--maven"}, description = "Maven home directory")
-  private final File mavenHome;
-
-  public Maven() {
-    mavenHome = FileExplorer.M2_HOME.toFile();
-  }
+  private File mavenHome;
 
   public Integer call() throws MavenInvocationException {
     if (request.mavenCustomRequest != null) {

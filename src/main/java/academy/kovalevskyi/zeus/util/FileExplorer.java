@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public final class FileExplorer {
 
   public static final String JAVA_CLASSPATH = System.getProperty("java.class.path");
-  public static final Path M2_HOME = Path.of(System.getenv("M2_HOME"));
   public static final Path WORKING_DIRECTORY = Path.of(System.getProperty("user.dir"));
   public static final Path TMP_DIRECTORY = Path.of(System.getProperty("java.io.tmpdir"));
   public static final Path JAVA_SOURCES = Path.of(WORKING_DIRECTORY.toString(), "src");

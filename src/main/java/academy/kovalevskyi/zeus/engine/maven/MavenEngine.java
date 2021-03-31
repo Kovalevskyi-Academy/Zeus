@@ -13,6 +13,7 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 public final class MavenEngine {
 
+  public static final String M2_HOME = System.getenv("M2_HOME");
   private static final Model ZEUS_CONFIG;
   private static final Model USER_CONFIG;
 
@@ -34,11 +35,20 @@ public final class MavenEngine {
 
   public static int execute(final File maven, final Request request)
       throws MavenInvocationException {
+    if (request == null) {
+      throw new IllegalArgumentException("Request is null");
+    }
     return execute(maven, request.getCommands());
   }
 
   public static int execute(final File maven, final List<String> request)
       throws MavenInvocationException {
+    if (maven == null && M2_HOME == null) {
+      throw new MavenInvocationException("Configure maven on your system!");
+    }
+    if (request == null || request.isEmpty()) {
+      throw new IllegalArgumentException("Commands list is null or empty");
+    }
     final var invocationRequest = new DefaultInvocationRequest()
         .setInputStream(null)
         .setGoals(request);
