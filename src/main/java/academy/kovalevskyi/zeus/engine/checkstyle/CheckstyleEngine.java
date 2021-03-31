@@ -6,6 +6,7 @@ import academy.kovalevskyi.zeus.util.FileType;
 import com.puppycrawl.tools.checkstyle.Main;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
@@ -27,13 +28,13 @@ public final class CheckstyleEngine {
     } else {
       System.out.printf(template, file.getName(), prepareStatus(State.FAILED));
       warnings.forEach(line ->
-          System.out.println(Ansi.ansi().fg(State.FAILED.color).a(line).reset()));
+          System.out.println(Ansi.ansi().fg(State.FAILED.color).a(line.trim()).reset()));
     }
     AnsiConsole.systemUninstall();
     return warnings.size();
   }
 
-  public static int checkAll(final Style style, final List<File> files) throws IOException {
+  public static int check(final Style style, final List<File> files) throws IOException {
     final Function<String, String> underline = text ->
         String.format("%s%n%s", text, "-".repeat(text.length()));
     if (files.isEmpty()) {
@@ -62,9 +63,9 @@ public final class CheckstyleEngine {
 
   private static List<String> process(final Style style, final File file) throws IOException {
     if (!file.exists()) {
-      throw new IllegalArgumentException(String.format("%s is absent", file.getAbsolutePath()));
+      throw new FileNotFoundException(String.format("%s is absent", file.getAbsolutePath()));
     }
-    if (!file.isFile()) {
+    if (file.isDirectory()) {
       throw new IllegalArgumentException(String.format("%s is not a file", file.getAbsolutePath()));
     }
     if (!FileExplorer.match(file.getName(), FileType.JAVA)) {

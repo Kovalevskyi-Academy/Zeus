@@ -30,7 +30,7 @@ public class Checkstyle implements Callable<Void> {
 
   static int checkAllSourceFiles() throws IOException {
     final var javaFiles = FileExplorer.getFiles(getSourceFilesDirectory(), true, FileType.JAVA);
-    return CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, javaFiles);
+    return CheckstyleEngine.check(DEFAULT_CHECKSTYLE, javaFiles);
   }
 
   private void checkAllSourceFiles(final List<String> classes) throws IOException {
@@ -62,7 +62,7 @@ public class Checkstyle implements Callable<Void> {
       AnsiConsole.systemUninstall();
     }
 
-    CheckstyleEngine.checkAll(DEFAULT_CHECKSTYLE, result);
+    CheckstyleEngine.check(DEFAULT_CHECKSTYLE, result);
   }
 
   @Override
