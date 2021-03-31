@@ -84,6 +84,6 @@ public class MavenEngineTest {
   }
 
   private void checkMavenHome() {
-    assumeTrue(M2_HOME != null, "Aborted because M2_HOME not configured on this system");
+    assumeTrue(M2_HOME != null, "Aborted because M2_HOME is not configured on this system");
   }
 }
