@@ -21,22 +21,19 @@ public class FileExplorerTest {
   @BeforeAll
   @SuppressWarnings("ResultOfMethodCallIgnored")
   public static void beforeAll() throws IOException {
-    tmpDir = new File(String.format(
-        "%s%sZeusTestFolder",
-        System.getProperty("java.io.tmpdir"),
-        File.separator));
+    tmpDir = new File(String.format("%s/ZeusTestFolder", System.getProperty("java.io.tmpdir")));
     tmpDir.mkdir();
     tmpDir.deleteOnExit();
 
-    fileOne = new File(String.format("%s%s%s", tmpDir, File.separator, "one.jar"));
+    fileOne = new File(String.format("%s/one.jar", tmpDir));
     fileOne.createNewFile();
     fileOne.deleteOnExit();
 
-    fileTwo = new File(String.format("%s%s%s", tmpDir, File.separator, "two.java"));
+    fileTwo = new File(String.format("%s/two.java", tmpDir));
     fileTwo.createNewFile();
     fileTwo.deleteOnExit();
 
-    fileThree = new File(String.format("%s%sfolder%2$s%s", tmpDir, File.separator, "three.jar"));
+    fileThree = new File(String.format("%s/folder/three.jar", tmpDir));
     var folder = new File(fileThree.getParent());
     folder.mkdir();
     folder.deleteOnExit();
@@ -59,7 +56,7 @@ public class FileExplorerTest {
   }
 
   @Test
-  public void testGetAllFilesWithFile() {
+  public void testGetFilesWithFile() {
     checkBaseFolder(FileExplorer.getFiles(tmpDir, false));
 
     assertThrows(
@@ -68,7 +65,7 @@ public class FileExplorerTest {
   }
 
   @Test
-  public void testGetAllFilesWithFileAndDeepSearch() {
+  public void testGetFilesWithFileAndDeepSearch() {
     checkAllFiles(FileExplorer.getFiles(tmpDir, true));
 
     assertThrows(
@@ -77,7 +74,7 @@ public class FileExplorerTest {
   }
 
   @Test
-  public void testGetAllFilesWithFileAndType() {
+  public void testGetFilesWithFileAndType() {
     var result = FileExplorer.getFiles(tmpDir, false, FileType.JAR);
 
     assertEquals(1, result.size());
@@ -89,7 +86,7 @@ public class FileExplorerTest {
   }
 
   @Test
-  public void testGetAllFilesWithFileAndDeepSearchAndType() {
+  public void testGetFilesWithFileAndDeepSearchAndType() {
     checkAllJars(FileExplorer.getFiles(tmpDir, true, FileType.JAR));
 
     assertThrows(
@@ -98,7 +95,7 @@ public class FileExplorerTest {
   }
 
   @Test
-  public void testGetAllFilesWithString() {
+  public void testGetFilesWithString() {
     checkBaseFolder(FileExplorer.getFiles(tmpDir.getAbsolutePath(), false));
 
     assertThrows(
@@ -107,7 +104,7 @@ public class FileExplorerTest {
   }
 
   @Test
-  public void testGetAllFilesWithStringAndDeepSearch() {
+  public void testGetFilesWithStringAndDeepSearch() {
     checkAllFiles(FileExplorer.getFiles(tmpDir.getAbsolutePath(), true));
 
     assertThrows(
@@ -116,7 +113,7 @@ public class FileExplorerTest {
   }
 
   @Test
-  public void testGetAllFilesWithStringAndType() {
+  public void testGetFilesWithStringAndType() {
     var result = FileExplorer.getFiles(tmpDir.getAbsolutePath(), false, FileType.JAVA);
 
     assertEquals(1, result.size());
@@ -128,7 +125,7 @@ public class FileExplorerTest {
   }
 
   @Test
-  public void testGetAllFilesWithStringAndDeepSearchAndType() {
+  public void testGetFilesWithStringAndDeepSearchAndType() {
     checkAllJars(FileExplorer.getFiles(tmpDir.getAbsolutePath(), true, FileType.JAR));
 
     assertThrows(
