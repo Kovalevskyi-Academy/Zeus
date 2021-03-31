@@ -9,6 +9,7 @@ import java.util.concurrent.Callable;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 
 @Command(
     name = "maven",
@@ -19,11 +20,11 @@ public class Maven implements Callable<Integer> {
   @ArgGroup(multiplicity = "1")
   private final Request request = new Request();
 
-  @picocli.CommandLine.Option(names = {"-m", "--maven"}, description = "Maven home directory")
+  @Option(names = {"-m", "--maven"}, description = "Maven home directory")
   private final File mavenHome;
 
   public Maven() {
-    mavenHome = new File(FileExplorer.M2_HOME);
+    mavenHome = FileExplorer.M2_HOME.toFile();
   }
 
   public Integer call() throws MavenInvocationException {

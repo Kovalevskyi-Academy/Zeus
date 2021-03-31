@@ -14,7 +14,7 @@ import java.nio.file.Path;
 
 public class DownloadManager implements Closeable {
 
-  private final String directory;
+  private final Path directory;
   private final URL link;
   private final byte[] buffer;
   private final String template;
@@ -27,8 +27,8 @@ public class DownloadManager implements Closeable {
     this(link, FileExplorer.WORKING_DIRECTORY);
   }
 
-  public DownloadManager(final URL link, final String directory) {
-    if (link == null || directory == null || directory.isBlank()) {
+  public DownloadManager(final URL link, final Path directory) {
+    if (link == null || directory == null) {
       throw new IllegalArgumentException();
     }
     this.link = link;
@@ -78,7 +78,7 @@ public class DownloadManager implements Closeable {
   }
 
   private File prepareResultFile() throws FileNotFoundException {
-    if (!new File(directory).isDirectory()) {
+    if (directory.toFile().isFile()) {
       throw new IllegalArgumentException(String.format("%s is not a directory", directory));
     }
     var path = link.getPath();
@@ -89,11 +89,12 @@ public class DownloadManager implements Closeable {
     if (name == null || name.isBlank()) {
       throw new FileNotFoundException("Can't parse file name");
     }
-    return new File(String.format("%s/%s", directory, name));
+    return Path.of(directory.toString(), name).toFile();
   }
 
   private File prepareTmpFile(final File result) {
-    return new File(String.format("%s/%s.tmp", FileExplorer.TMP_DIRECTORY, result.getName()));
+    return Path.of(FileExplorer.TMP_DIRECTORY.toString(), String.format("%s.tmp", result.getName()))
+        .toFile();
   }
 
   private String prepareProgressBar() {

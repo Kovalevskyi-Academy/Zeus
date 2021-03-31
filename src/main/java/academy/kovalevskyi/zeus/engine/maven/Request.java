@@ -3,7 +3,13 @@ package academy.kovalevskyi.zeus.engine.maven;
 import java.util.ArrayList;
 import java.util.List;
 
-public record Request(List<String> commands) {
+public class Request {
+
+  private final List<String> commands;
+
+  private Request(List<String> commands) {
+    this.commands = commands;
+  }
 
   public static Builder builder() {
     return new Builder();
@@ -15,10 +21,9 @@ public record Request(List<String> commands) {
 
   public static class Builder {
 
-    private final List<String> commands;
+    private final List<String> commands = new ArrayList<>();
 
     private Builder() {
-      commands = new ArrayList<>();
     }
 
     public Builder add(Lifecycle lifecycle) {
@@ -32,6 +37,9 @@ public record Request(List<String> commands) {
     }
 
     public Request build() {
+      if (commands.isEmpty()) {
+        throw new NullPointerException("Command list can't be empty");
+      }
       return new Request(commands);
     }
 

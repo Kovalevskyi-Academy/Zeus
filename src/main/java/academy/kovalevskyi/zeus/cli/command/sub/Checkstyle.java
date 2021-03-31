@@ -8,6 +8,7 @@ import academy.kovalevskyi.zeus.util.FileType;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
@@ -74,12 +75,12 @@ public class Checkstyle implements Callable<Void> {
     return null;
   }
 
-  private static File getSourceFilesDirectory() throws FileNotFoundException {
-    final var directory = new File(FileExplorer.JAVA_SOURCES);
+  private static Path getSourceFilesDirectory() throws FileNotFoundException {
+    final var directory = FileExplorer.JAVA_SOURCES.toFile();
     if (!directory.exists()) {
       throw new FileNotFoundException("Directory of java source files is not exist!");
     } else {
-      return directory;
+      return FileExplorer.JAVA_SOURCES;
     }
   }
 

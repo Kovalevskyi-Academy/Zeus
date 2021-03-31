@@ -1,6 +1,7 @@
 package academy.kovalevskyi.zeus.util;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,12 +9,12 @@ import java.util.stream.Collectors;
 
 public final class FileExplorer {
 
-  public static final String M2_HOME = System.getenv("M2_HOME");
   public static final String JAVA_CLASSPATH = System.getProperty("java.class.path");
-  public static final String WORKING_DIRECTORY = System.getProperty("user.dir");
-  public static final String TMP_DIRECTORY = System.getProperty("java.io.tmpdir");
-  public static final String JAVA_SOURCES = String.format("%s/src", WORKING_DIRECTORY);
-  public static final String OUTPUT_DIRECTORY = String.format("%s/target", WORKING_DIRECTORY);
+  public static final Path M2_HOME = Path.of(System.getenv("M2_HOME"));
+  public static final Path WORKING_DIRECTORY = Path.of(System.getProperty("user.dir"));
+  public static final Path TMP_DIRECTORY = Path.of(System.getProperty("java.io.tmpdir"));
+  public static final Path JAVA_SOURCES = Path.of(WORKING_DIRECTORY.toString(), "src");
+  public static final Path OUTPUT_DIRECTORY = Path.of(WORKING_DIRECTORY.toString(), "target");
 
   public static boolean match(final String fileName, final String extension) {
     if (fileName == null || extension == null) {
@@ -32,14 +33,7 @@ public final class FileExplorer {
   }
 
   public static List<File> getFiles(
-      final File directory,
-      final boolean deepSearch,
-      final FileType type) {
-    return getFiles(directory.getAbsolutePath(), deepSearch, type);
-  }
-
-  public static List<File> getFiles(
-      final String directory,
+      final Path directory,
       final boolean deepSearch,
       final FileType type) {
     return getFiles(directory, deepSearch)
@@ -48,12 +42,8 @@ public final class FileExplorer {
         .collect(Collectors.toUnmodifiableList());
   }
 
-  public static List<File> getFiles(final File directory, final boolean deepSearch) {
-    return getFiles(directory.getAbsolutePath(), deepSearch);
-  }
-
-  public static List<File> getFiles(final String directory, final boolean deepSearch) {
-    final var folder = new File(directory);
+  public static List<File> getFiles(final Path directory, final boolean deepSearch) {
+    final var folder = directory.toFile();
     if (!folder.exists()) {
       throw new IllegalArgumentException(String.format("Wrong path '%s'", directory));
     }

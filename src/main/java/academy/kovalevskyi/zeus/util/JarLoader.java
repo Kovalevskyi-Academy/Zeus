@@ -61,10 +61,11 @@ public final class JarLoader {
 
   private static boolean pathContainsIllegalSymbols() {
     try {
+      var workDir = FileExplorer.WORKING_DIRECTORY.toString();
       StandardCharsets.US_ASCII.newDecoder()
           .onMalformedInput(CodingErrorAction.REPORT)
           .onUnmappableCharacter(CodingErrorAction.REPORT)
-          .decode(ByteBuffer.wrap(FileExplorer.WORKING_DIRECTORY.getBytes(StandardCharsets.UTF_8)));
+          .decode(ByteBuffer.wrap(workDir.getBytes(StandardCharsets.UTF_8)));
     } catch (CharacterCodingException e) {
       return true;
     }
