@@ -14,7 +14,7 @@ import picocli.CommandLine.Option;
     name = "maven",
     description = "Run maven presets or any custom commands",
     mixinStandardHelpOptions = true)
-public class Maven implements Callable<Integer> {
+public class Maven implements Callable<Void> {
 
   @ArgGroup(multiplicity = "1")
   private final Request request = new Request();
@@ -22,11 +22,12 @@ public class Maven implements Callable<Integer> {
   @Option(names = {"-m", "--maven"}, description = "Maven home directory")
   private File mavenHome;
 
-  public Integer call() throws MavenInvocationException {
+  public Void call() throws MavenInvocationException {
     if (request.mavenCustomRequest != null) {
-      return MavenEngine.execute(mavenHome, request.mavenCustomRequest.getCommands());
+      MavenEngine.execute(mavenHome, request.mavenCustomRequest.getCommands());
     }
-    return MavenEngine.execute(mavenHome, request.mavenPresetRequest.getRequest());
+    MavenEngine.execute(mavenHome, request.mavenPresetRequest.getRequest());
+    return null;
   }
 
   private static class Request {

@@ -6,16 +6,16 @@ import picocli.CommandLine.Option;
 
 public class MavenPresetRequest {
 
-  @Option(names = {"-c", "--clean"}, description = "Clean a project")
+  @Option(defaultValue = "false", names = {"-c", "--clean"}, description = "Clean a project")
   private boolean isClean;
 
-  @Option(names = {"-C", "--compile"}, description = "Compile a project")
+  @Option(defaultValue = "false", names = {"-C", "--compile"}, description = "Compile a project")
   private boolean isCompile;
 
-  @Option(names = {"-t", "--test"}, description = "Test a project")
+  @Option(defaultValue = "false", names = {"-t", "--test"}, description = "Test a project")
   private boolean isTest;
 
-  @Option(names = {"-b", "--build"}, description = "Package a project")
+  @Option(defaultValue = "false", names = {"-b", "--build"}, description = "Package a project")
   private boolean isBuild;
 
   public Request getRequest() {
