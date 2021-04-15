@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
-  <version>23-SNAPSHOT</version>
+  <version>23</version>
 
   <properties>
     <java.version>16</java.version>
@@ -145,7 +145,7 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-model</artifactId>
-      <version>3.6.3</version>
+      <version>3.8.1</version>
     </dependency>
     <dependency>
       <groupId>com.puppycrawl.tools</groupId>
@@ -177,7 +177,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>JavaDeepDive</artifactId>
-      <version>13</version>
+      <version>14</version>
     </dependency>
   </dependencies>
 
