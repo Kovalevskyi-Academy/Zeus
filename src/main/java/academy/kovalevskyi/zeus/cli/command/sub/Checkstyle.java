@@ -42,13 +42,13 @@ public class Checkstyle implements Callable<Void> {
           }
           return name;
         })
-        .collect(Collectors.toUnmodifiableList());
+        .toList();
 
     final var result = FileExplorer
         .getFiles(getSourceFilesDirectory(), true, FileType.JAVA)
         .stream()
         .filter(file -> preparedNames.contains(file.getName()))
-        .collect(Collectors.toUnmodifiableList());
+        .toList();
 
     if (result.size() != classes.size()) {
       var existedFileNames = result.stream().map(File::getName).collect(Collectors.toList());
