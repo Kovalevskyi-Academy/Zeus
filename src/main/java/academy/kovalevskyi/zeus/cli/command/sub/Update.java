@@ -38,7 +38,7 @@ public class Update implements Callable<Void> {
       var url = new URL(getJarAsset(release).getLink());
       try (var manager = new DownloadManager(url)) {
         var result = manager.download(true);
-        System.out.printf("%s downloaded successfully%n", result.getAbsolutePath());
+        System.out.printf("%s downloaded successfully%n", result.toAbsolutePath());
       }
     } else {
       System.out.println("You already have the latest version of Zeus");

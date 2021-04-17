@@ -2,7 +2,6 @@ package academy.kovalevskyi.zeus.service;
 
 import academy.kovalevskyi.zeus.util.FileExplorer;
 import java.io.Closeable;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +9,9 @@ import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 public class DownloadManager implements Closeable {
 
@@ -38,17 +39,17 @@ public class DownloadManager implements Closeable {
     this.part = 0;
   }
 
-  public File download(final boolean showProgress) throws IOException {
+  public Path download(final boolean showProgress) throws IOException {
     final var result = prepareResultFile();
     final var tmp = prepareTmpFile(result);
     connection = (HttpURLConnection) link.openConnection();
     parts = connection.getContentLengthLong();
-    if (result.exists() && result.length() == parts) {
-      var message = String.format("%s already exists", result.getAbsolutePath());
+    if (Files.exists(result)) {
+      var message = String.format("%s already exists", result.toAbsolutePath());
       throw new FileAlreadyExistsException(message);
     }
     input = connection.getInputStream();
-    try (var output = new RandomAccessFile(tmp, "rw")) {
+    try (var output = new RandomAccessFile(tmp.toFile(), "rw")) {
       var bytes = 0;
       while ((bytes = input.read(buffer)) != -1) {
         part += bytes;
@@ -61,10 +62,7 @@ public class DownloadManager implements Closeable {
         System.out.println();
       }
     }
-    if (!tmp.renameTo(result)) {
-      throw new NullPointerException("Something went wrong while file was moving");
-    }
-    return result;
+    return Files.move(tmp, result, StandardCopyOption.REPLACE_EXISTING);
   }
 
   @Override
@@ -77,8 +75,8 @@ public class DownloadManager implements Closeable {
     }
   }
 
-  private File prepareResultFile() throws FileNotFoundException {
-    if (directory.toFile().isFile()) {
+  private Path prepareResultFile() throws FileNotFoundException {
+    if (!Files.isDirectory(directory)) {
       throw new IllegalArgumentException(String.format("%s is not a directory", directory));
     }
     var path = link.getPath();
@@ -89,12 +87,11 @@ public class DownloadManager implements Closeable {
     if (name == null || name.isBlank()) {
       throw new FileNotFoundException("Can't parse file name");
     }
-    return Path.of(directory.toString(), name).toFile();
+    return directory.resolve(name);
   }
 
-  private File prepareTmpFile(final File result) {
-    return Path.of(FileExplorer.TMP_DIRECTORY.toString(), String.format("%s.tmp", result.getName()))
-        .toFile();
+  private Path prepareTmpFile(final Path result) {
+    return FileExplorer.TMP_DIRECTORY.resolve(String.format("%s.tmp", result.getFileName()));
   }
 
   private String prepareProgressBar() {

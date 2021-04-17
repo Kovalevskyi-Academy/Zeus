@@ -41,7 +41,7 @@ public class DownloadManagerTest {
 
   @Test
   public void testThrowsConstructor() throws MalformedURLException {
-    var link = new URL("http://example.org");
+    var link = new URL("https://example.org");
     assertThrows(IllegalArgumentException.class, () -> new DownloadManager(null, TMP_DIR));
     assertThrows(IllegalArgumentException.class, () -> new DownloadManager(link, null));
     assertThrows(IllegalArgumentException.class, () -> new DownloadManager(null));
@@ -51,18 +51,18 @@ public class DownloadManagerTest {
   public void testThrowsFileNotFount() {
     assertThrows(
         FileNotFoundException.class,
-        () -> new DownloadManager(new URL("http://example.org")).download(false));
+        () -> new DownloadManager(new URL("https://example.org")).download(false));
     assertThrows(
         FileNotFoundException.class,
-        () -> new DownloadManager(new URL("http://example.org/")).download(false));
+        () -> new DownloadManager(new URL("https://example.org/")).download(false));
     assertThrows(
         FileNotFoundException.class,
-        () -> new DownloadManager(new URL("http://example.org/info")).download(false));
+        () -> new DownloadManager(new URL("https://example.org/info")).download(false));
   }
 
   @Test
   public void testThrowsIllegal() throws MalformedURLException {
-    var manager = new DownloadManager(new URL("http://example.org"), testFile.toPath());
+    var manager = new DownloadManager(new URL("https://example.org"), testFile.toPath());
     assertThrows(IllegalArgumentException.class, () -> manager.download(false));
   }
 
@@ -106,7 +106,7 @@ public class DownloadManagerTest {
 
   @Test
   public void testDoesNotThrowIfIsNotInitialized() throws IOException {
-    assertDoesNotThrow(new DownloadManager(new URL("http://example.org"), TMP_DIR)::close);
+    assertDoesNotThrow(new DownloadManager(new URL("https://example.org"), TMP_DIR)::close);
   }
 
   private void checkDownloadedFile(boolean show) throws IOException {
@@ -124,7 +124,7 @@ public class DownloadManagerTest {
     when(connection.getInputStream()).thenReturn(new FileInputStream(testFile));
 
     var manager = new DownloadManager(url, TMP_DIR);
-    var result = manager.download(show);
+    var result = manager.download(show).toFile();
     manager.close();
 
     assertNotNull(result);
