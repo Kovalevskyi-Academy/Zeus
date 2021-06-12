@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import academy.kovalevskyi.testing.service.State;
+import academy.kovalevskyi.testing.util.AnsiConsoleInstaller;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +13,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
-import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,7 +28,7 @@ public class CheckstyleEngineTest {
 
   @BeforeAll
   public static void beforeAll() {
-    AnsiConsole.systemUninstall();
+    AnsiConsoleInstaller.INSTANCE.systemUninstall();
     System.setOut(STREAM);
   }
 

@@ -1,6 +1,7 @@
 package academy.kovalevskyi.zeus.engine.checkstyle;
 
 import academy.kovalevskyi.testing.service.State;
+import academy.kovalevskyi.testing.util.AnsiConsoleInstaller;
 import academy.kovalevskyi.zeus.util.FileExplorer;
 import academy.kovalevskyi.zeus.util.FileType;
 import com.puppycrawl.tools.checkstyle.Main;
@@ -15,13 +16,12 @@ import java.util.StringJoiner;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 
 public final class CheckstyleEngine {
 
   public static int check(final Style style, final File file) throws IOException {
     final var warnings = process(style, file);
-    AnsiConsole.systemInstall();
+    AnsiConsoleInstaller.INSTANCE.systemInstall();
     final var template = "%s%s%n";
     if (warnings.isEmpty()) {
       System.out.printf(template, file.getName(), prepareStatus(State.SUCCESSFUL));
@@ -30,7 +30,7 @@ public final class CheckstyleEngine {
       warnings.forEach(line ->
           System.out.println(Ansi.ansi().fg(State.FAILED.color).a(line.trim()).reset()));
     }
-    AnsiConsole.systemUninstall();
+    AnsiConsoleInstaller.INSTANCE.systemUninstall();
     return warnings.size();
   }
 

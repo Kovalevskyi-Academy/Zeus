@@ -1,6 +1,7 @@
 package academy.kovalevskyi.zeus.cli.command.sub;
 
 import academy.kovalevskyi.testing.service.State;
+import academy.kovalevskyi.testing.util.AnsiConsoleInstaller;
 import academy.kovalevskyi.zeus.engine.checkstyle.CheckstyleEngine;
 import academy.kovalevskyi.zeus.engine.checkstyle.Style;
 import academy.kovalevskyi.zeus.util.FileExplorer;
@@ -13,7 +14,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
@@ -53,13 +53,13 @@ public class Checkstyle implements Callable<Void> {
     if (result.size() != classes.size()) {
       var existedFileNames = result.stream().map(File::getName).collect(Collectors.toList());
 
-      AnsiConsole.systemInstall();
+      AnsiConsoleInstaller.INSTANCE.systemInstall();
       preparedNames.forEach(name -> {
         if (!existedFileNames.contains(name)) {
           System.out.println(prepareFileNotFoundMessage(name));
         }
       });
-      AnsiConsole.systemUninstall();
+      AnsiConsoleInstaller.INSTANCE.systemUninstall();
     }
 
     CheckstyleEngine.check(DEFAULT_CHECKSTYLE, result);

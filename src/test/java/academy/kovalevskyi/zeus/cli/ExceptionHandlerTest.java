@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mockStatic;
 
+import academy.kovalevskyi.testing.util.AnsiConsoleInstaller;
 import academy.kovalevskyi.zeus.cli.command.Zeus;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -11,7 +12,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ConnectException;
 import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine.IExecutionExceptionHandler;
@@ -20,7 +20,7 @@ public class ExceptionHandlerTest {
 
   @BeforeAll
   public static void beforeAll() {
-    AnsiConsole.systemUninstall();
+    AnsiConsoleInstaller.INSTANCE.systemUninstall();
   }
 
   @SuppressWarnings("ConstantConditions")

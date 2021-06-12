@@ -94,8 +94,8 @@
         <version>3.8.1</version>
         <configuration>
           <release>${java.version}</release>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <source>16</source>
+          <target>16</target>
         </configuration>
       </plugin>
       <plugin>
@@ -166,7 +166,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>21</version>
+      <version>23</version>
     </dependency>
     <!--    Courses add below-->
     <dependency>
