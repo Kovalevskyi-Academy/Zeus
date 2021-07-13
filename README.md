@@ -9,44 +9,30 @@
 
 ## Importantly
 
-- Zeus should lay in the root folder of the student's project
+- Zeus should lay in the root folder of the student's project **([EXAMPLE](./detailManuals/projectFolder.md))**
 - use Java 16 and above
 
+## Course keys
+* jcb - Java Coding Bootcamp
+* jdd - Java Deep Dive
+
 ## How to use
+- while writing the solution:
+    - run code style checker separately
+    - run tests separately for each day or even a separate test (the latter is optional)
+- when submitting a job, you must use `pass`.
+  The task can be completed in parts - it is not necessary to turn in at once all day.
+  You can even turn in only one point from your scoring card of the current day!
 
-`<ZEUS>` — Zeus JAR file, example **Zeus-7.jar**
+`<ZEUS>` — Zeus JAR file, example **Zeus-27.jar**
 
-`<HOMEWORK>` — the name of your JAR file, example **Homework.jar**
-
-`<DELIMITER>` — classpath delimiter:
-
-- `:` - unix-like
-
-- `;` - windows
-
-`<KEY>` — any available key, example **-h** or **--help**
+`<KEY>` — any available key, example: **-h**, **-v**, **-d** or course key. Different keys apply to Zeus itself and to individual Zeus commands.
 
 `<COMMAND>` — any available command, example **test**
 
 ### run Zeus
 
 `java -jar <ZEUS> <KEY>.. <COMMAND> <KEY>..`
-
-> The two examples below demonstrate how to add your homework manually.
-> But, actually, Zeus does this automatically.
-
-### run Zeus with another JAR file
-
-`java -cp "<HOMEWORK><DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>.. <COMMAND> <KEY>..`
-
-### run Zeus with another JAR files (wildcards version, same that above)
-
-`java -cp "/target/*<DELIMITER><ZEUS>" academy.kovalevskyi.zeus.TheMighty <KEY>.. <COMMAND> <KEY>..`
-
-> * launch the command line from the root folder of your project
-> * `/target/*` will add all JAR files to classpath from **target** folder, see [more](https://riptutorial.com/java/example/12854/adding-all-jars-in-a-directory-to-the-classpath)
-> * command and keys are not required
-> * `<KEY>..` meaning support of multiple keys (space separated)
 
 ## Zeus keys
 
@@ -56,113 +42,50 @@
 
 ## Zeus commands
 
-* `show` - show available courses or containers
-* `style` - run checkstyle for all or selected sources
-* `test` - run test containers
-* `pass` - run exam
+* `show` - show available courses or containers (in developing)
+* `style` - run checkstyle for all or selected sources, you cannot pick a specific day to check the code style.
+* `test` - run test containers. You can choose a specific day for testing.
+* `pass` - run exam: run `style` and `test` in sequence
 * `maven` - run maven presets or custom commands
 * `update` - download the latest Zeus release
 
 > all commands have own help menu, use key **-h** or **--help** to get help
+> example: `java -jar Zeus-27.jar pass -h`
 
 ## Detail about each command
 
-### show
+- [show](./detailManuals/show.md)
+- [style](./detailManuals/style.md)
+- [test](./detailManuals/test.md)
+- [pass](./detailManuals/pass.md)
+- [maven](./detailManuals/maven.md)
 
-`show` - show available courses and its keys
-
-`show key -wX -dX -iX` - show test containers and its ids
-
-`show -h` - show help of usage
-
-> X - specify week/day number or test container id
-
-* `key` - course key **_(required)_**
-* `-w`,`--week=<week>` - week number
-* `-d`,`--day=<day>` - day number
-* `-i`,`--id=<id>` - container id
-* `-h`,`--help` - show help
-
-### style
-
-`style` - launch checkstyle for all source files of your project
-
-`style ClassName1 ClassName2...` - launch checkstyle for selected source files
-
-`style -h` - show help of usage
-
-* `-h`,`--help` - show help
-
-### test
-
-`test key -wX -dX -iX -e -D -v` - run test containers
-
-`test -h` - show help of usage
-
-> X - specify week/day number or test container id
-
-* `key` - course key **_(required)_**
-* `-w`,`--week=<week>` - week number
-* `-d`,`--day=<day>` - day number
-* `-i`,`--id=<id>` - container id
-* `-e`,`--error` - show only errors
-* `-D`,`--debug` - show std out/error prints and time of each test
-* `-v`,`--verbose` - show extra long error messages
-* `-h`,`--help` - show help
-
-### pass
-
-`pass key -wX -dX -iX` - run checkstyle and test containers to pass an exam
-
-`pass -h` - show help of usage
-
-> X - specify week/day number or test container id
-
-* `key` - course key **_(required)_**
-* `-w`,`--week=<week>` - week number
-* `-d`,`--day=<day>` - day number
-* `-i`,`--id=<id>` - container id
-* `-h`,`--help` - show help
-
-### maven
-
-`maven -m"dir" command1 command2...` - invoke any maven commands
-
-`maven -m"dir" X` - invoke maven preset
-
-`maven -h` - show help of usage
-
-> _X_ - any key from list below
-
-* `-b`,`--build` - package a project
-* `-c`,`--clean` - clean a project
-* `-C`,`--compile` - compile a project
-* `-m`,`--maven=<mavenHome>` - maven home directory _**(optional, if M2_HOME absent in your system)**_
-* `-t`,`--test` - test a project
-* `-h`,`--help` - show help
-
-### update
-
-`update` - download the latest release of Zeus
+- `update` - download the latest release of Zeus
 
 ## Examples of usage
 
 ### show Zeus help
 
-`java -jar Zeus-7.jar -h`
+`java -jar Zeus-27.jar -h`
 
 ### show Zeus checkstyle help
 
-`java -jar Zeus-7.jar style -h`
+`java -jar Zeus-27.jar style -h`
+
+### run checkstyle
+`java -jar Zeus-27.jar style`
 
 ### run tests
 
-`java -jar Zeus-7.jar test jcb -w0 -d3`
+`java -jar Zeus-27.jar test jcb -w0 -d4` — run all test of the week0 day4
+`java -jar Zeus-27.jar test jcb -w0 -d4 -i0` — run only first test class of the week0 day4
+`java -jar Zeus-27.jar test jcb -w0 -d4 -i1` — run only second test class of the week0 day4
 
-### run tests (manually adding your JAR into classpath)
+> `jcb` — tells Zeus which course to run tests from.
 
-`java -cp "/target/Homework.jar:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
+`java -jar Zeus-27.jar test jcb -w0 -d4 -i1 -v` — run only second test class of the week0 day4 **END** show extra long error messages
 
-### run tests (manually adding your JAR into classpath, wildcards version, same that above)
+### run pass
+`java -jar Zeus-27.jar pass jcb` - starts a code style check for the entire project, and then starts testing the entire project.
 
-`java -cp "/target/*:Zeus-7.jar" academy.kovalevskyi.zeus.TheMighty test jcb -w0 -d3`
+`java -jar Zeus-27.jar pass jcb -w0 -d4 -i0` - starts first checking the code style of the entire project, and then runs the tests specified: week0, day4, test class1. 
