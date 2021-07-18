@@ -1,4 +1,4 @@
-### style
+## style
 
 `style` - launch checkstyle for all source files of your project
 

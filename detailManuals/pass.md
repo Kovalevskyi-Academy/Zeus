@@ -1,4 +1,4 @@
-### pass
+## pass
 
 `pass key -wX -dX -iX` - run checkstyle and test containers to pass an exam
 

@@ -1,4 +1,4 @@
-### show
+## show
 
 `show` - show available courses and its keys
 

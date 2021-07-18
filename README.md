@@ -30,9 +30,13 @@
 
 `<COMMAND>` — any available command, example **test**
 
-### run Zeus
+### local run Zeus
 
-`java -jar <ZEUS> <KEY>.. <COMMAND> <KEY>..`
+`java -jar <ZEUS> <KEY>... <COMMAND> <KEY>...`
+
+### Google claud run Zeus
+An alias for Zeus is registered in Google Cloud. Therefore, the command will be like this:
+`zeus <KEY>... <COMMAND> <KEY>...`
 
 ## Zeus keys
 
@@ -66,14 +70,15 @@
 
 ### show Zeus help
 
-`java -jar Zeus-27.jar -h`
+`java -jar Zeus-27.jar -h`Zeus
 
 ### show Zeus checkstyle help
 
 `java -jar Zeus-27.jar style -h`
 
 ### run checkstyle
-`java -jar Zeus-27.jar style`
+`java -jar Zeus-27.jar style` — local run
+`zeus style` — claud run
 
 ### run tests
 
@@ -85,7 +90,13 @@
 
 `java -jar Zeus-27.jar test jcb -w0 -d4 -i1 -v` — run only second test class of the week0 day4 **END** show extra long error messages
 
-### run pass
-`java -jar Zeus-27.jar pass jcb` - starts a code style check for the entire project, and then starts testing the entire project.
+`zeus test jcb -w0 -d4 -i1 -v` — the same, but in google claud
 
-`java -jar Zeus-27.jar pass jcb -w0 -d4 -i0` - starts first checking the code style of the entire project, and then runs the tests specified: week0, day4, test class1. 
+> `-v` — special kay for `test` command, more verbose
+
+### run pass
+`java -jar Zeus-27.jar pass jcb` - starts a code style check for the entire project, and then starts testing the entire project
+
+`java -jar Zeus-27.jar pass jcb -w0 -d4 -i0` - starts first checking the code style of the entire project, and then runs the tests specified: week0, day4, test class1
+
+`zeus pass jcb -w0 -d4 -i0` - the same, but in google claud
