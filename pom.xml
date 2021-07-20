@@ -5,11 +5,17 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
+  <packaging>jar</packaging>
   <version>28-SNAPSHOT</version>
+
+  <name>Zeus</name>
+  <description>
+    This thing checks students' homework at kovalevskyi.academy.
+  </description>
 
   <properties>
     <java.version>16</java.version>
-    <checkstyle.version>8.41.1</checkstyle.version>
+    <checkstyle.version>8.44</checkstyle.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -94,8 +100,8 @@
         <version>3.8.1</version>
         <configuration>
           <release>${java.version}</release>
-          <source>16</source>
-          <target>16</target>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
         </configuration>
       </plugin>
       <plugin>
@@ -120,6 +126,7 @@
         </executions>
         <configuration>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <!--https://maven.apache.org/plugins/maven-checkstyle-plugin/examples/custom-checker-config.html-->
           <configLocation>google_checks.xml</configLocation>
           <encoding>UTF-8</encoding>
           <failsOnError>true</failsOnError>
