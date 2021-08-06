@@ -186,6 +186,11 @@
       <artifactId>JavaDeepDive</artifactId>
       <version>14</version>
     </dependency>
+    <dependency>
+      <groupId>academy.kovalevskyi</groupId>
+      <artifactId>AlgorithmsWithJava</artifactId>
+      <version>2</version>
+    </dependency>
   </dependencies>
 
 </project>
