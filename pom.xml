@@ -6,7 +6,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>31-SNAPSHOT</version>
+  <version>31</version>
 
   <name>Zeus</name>
   <description>
@@ -189,7 +189,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>AlgorithmsWithJava</artifactId>
-      <version>4.2</version>
+      <version>5</version>
     </dependency>
   </dependencies>
 
