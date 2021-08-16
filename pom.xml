@@ -15,7 +15,7 @@
 
   <properties>
     <java.version>16</java.version>
-    <checkstyle.version>8.45</checkstyle.version>
+    <checkstyle.version>8.45.1</checkstyle.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -173,7 +173,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>23</version>
+      <version>25</version>
     </dependency>
     <!--    Courses add below-->
     <dependency>
