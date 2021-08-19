@@ -6,7 +6,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>37-SNAPSHOT</version>
+  <version>36.1</version>
 
   <name>Zeus</name>
   <description>
@@ -173,13 +173,13 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>25</version>
+      <version>26</version>
     </dependency>
     <!--    Courses add below-->
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>CodingBootcamp</artifactId>
-      <version>13</version>
+      <version>15</version>
     </dependency>
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
@@ -189,7 +189,7 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>AlgorithmsWithJava</artifactId>
-      <version>8</version>
+      <version>9</version>
     </dependency>
   </dependencies>
 
