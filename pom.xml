@@ -6,7 +6,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>39-SNAPSHOT</version>
+  <version>39</version>
 
   <name>Zeus</name>
   <description>
@@ -14,6 +14,10 @@
   </description>
 
   <properties>
+    <version.testingFramework>26</version.testingFramework>
+    <version.codingBootcamp>15</version.codingBootcamp>
+    <version.javaDeepDive>14</version.javaDeepDive>
+    <version.algorithmsWithJava>13</version.algorithmsWithJava>
     <java.version>16</java.version>
     <checkstyle.version>8.45.1</checkstyle.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -173,23 +177,23 @@
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>TestingFramework</artifactId>
-      <version>26</version>
+      <version>${version.testingFramework}</version>
     </dependency>
     <!--    Courses add below-->
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>CodingBootcamp</artifactId>
-      <version>15</version>
+      <version>${version.codingBootcamp}</version>
     </dependency>
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>JavaDeepDive</artifactId>
-      <version>14</version>
+      <version>${version.javaDeepDive}</version>
     </dependency>
     <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>AlgorithmsWithJava</artifactId>
-      <version>12</version>
+      <version>${version.algorithmsWithJava}</version>
     </dependency>
   </dependencies>
 
