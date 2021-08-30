@@ -19,7 +19,8 @@ import picocli.CommandLine.Option;
 )
 public class Zeus implements Runnable {
 
-  @Option(defaultValue = "false", names = {"-d", "--dev"}, description = "Developer mode")
+  @Option(defaultValue = "false", names = {"-dm", "--developer-mode"}, description = "Developer "
+      + "mode")
   private static boolean dev;
 
   public static boolean isDev() {

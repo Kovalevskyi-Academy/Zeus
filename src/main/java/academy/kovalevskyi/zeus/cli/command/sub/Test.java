@@ -23,7 +23,7 @@ public class Test implements Runnable {
   @Option(names = {"-e", "--error"}, description = "Show only errors")
   private boolean error;
 
-  @Option(names = {"-D", "--debug"}, description = "Show std out/error prints")
+  @Option(names = {"-db", "--debug"}, description = "Show std out/error prints")
   private boolean debug;
 
   @Option(names = {"-v", "--verbose"}, description = "Show extra long error messages")
