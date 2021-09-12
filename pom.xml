@@ -6,7 +6,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>46-SNAPSHOT</version>
+  <version>46</version>
 
   <name>Zeus</name>
   <description>
@@ -17,7 +17,7 @@
     <version.testingFramework>26</version.testingFramework>
     <version.codingBootcamp>16</version.codingBootcamp>
     <version.javaDeepDive>15</version.javaDeepDive>
-    <version.algorithmsWithJava>18</version.algorithmsWithJava>
+    <version.algorithmsWithJava>19</version.algorithmsWithJava>
     <java.version>16</java.version>
     <checkstyle.version>8.45.1</checkstyle.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
