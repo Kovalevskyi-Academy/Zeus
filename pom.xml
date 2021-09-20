@@ -15,7 +15,7 @@
 
   <properties>
     <version.testingFramework>26</version.testingFramework>
-    <version.codingBootcamp>16</version.codingBootcamp>
+    <version.codingBootcamp>17</version.codingBootcamp>
     <version.javaDeepDive>15</version.javaDeepDive>
     <version.algorithmsWithJava>19</version.algorithmsWithJava>
     <java.version>16</java.version>
