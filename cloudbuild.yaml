@@ -4,7 +4,7 @@ steps:
   - name: 'gcr.io/cloud-builders/git'
     args: [ 'checkout', '$COMMIT_SHA' ]
     dir: 'Zeus'
-  - name: 'maven:3.6.3-openjdk-16'
+  - name: 'maven:3.8.2-openjdk-17'
     args: [ 'mvn', '-Dmaven.wagon.http.retryHandler.count=3', 'compile', 'test', 'package' ]
     dir: 'Zeus'
   - name: 'gcr.io/cloud-builders/gsutil'
