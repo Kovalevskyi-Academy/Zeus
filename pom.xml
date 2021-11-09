@@ -19,6 +19,7 @@
 
     <java.version>17</java.version>
     <checkstyle.version>9.1</checkstyle.version>
+    <slf4j.version>1.7.32</slf4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -162,6 +163,21 @@
   </build>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>info.picocli</groupId>
       <artifactId>picocli</artifactId>
