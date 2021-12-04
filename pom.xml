@@ -11,14 +11,15 @@
   </description>
 
   <properties>
-    <version.testingFramework>28</version.testingFramework>
+    <version.testingFramework>29</version.testingFramework>
 
-    <version.codingBootcamp>19</version.codingBootcamp>
+    <version.codingBootcamp>20</version.codingBootcamp>
     <version.algorithmsWithJava>21</version.algorithmsWithJava>
-    <version.javaDeepDive>16</version.javaDeepDive>
+    <version.javaDeepDive>17</version.javaDeepDive>
 
     <java.version>17</java.version>
     <checkstyle.version>9.1</checkstyle.version>
+    <slf4j.version>1.7.32</slf4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -162,10 +163,25 @@
   </build>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>info.picocli</groupId>
       <artifactId>picocli</artifactId>
-      <version>4.6.1</version>
+      <version>4.6.2</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.shared</groupId>
@@ -190,7 +206,7 @@
     <dependency>
       <groupId>net.bytebuddy</groupId>
       <artifactId>byte-buddy-agent</artifactId>
-      <version>1.11.22</version>
+      <version>1.12.1</version>
     </dependency>
     <!--    Testing Framework-->
     <dependency>
