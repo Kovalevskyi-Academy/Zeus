@@ -15,7 +15,7 @@
 
     <version.codingBootcamp>20</version.codingBootcamp>
     <version.algorithmsWithJava>21</version.algorithmsWithJava>
-    <version.javaDeepDive>16</version.javaDeepDive>
+    <version.javaDeepDive>17</version.javaDeepDive>
 
     <java.version>17</java.version>
     <checkstyle.version>9.1</checkstyle.version>
