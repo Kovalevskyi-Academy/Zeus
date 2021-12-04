@@ -3,7 +3,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>49</version>
+  <version>50-SNAPSHOT</version>
 
   <name>Zeus</name>
   <description>
