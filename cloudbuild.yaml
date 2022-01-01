@@ -11,4 +11,4 @@ steps:
 artifacts:
   objects:
     location: '${_ARTIFACT_REPO}'
-    paths: ['./helloworld/target/Z*.jar']
+    paths: ['./target/Z*.jar']
