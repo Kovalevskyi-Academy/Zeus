@@ -1,15 +1,14 @@
+options:
+  dynamic_substitutions: true
+  substitution_option: 'ALLOW_LOOSE'
+substitutions:
+  _ARTIFACT_REPO: 'gs://zeus-artifacts/per-push-builds'
+
 steps:
-  - name: 'gcr.io/cloud-builders/git'
-    args: [ 'clone', '--recurse-submodules', 'https://github.com/Kovalevskyi-Academy/Zeus.git' ]
-  - name: 'gcr.io/cloud-builders/git'
-    args: [ 'checkout', '$COMMIT_SHA' ]
-    dir: 'Zeus'
-  - name: 'maven:3.8.2-openjdk-17'
-    args: [ 'mvn', '-Dmaven.wagon.http.retryHandler.count=3', 'compile', 'test', 'package' ]
-    dir: 'Zeus'
-  - name: 'gcr.io/cloud-builders/gsutil'
-    args: [ 'cp', 'target/Zeus-51-SNAPSHOT.jar', 'gs://zeus-artifacts/per-push-builds/Zeus-51-SNAPSHOT.jar' ]
-    dir: 'Zeus'
-  - name: 'gcr.io/cloud-builders/gsutil'
-    args: [ 'acl', 'ch', '-u', 'AllUsers:R', 'gs://zeus-artifacts/per-push-builds/Zeus-51-SNAPSHOT.jar' ]
-    dir: 'Zeus'
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    args: [ 'mvn', '-e', '-Dmaven.wagon.http.retryHandler.count=3', 'compile', 'test', 'package']
+
+artifacts:
+  objects:
+    location: '${_ARTIFACT_REPO}'
+    paths: ['./target/Z*.jar']
