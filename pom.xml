@@ -3,7 +3,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>52-SNAPSHOT</version>
+  <version>52</version>
 
   <name>Zeus</name>
   <description>
@@ -11,15 +11,16 @@
   </description>
 
   <properties>
-    <version.testingFramework>29</version.testingFramework>
+    <version.testingFramework>30</version.testingFramework>
 
-    <version.codingBootcamp>21</version.codingBootcamp>
-    <version.algorithmsWithJava>21</version.algorithmsWithJava>
-    <version.javaDeepDive>18</version.javaDeepDive>
+    <version.codingBootcamp>23</version.codingBootcamp>
+    <version.algorithmsWithJava>22</version.algorithmsWithJava>
+    <version.javaDeepDive>19</version.javaDeepDive>
 
     <java.version>17</java.version>
     <checkstyle.version>9.2.1</checkstyle.version>
-    <slf4j.version>1.7.32</slf4j.version>
+<!--    <checkstyle.version>9.3</checkstyle.version> CRASH BUG-->
+    <slf4j.version>1.7.35</slf4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -163,21 +164,6 @@
   </build>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>${slf4j.version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>${slf4j.version}</version>
-      <scope>test</scope>
-    </dependency>
-
     <dependency>
       <groupId>info.picocli</groupId>
       <artifactId>picocli</artifactId>
