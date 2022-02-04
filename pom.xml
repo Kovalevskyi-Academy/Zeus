@@ -3,7 +3,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>52</version>
+  <version>53-SNAPSHOT</version>
 
   <name>Zeus</name>
   <description>
@@ -20,7 +20,6 @@
     <java.version>17</java.version>
     <checkstyle.version>9.2.1</checkstyle.version>
 <!--    <checkstyle.version>9.3</checkstyle.version> CRASH BUG-->
-    <slf4j.version>1.7.35</slf4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
