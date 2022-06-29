@@ -3,7 +3,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>55-SNAPSHOT</version>
+  <version>55</version>
 
   <name>Zeus</name>
   <description>
@@ -13,9 +13,9 @@
   <properties>
     <version.testingFramework>30</version.testingFramework>
 
-    <version.codingBootcamp>25</version.codingBootcamp>
+    <version.codingBootcamp>26</version.codingBootcamp>
     <version.algorithmsWithJava>22</version.algorithmsWithJava>
-    <version.javaDeepDive>19</version.javaDeepDive>
+    <version.javaDeepDive>20</version.javaDeepDive>
 
     <java.version>17</java.version>
     <checkstyle.version>9.2.1</checkstyle.version>
