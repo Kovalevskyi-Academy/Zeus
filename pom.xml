@@ -16,6 +16,7 @@
     <version.codingBootcamp>26</version.codingBootcamp>
     <version.algorithmsWithJava>22</version.algorithmsWithJava>
     <version.javaDeepDive>20</version.javaDeepDive>
+    <version.backendCloudEngineer>1-SNAPSHOT</version.backendCloudEngineer>
 
     <java.version>17</java.version>
     <checkstyle.version>9.2.1</checkstyle.version>
@@ -214,6 +215,11 @@
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>AlgorithmsWithJava</artifactId>
       <version>${version.algorithmsWithJava}</version>
+    </dependency>
+    <dependency>
+      <groupId>academy.kovalevskyi</groupId>
+      <artifactId>BackendCloudEngineer</artifactId>
+      <version>${version.backendCloudEngineer}</version>
     </dependency>
   </dependencies>
 
