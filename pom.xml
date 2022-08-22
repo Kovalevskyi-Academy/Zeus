@@ -3,7 +3,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>57</version>
+  <version>58-SNAPSHOT</version>
 
   <name>Zeus</name>
   <description>
@@ -196,11 +196,11 @@
       <artifactId>AlgorithmsWithJava</artifactId>
       <version>${version.algorithmsWithJava}</version>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>academy.kovalevskyi</groupId>
       <artifactId>BackendCloudEngineer</artifactId>
       <version>${version.backendCloudEngineer}</version>
-    </dependency>-->
+    </dependency>
   </dependencies>
 
 </project>
