@@ -3,7 +3,7 @@
   <groupId>academy.kovalevskyi</groupId>
   <artifactId>Zeus</artifactId>
   <packaging>jar</packaging>
-  <version>59-SNAPSHOT</version>
+  <version>59</version>
 
   <name>Zeus</name>
   <description>
@@ -13,7 +13,7 @@
   <properties>
     <version.testingFramework>32</version.testingFramework>
 
-    <version.codingBootcamp>29</version.codingBootcamp>
+    <version.codingBootcamp>30</version.codingBootcamp>
     <version.algorithmsWithJava>23</version.algorithmsWithJava>
     <version.javaDeepDive>21</version.javaDeepDive>
     <version.backendCloudEngineer>1-SNAPSHOT</version.backendCloudEngineer>
@@ -172,7 +172,13 @@
     <dependency>
       <groupId>net.bytebuddy</groupId>
       <artifactId>byte-buddy-agent</artifactId>
-      <version>1.12.16</version>
+      <version>1.12.18</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-nop</artifactId>
+      <version>2.0.3</version>
+      <scope>test</scope>
     </dependency>
     <!--    Testing Framework-->
     <dependency>
